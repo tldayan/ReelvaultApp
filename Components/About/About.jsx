@@ -31,7 +31,7 @@ export default function About() {
     <>
         <AboutContainer>
             <h1 className='about_title'>About</h1>
-            <p className='about_info'>Welcome to ReelVault, the movie streaming website that brings cinematic magic to your screen. By integrating the TMDB and 2Embed APIs, we provide an extensive database of movies, ensuring up-to-date information on titles, summaries, ratings, and genres. With the seamless integration of 2Embed, you can enjoy embedded movie trailers and videos, enhancing your browsing experience. Explore our vast library, make informed choices, and embark on an unforgettable cinematic journey at ReelVault.</p>
+            <p className='about_info'>Welcome to RlVault, the movie streaming website that brings cinematic magic to your screen. By integrating the TMDB and 2Embed APIs, we provide an extensive database of movies, ensuring up-to-date information on titles, summaries, ratings, and genres. With the seamless integration of 2Embed, you can enjoy embedded movie trailers and videos, enhancing your browsing experience. Explore our vast library, make informed choices, and embark on an unforgettable cinematic journey at ReelVault.</p>
             <div className='api_logos'>
                 <img className='tmdb_logo' src={tmdbLogo} alt="" />
                 <img className='embed_logo' src={embedLogo} alt="" />
