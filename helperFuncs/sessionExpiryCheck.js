@@ -10,7 +10,7 @@ export const sessionExpiryCheck = async(stytchClient,prevSessionToken,expiryTime
     try {
       const refreshTokenReq = await stytchClient.session.authenticate({
       session_token: prevSessionToken,
-      session_duration_minutes: 86400}) 
+      session_duration_minutes: 60}) 
 
       return refreshTokenReq.status_code;
 

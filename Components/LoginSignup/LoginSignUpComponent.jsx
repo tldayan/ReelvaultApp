@@ -61,7 +61,7 @@ const handleAuth = async(e) => {
   if(authType === "login") {
 
     try {
-      let loginResponse = await stytchClient.passwords.authenticate({email,password,session_duration_minutes: 86400})
+      let loginResponse = await stytchClient.passwords.authenticate({email,password,session_duration_minutes: 60})
       setServerMsg(null)
       setAuthType(undefined)
       window.location.reload()
@@ -94,7 +94,7 @@ const handleAuth = async(e) => {
         return
       }
 
-        const userData = await stytchClient.passwords.create({email,password,session_duration_minutes: 86400})
+        const userData = await stytchClient.passwords.create({email,password,session_duration_minutes: 60})
         await stytchClient.user.update({user_id : userData.user_id, name : {first_name : username}})        
         const createUserReq = await createUser(username, userData.user_id)
         
