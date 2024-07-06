@@ -1,12 +1,12 @@
 
 
-export const UpdateUserShowDetails = async(userDetails,username) => {
+export const UpdateUserShowDetails = async(userDetails,userId) => {
 
     try {
 
-        const userShowDetails = await fetch("http://localhost:3200/postUpdateUserShowDetails", {
+        const userShowDetails = await fetch("https://reelvault-server.vercel.app/postUpdateUserShowDetails", {
                 method : "POST",
-                body : JSON.stringify({ showDetails : userDetails, username : username}),
+                body : JSON.stringify({ showDetails : userDetails, userId : userId}),
                 headers : {
                     "Content-Type" : "application/json"
                 },

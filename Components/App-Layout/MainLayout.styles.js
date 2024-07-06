@@ -44,12 +44,16 @@ nav {
 }
 
 .userlogo {
-  width: clamp(10px, 4vw, 23px);
+  width: clamp(10px, 4vw, 28px);
+  border-radius : 50%;
 }
 
 .userlogo.light {
-  width: clamp(10px, 4vw, 23px);
   filter : invert(1)
+}
+
+.userlogo.light.oAuth {
+  filter : invert(0)
 }
 
 .auth_buttons:hover,.logout_btn:hover {
@@ -265,7 +269,7 @@ a {
     /* border: 1px solid red; */
     color : var(--primary);
     display: flex;
-    gap: 5px;
+    gap: 7px;
     align-items: center;
     justify-content: center;
     cursor: pointer;

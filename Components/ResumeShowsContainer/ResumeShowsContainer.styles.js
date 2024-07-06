@@ -7,7 +7,11 @@ export const StyledResumeShowsContainer = styled.div`
 /* border : 3px solid red; */
 width : 93%;
 margin : auto;
-margin-top: 30px;
+height: 260px;
+display : flex;
+align-items: center;
+justify-content : center;
+
 
 swiper-container {
   width: 100%;
@@ -15,6 +19,8 @@ swiper-container {
 }
 
 swiper-slide {
+/*   border: 1px solid aqua; */
+  width: 152px;
   margin-right: 30px;
   flex: 0;
   height: 100%;
@@ -134,24 +140,32 @@ padding-bottom : 30px;
   z-index:100;
 }
 
-
-
-.category_titles {
-/*   border: 1px solid #333; */
-  font-size: clamp(0.6rem, 5vw, 1.5rem);
-display: flex;
-align-items :center;
-  text-align: center;
-  padding: 10px 10px;
-/*   font-size: 1.5rem; */
-  border-radius: 5px;
- /*    background-color: #101010; */
-  margin-top: 5px;
-  margin-bottom: 20px;
-  font-weight: normal;
-  font-family: 'Quicksand', sans-serif;
+.remove_show_btn {
+  border: 1px solid var(--primary);
   color: var(--primary);
+  background-color: var(--background);
+  outline: none;
+  border-radius: 2px;
+  padding: 3px 6px;
+  text-overflow: ellipsis;
+  font-size: 0.7rem;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+  margin-top: 8px;
+  cursor: pointer;
+  transition: border-color 0.3s, color 0.3s, background-color 0.3s;
 }
+
+.remove_show_btn:hover {
+  border-color: var(--background);
+  color: var(--background);
+  background-color: var(--primary);
+}
+
+
+
+
 
 
 `

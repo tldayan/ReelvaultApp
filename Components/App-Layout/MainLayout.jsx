@@ -1,13 +1,16 @@
-
-import {NavLink,Link, Outlet, useNavigation, useLocation} from "react-router-dom"
-import {React, useEffect, useState} from 'react'
+import {NavLink,Link, Outlet, useLocation, useNavigate} from "react-router-dom"
+import {React, useEffect, useRef, useState} from 'react'
 import { StyledMainApp } from "./MainLayout.styles";
 import LoginSignupComponent from "../LoginSignup/LoginSignUpComponent";
-import { handleLogoutApi } from "../APIs/Authentication/logout";
 import userLogo from "../../assets/user.svg"
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import SearchBar from "../SearchBar/SearchBar";
 import MoviesSlider from "../MovieSlider/MoviesSlider";
+import { useStytch, useStytchSession, useStytchUser } from "@stytch/react";
+import { sessionExpiryCheck } from "../../helperFuncs/sessionExpiryCheck";
+import { createUser } from "../APIs/mongo/createUser";
+import { checkExistingUser } from "../APIs/mongo/checkExistingUser";
+import { incrementStytchUser } from "../APIs/mongo/incrementStytchUser";
 
 
 const validSearchBarPaths = ["/popular","/","/rated","/upcoming","/filter","/filter/romance","/filter/action","/filter/adventure","/filter/horror","/filter/comedy"]
@@ -15,17 +18,99 @@ const validSearchBarPaths = ["/popular","/","/rated","/upcoming","/filter","/fil
 export default function MainLayout() {
 
     const [showChevron, setShowChevron] = useState(false);
-    const mobileMenu = document.querySelector("ul");
-    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = useRef()
+    const hamburger = useRef()
     const [authType, setAuthType] = useState(undefined)
-    const [isUserLogged,setIsUserLogged] = useState(() => JSON.parse(localStorage.getItem("isUserLogged")) || false)
-    const storedUserInfo = JSON.parse(localStorage.getItem("userInfo"));
-    const [username] = useState(storedUserInfo ? storedUserInfo.username : null);
-    const [accessTokenRecieved,setAccessTokenRecieved] = useState(false)
+    const {user} = useStytchUser();
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const currentLocation = useLocation()
+    const [OauthCompleted,setOauthCompleted] = useState(user?.providers[0]?.provider_type ? true : false)
+    const location = useLocation()
+    const stytchClient = useStytch()
+    const {session} = useStytchSession()
+    const navigate = useNavigate()
+  
+  useEffect(() => {
+   
+    if(session) {
+      const isStytchTokenClosetoExpire = sessionExpiryCheck(stytchClient,stytchClient.session.session_id,session.expires_at)
+  
+      if(isStytchTokenClosetoExpire === 401 || isStytchTokenClosetoExpire === 400 || isStytchTokenClosetoExpire === 500) {
+        handleLogout()
+      }
+    } else {
+      localStorage.setItem("OAuthUserCreated", false)
+    }
+ 
+  },[])
 
-    
+  
+useEffect(() => {
+
+  const searchParams = new URLSearchParams(location.search)
+  const token = searchParams.get("token")
+
+  if(!token) return
+
+  const authenicateOauth = async() => {
+
+    try {
+
+        const oAuthReq = await stytchClient.oauth.authenticate(token, {session_duration_minutes : 86400})
+
+
+        if(oAuthReq.status_code === 200) {
+          
+          setOauthCompleted(true)
+        }
+
+      } catch (err) {
+        console.log(err.status_code)
+    }
+
+  }
+
+  authenicateOauth()
+
+},[location.search])
+
+
+useEffect(() => {
+   
+  const isOAuthUserCreated = localStorage.getItem("OAuthUserCreated") === 'true';
+  
+  const handleCreateUser = async() => {
+
+      const isUserExisting = await checkExistingUser(session?.user_id)
+   
+      if(isUserExisting) {
+        localStorage.setItem("OAuthUserCreated", true)
+        navigate("/")
+        return
+      }
+
+      const limitStatus = await incrementStytchUser()
+
+      if(limitStatus === 403) {
+        setOauthCompleted(false)
+        navigate("/")
+        return
+      }
+
+      const createUserReq = await createUser(user?.name?.first_name, session?.user_id)
+
+      if(createUserReq === 201) {
+        localStorage.setItem("OAuthUserCreated", true)
+        navigate("/")
+      }
+  }
+ 
+
+  if(OauthCompleted && !isOAuthUserCreated) {
+    handleCreateUser()
+  }
+  
+},[OauthCompleted])
+
 
     const toggleDarkMode = () => {
       setIsDarkMode(!isDarkMode);
@@ -35,25 +120,18 @@ export default function MainLayout() {
 
     function openHamburger() {
       
-        hamburger.classList.toggle('open');
+        hamburger.current.classList.toggle('open');
 
-        if(document.body.style.overflow === "hidden") {
-          document.body.style.overflow = "auto";
-        } else {
-          document.body.style.overflow = "hidden";
-        }
-      
-        if (hamburger.classList.contains("open")) {
-          mobileMenu.style.left = "0%";
-          
-        } else {
-          mobileMenu.style.left = "100%";
-        }
+        document.body.style.overflow = document.body.style.overflow === "hidden" ?  "auto" : "hidden" 
+    
+        const isHambugerOpen = hamburger.current.classList.contains("open");
+        mobileMenu.current.style.left = isHambugerOpen ? "0%" : "100%";
+
       }
 
       function returnHome() {
-        mobileMenu.style.left = "100%";
-        hamburger.classList.toggle("open")
+        mobileMenu.current.style.left = "100%";
+        hamburger.current.classList.toggle("open")
         document.body.style.overflow = "auto";
       }
       
@@ -63,9 +141,9 @@ export default function MainLayout() {
         const scrollPosition = window.scrollY;
   
         if (scrollPosition > 0) {
-          setShowChevron(true); // Show the "chevron_up" div if user is anywhere else but at the top
+          setShowChevron(true);
         } else {
-          setShowChevron(false); // Hide the "chevron_up" div if user is at the top
+          setShowChevron(false); 
         }
       };
   
@@ -78,77 +156,20 @@ export default function MainLayout() {
 
 
       const handleLogout = async() => {
-
-        if(isUserLogged) {
           
-          const logoutResponse = await handleLogoutApi()
-
-          if(logoutResponse === 200 || logoutResponse === 204) {
-            localStorage.setItem("isUserLogged", false); 
-            localStorage.removeItem("userInfo")
-            setIsUserLogged(false)
-            window.location.reload()
-          } else {
-            console.log(logoutResponse.message)
-          }
-
-        }
-      }
-
-
-      const accessTokenRequest = async() => {
-
         try {
+          const logoutResponse = await stytchClient.session.revoke()
 
-          const response = await fetch("http://localhost:3200/refresh", {
-            method : "POST",
-            credentials : "include"
-          })
-
-          if(response.ok) {
-            setAccessTokenRecieved(true)
-            console.log("access token recieved")
-          }
-
-          if(response.status === 401) {
-            handleLogout()
+        if(logoutResponse.status_code === 200 || logoutResponse.status_code === 204) {
+          localStorage.removeItem("OAuthUserCreated")
+            navigate("/")
           }
 
         } catch (err) {
-          console.log(err.message)
+          console.log(err.status_code)
+          navigate("/") 
         }
-      } 
-      
-
-      useEffect(() => {
-        if(isUserLogged) {
-          accessTokenRequest()
-        }
-      },[])
-
-
-      let accessTokenReqInterval;
-
-const startAccessTokenInterval = () => {
-  accessTokenReqInterval = setInterval(accessTokenRequest, 300000);
-};
-
-const stopAccessTokenInterval = () => {
-  clearInterval(accessTokenReqInterval);
-};
-
-useEffect(() => {
-  if (isUserLogged) {
-    startAccessTokenInterval();
-  } else {
-    stopAccessTokenInterval();
-  }
-
-  return () => {
-    stopAccessTokenInterval(); // Cleanup
-  };
-}, [isUserLogged]);
-
+      }
 
 
   return (
@@ -157,8 +178,8 @@ useEffect(() => {
             <nav>
                 <Link to="/" className="logo">ReelVault</Link>
                 {authType && <div className="dark_overlay"></div>}
-                {authType && <LoginSignupComponent authType={authType} setAuthType={setAuthType} setIsUserLogged={setIsUserLogged} />}
-                <ul className="nav_container">
+                {authType && <LoginSignupComponent authType={authType} setAuthType={setAuthType} />}
+                <ul ref={mobileMenu} className="nav_container">
                     <NavLink to="/" className="nav_links" onClick={returnHome}>Home</NavLink>
                     <NavLink to="watchlist" className="nav_links" onClick={returnHome}>Watchlist</NavLink>
                     <NavLink to="contactus" className="nav_links" onClick={returnHome}>Contact</NavLink>
@@ -167,19 +188,19 @@ useEffect(() => {
 
                   <ThemeToggle toggleDarkMode={toggleDarkMode}/>
 
-                {/* <div className="user_profile_container">
-                  {isUserLogged && <img className={`userlogo ${isDarkMode ? "light" : ""}`} src={userLogo} alt="user" />}
-                  {isUserLogged && <p className="username">{username ? username : "..."}</p>}
+                <div className="user_profile_container">
+                  {session && <img className={`userlogo ${isDarkMode ? "light" : ""} ${user?.providers[0]?.profile_picture_url ? "oAuth" : ""}`} src={user?.providers[0]?.profile_picture_url ? user?.providers[0]?.profile_picture_url : userLogo} alt="user" />}
+                  {session && <p className="username">{user?.name?.first_name ? user.name.first_name : "..."}</p>}
                 </div>
-                {isUserLogged ? <button className="logout_btn" onClick={handleLogout}>Logout</button> : 
+                {session ? <button className="logout_btn" onClick={handleLogout}>Logout</button> : 
                     <>
                       <button className="auth_buttons" onClick={() => setAuthType("login")}>Login</button>
                       <button className="auth_buttons" onClick={() => setAuthType("signup")}>SignUp</button>
-                    </> } */}
+                    </> }
                 
 
                 <div className="container">
-                    <div id="hamburger" onClick={openHamburger}>
+                    <div ref={hamburger} id="hamburger" onClick={openHamburger}>
                         <svg width="50" height="50" viewBox="0 0 100 100">
                             <path className="line line1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
                             <path className="line line2" d="M 20,50 H 80" />
@@ -189,10 +210,10 @@ useEffect(() => {
                 </div>
             </nav>
         </header>
-        {currentLocation.pathname === "/" && <MoviesSlider />}
-        {validSearchBarPaths.includes(currentLocation.pathname) && <SearchBar />}
+        {validSearchBarPaths.includes(location.pathname) && <MoviesSlider />}
+        {validSearchBarPaths.includes(location.pathname) && <SearchBar />}
         <main>
-            <Outlet context={[accessTokenRecieved]}/>
+            <Outlet />
         </main>
         <div onClick={() => window.scrollTo(0,0)} className='chevron_up' style={{ opacity: showChevron ? '1' : '0',cursor: showChevron ? "pointer" : "auto" }}></div>
         <footer>

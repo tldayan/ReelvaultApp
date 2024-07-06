@@ -4,34 +4,42 @@ import { register } from 'swiper/element/bundle';
 import { Link } from 'react-router-dom';
 import playButton from "../../assets/play-solid.svg";
 import { getUserShowDetails } from '../APIs/mongo/UserShowDetail';
+import { deleteUserShowDetails } from '../APIs/mongo/deleteUserShowDetails';
+import { useStytchSession, useStytchUser } from '@stytch/react';
 register();
 
 export default function ResumeShowsContainer() {
-  const storedUserInfo = JSON.parse(localStorage.getItem("userInfo"));
-  const [username] = useState(storedUserInfo ? storedUserInfo.username : null);
   const [userShows, setUserShows] = useState([]);
-
+  const {session} = useStytchSession() 
+  const {user} = useStytchUser()
   
   useEffect(() => {
+
     const fetchUserShowDetails = async () => {
-      const userShowDetails = await getUserShowDetails(username);
+      const userShowDetails = await getUserShowDetails(session?.user_id);
       setUserShows(userShowDetails);
     };
 
-    if (username) {
+    if (session?.user_id) {
       fetchUserShowDetails();
     }
+    
   }, []);
+
+  const refreshShows = (showId) => {
+    const updatedList = userShows.filter(eachShow => eachShow.showId !== showId)
+    setUserShows(updatedList)
+  }
+
   
 
   return (
     <>
-      {userShows.length > 0 && (
-        <StyledResumeShowsContainer>
-          <h2 className='category_titles'>Welcome back {username}, resume where you left off ?</h2>
+    {userShows?.length && <h2 className='category_titles'>Welcome back {user?.name?.first_name}, resume where you left off ?</h2>}
+    {userShows?.length && <StyledResumeShowsContainer>
           <swiper-container slides-per-view="auto" mousewheel="false">
             {userShows.map(eachShow => (
-              <swiper-slide key={eachShow?.showId}>
+              <swiper-slide className="eachShowSlide" key={eachShow?.showId}>
                 <Link className='show_link' to={`/tvshows/${eachShow.showId}/${eachShow.showSeason}/${eachShow.showEpisode}`}>
                   {eachShow.poster_url ? (
                     <img className='show_poster' src={eachShow?.poster_url === null ? defaultPoster : `https://image.tmdb.org/t/p/w500${eachShow?.poster_url}`} alt="showPoster" />
@@ -47,11 +55,11 @@ export default function ResumeShowsContainer() {
                     <p className='show_name'>{eachShow.showName}</p>
                   </div>
                 </Link>
+                <button onClick={() => {deleteUserShowDetails(session?.user_id,eachShow?.showId); refreshShows(eachShow.showId)}} className='remove_show_btn'>Remove {eachShow.showName}</button>
               </swiper-slide>
             ))}
           </swiper-container>
-        </StyledResumeShowsContainer>
-      )}
-    </>
+      </StyledResumeShowsContainer>}
+      </>
   );
 }

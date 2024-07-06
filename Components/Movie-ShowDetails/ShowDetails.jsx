@@ -10,13 +10,15 @@ import { UpdateUserShowDetails } from "../APIs/mongo/UpdateUserShowDetails";
 import { getUserShowDetails } from "../APIs/mongo/UserShowDetail";
 import EntityDetailsSkeleton from "./EntityDetailsSkeleton";
 import { deleteUserShowDetails } from "../APIs/mongo/deleteUserShowDetails";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
+import { useStytchSession } from "@stytch/react";
 
-export default function ShowDetails({ showId,showDataLoading,seasonEpisodeNames,showData,showTrailerKey,setEpisodeList,setSelectedEpisode,setSelectedSeason,selectedEpisode,episodeList,selectedSeason,seasonList }) {
+export default function ShowDetails({ showId,showDataLoading,seasonEpisodeNames,showData,showTrailerKey,setEpisodeList,selectedEpisode,episodeList,selectedSeason,seasonList }) {
 
   const dispatch = useDispatch()
-  const storedUserInfo = JSON.parse(localStorage.getItem("userInfo"));
-  const [username] = useState(storedUserInfo ? storedUserInfo.username : null);
+  /* const [username] = useOutletContext() */
+  const { session } = useStytchSession();
+  const userId = session?.user_id;
   const seasonsContainer = useRef(null);
   let episodeButton = useRef(null)
   let episodeListContainer = useRef(null) 
@@ -46,28 +48,28 @@ export default function ShowDetails({ showId,showDataLoading,seasonEpisodeNames,
 
     let isLastEpisodeOfLastSeason = seasonList[seasonList?.length - 1]?.episode_count === selectedEpisode && seasonList?.length === selectedSeason
 
-    if(username && isLastEpisodeOfLastSeason) {
+    if(userId && isLastEpisodeOfLastSeason) {
 
         const deleteUserShowDetailsReq = async() => {
-          await deleteUserShowDetails(username,showId)
+          await deleteUserShowDetails(userId,showId)
         }
   
         deleteUserShowDetailsReq()
-      } else if((selectedEpisode > 1 || selectedSeason > 1) && username && showData.name) {
+      } else if((selectedEpisode > 1 || selectedSeason > 1) && userId && showData.name) {
 
       const UpdateUserShowsDetailsRequest = async() => {
         
             const ShowDetails = {showId : showId, showName : showData?.name, poster_url : showData?.poster_path, showSeason : selectedSeason, showEpisode : selectedEpisode}
             
-            await UpdateUserShowDetails(ShowDetails,username)
+            await UpdateUserShowDetails(ShowDetails,userId)
         }
       
       UpdateUserShowsDetailsRequest()
     
-    } else if (username) {
+    } else if (userId) {
         const fetchUserShowDetails = async() => {
   
-          const fetchUserShowDetailsReq = await getUserShowDetails(username)
+          const fetchUserShowDetailsReq = await getUserShowDetails(userId)
   
           if(fetchUserShowDetailsReq === 404) {
             return
@@ -97,8 +99,7 @@ export default function ShowDetails({ showId,showDataLoading,seasonEpisodeNames,
       )
     );
     navigate(`../tvshows/${showId}/${seasonNumber}/${episodeNumber}`)
-    setSelectedEpisode(episodeNumber);
-    seasonsContainer.current.classList.add("hide")
+    /* seasonsContainer.current.classList.add("hide") */
   };
 
 
@@ -106,7 +107,6 @@ export default function ShowDetails({ showId,showDataLoading,seasonEpisodeNames,
 
 
   useEffect(() => {
-    
     dispatch(
       EpisodeLinkActions.setEpisodeLink(
         `https://vidsrc.xyz/embed/tv/${showId}/${selectedSeason}/${selectedEpisode}`
