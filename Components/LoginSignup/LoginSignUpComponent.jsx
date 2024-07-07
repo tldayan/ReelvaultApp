@@ -103,9 +103,7 @@ const handleAuth = async(e) => {
         } else if(createUserReq === 401) {
           setServerMsg("Unauthorized Credentials")
         }
-        setServerMsg(null)
         setAuthType(undefined)
-        window.location.reload()
       } else {
         setServerMsg("Create a strong password with numbers and special characters")
       }

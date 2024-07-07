@@ -29,7 +29,7 @@ export default function MainLayout() {
     const {session} = useStytchSession()
     const navigate = useNavigate()
   
-  useEffect(() => {
+/*   useEffect(() => {
    
     if(session) {
       const isStytchTokenClosetoExpire = sessionExpiryCheck(stytchClient,stytchClient.session.session_id,session.expires_at)
@@ -41,7 +41,7 @@ export default function MainLayout() {
       localStorage.setItem("OAuthUserCreated", false)
     }
  
-  },[])
+  },[]) */
 
   
 useEffect(() => {
