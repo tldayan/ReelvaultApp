@@ -17,8 +17,6 @@ export default function LoginSignupComponent({authType,setAuthType}) {
 
   
 const handleOAuth = async() => {
-
-  setServerResponseLoading(true)
   
   try {
 
@@ -29,10 +27,7 @@ const handleOAuth = async() => {
   })
 
   } catch(err) {
-    setServerResponseLoading(false)
     console.log(err.message)
-  } finally {
-    setServerResponseLoading(false)
   }
 
 }
