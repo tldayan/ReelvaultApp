@@ -28,10 +28,11 @@ const handleOAuth = async() => {
     custom_scopes: ["profile"]
   })
 
-
   } catch(err) {
     setServerResponseLoading(false)
     console.log(err.message)
+  } finally {
+    setServerResponseLoading(false)
   }
 
 }
