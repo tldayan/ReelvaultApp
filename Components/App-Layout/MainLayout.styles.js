@@ -44,7 +44,7 @@ nav {
 }
 
 .userlogo {
-  width: clamp(10px, 4vw, 28px);
+  width: clamp(10px, 6vw, 28px);
   border-radius : 50%;
 }
 
