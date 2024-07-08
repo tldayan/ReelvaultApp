@@ -55,7 +55,7 @@ export default function ShowDetails({ showId,showDataLoading,seasonEpisodeNames,
         }
   
         deleteUserShowDetailsReq()
-      } else if((selectedEpisode > 1 || selectedSeason > 1) && userId && showData.name) {
+      } else if((selectedEpisode >= 1 || selectedSeason > 1) && userId && showData.name) {
 
       const UpdateUserShowsDetailsRequest = async() => {
         
