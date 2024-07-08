@@ -125,7 +125,7 @@ export default function CategoryMovies() {
 
   return (
     <CategoryMovieTypeContainer media={900} ref={categoryMovieTypeContainerRef}>
-      <h2 className="category_titles">{category.charAt(0).toUpperCase() + category.slice(1)} Movies
+      <h2 className="category_titles" style={{width : "100%"}}>{category.charAt(0).toUpperCase() + category.slice(1)} Movies
       <div className="sort_container">
           <button onClick={handleSortList} className="sort_button">Sort</button>
           <div ref={sortList} className="sort_list">

@@ -100,7 +100,7 @@ export default function PopularShows() {
 
   return (
     <PopularShowsTypeContainer media={900} ref={popularShowsTypeContainer}>
-      <h2 className="category_titles">Popular TV Shows
+      <h2 className="category_titles" style={{width : "100%"}}>Popular TV Shows
       <div className="sort_container">
           <button onClick={handleSortList} className="sort_button">Sort</button>
           <div ref={sortList} className="sort_list">

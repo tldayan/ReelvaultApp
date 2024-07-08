@@ -683,7 +683,7 @@ footer {
 .category_titles {
 /*     border: 1px solid #ff0000; */
     margin: 30px auto 10px auto;
-  /* width: 93%; */
+  width: 93%;
   font-size: clamp(0.6rem, 5vw, 1.5rem);
   display: flex;
   align-items :center;
