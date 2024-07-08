@@ -69,15 +69,14 @@ const handleAuth = async(e) => {
       } else {
         setServerMsg("Could not reach Reelvault")
       }
+    } finally {
+      setServerResponseLoading(false)
     }
     
 
   } else { // if user is signing up
 
     try {
-
-
-
   
       let signupResponse = await stytchClient.passwords.strengthCheck({email,password})
 
@@ -111,9 +110,10 @@ const handleAuth = async(e) => {
         setServerMsg("Create a strong password with numbers and special characters")
       }
         
-    } 
+    } finally {
+      setServerResponseLoading(false)
+    }
   }
-  setServerResponseLoading(false)
 }
 
   useEffect(() => {
