@@ -55,7 +55,7 @@ useEffect(() => {
 
     try {
 
-        const oAuthReq = await stytchClient.oauth.authenticate(token, {session_duration_minutes : 5})
+        const oAuthReq = await stytchClient.oauth.authenticate(token, {session_duration_minutes : 86400})
 
 
         if(oAuthReq.status_code === 200) {
