@@ -59,7 +59,7 @@ export default function ShowPlayer() {
   useEffect(() => {
     showLoadContainer.current.style.display = "flex"
     IframeShowElement.current.style.height = "0%"
-    dispatch(EpisodeLinkActions.setEpisodeLink(`https://vidsrc.xyz/embed/tv/${id}/${seasonNumber}/${episodeNumber}`))
+    dispatch(EpisodeLinkActions.setEpisodeLink(`https://vidsrc.to/embed/tv/${id}/${seasonNumber}/${episodeNumber}`))
   },[id,seasonNumber,episodeNumber])
 
 
