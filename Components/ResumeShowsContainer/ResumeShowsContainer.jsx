@@ -35,7 +35,7 @@ export default function ResumeShowsContainer() {
 
   return (
     <>
-    {userShows?.length && <h2 className='category_titles'>Welcome back {user?.name?.first_name}, resume where you left off ?</h2>}
+    {userShows?.length && <h2 className='resumeShows_title'>Welcome back {user?.name?.first_name}, resume where you left off ?</h2>}
     {userShows?.length && <StyledResumeShowsContainer>
           <swiper-container slides-per-view="auto" mousewheel="false">
             {userShows.map(eachShow => (

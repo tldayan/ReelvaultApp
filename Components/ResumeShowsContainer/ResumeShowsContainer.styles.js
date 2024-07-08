@@ -31,6 +31,21 @@ swiper-slide:last-child {
   margin-right: 0px;
 }
 
+.resumeShows_title {
+/*     border: 1px solid #ff0000; */
+    margin: 30px auto 10px auto;
+  width: 93%;
+  font-size: clamp(0.6rem, 5vw, 1.5rem);
+  display: flex;
+  align-items :center;
+    text-align: center;
+  /*   font-size: 1.5rem; */
+    border-radius: 5px;
+   /*    background-color: #101010; */
+    font-weight: normal;
+    font-family: 'Quicksand', sans-serif;
+    color: var(--primary);
+}
 
 .show_link {
   text-decoration: none;
