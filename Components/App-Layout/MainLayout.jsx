@@ -190,7 +190,7 @@ useEffect(() => {
 
                 <div className="user_profile_container">
                   {/* <img className="userlogo" src="https://lh3.googleusercontent.com/a/ACg8ocKGd_sDOh7dz-pOmEot9prgRuTC3pQreFZ3QxIxosEshO6eCQ=s96-c" alt="" /> */}
-                  {session && <img className={`userlogo ${isDarkMode ? "light" : ""} ${user?.providers[0]?.profile_picture_url ? "oAuth" : ""}`} src={user?.providers[0]?.profile_picture_url ? user?.providers[0]?.profile_picture_url : userLogo} alt="user" />}
+                  {session && <img className={`userlogo ${isDarkMode ? "light" : ""} ${user?.providers[0]?.profile_picture_url ? "oAuth" : ""}`} src={user?.providers[0]?.profile_picture_url || userLogo} alt="user" />}
                   {session && <p className="username">{user?.name?.first_name ? user.name.first_name : "..."}</p>}
                 </div>
                 {session ? <button className="logout_btn" onClick={handleLogout}>Logout</button> : 
