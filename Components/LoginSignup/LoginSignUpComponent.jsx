@@ -85,7 +85,7 @@ const handleAuth = async(e) => {
         const limitStatus = await incrementStytchUser()
 
       if(limitStatus === 403) {
-        setServerMsg("Sorry, Maximum User limit reached")
+        setServerMsg("Sorry, Maximum User Accounts reached")
         return
       }
 
