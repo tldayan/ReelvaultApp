@@ -10,8 +10,15 @@ import ReactGA from "react-ga4";
 
 ReactGA.initialize("G-6Z3LEDT59J");
 
-const stytchClient = new StytchUIClient(import.meta.env.VITE_STYTCH_PUBLIC_TOKEN);
-
+const stytchClient = new StytchUIClient(import.meta.env.VITE_STYTCH_PUBLIC_TOKEN, {
+  cookieOptions: {
+    opaqueTokenCookieName: 'stytch_session',
+    jwtCookieName: 'stytch_sesssssion_jwt',
+    availableToSubdomains: true,
+    secure: true,
+    sameSite: 'None' // Adjust to 'Lax' or 'Strict' based on your requirements
+  }
+});
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
