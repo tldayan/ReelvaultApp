@@ -15,7 +15,7 @@ const stytchClient = new StytchUIClient(import.meta.env.VITE_STYTCH_PUBLIC_TOKEN
     opaqueTokenCookieName: 'stytch_session',
     jwtCookieName: 'stytch_session_jwt',
     path: '/',
-    domain: '.vercel.app', // This covers both subdomains
+    domain: 'vercel.app', // This covers both subdomains
     availableToSubdomains: true,
     secure: true, // Ensure this is true for HTTPS
     sameSite: 'None' // Required for cross-site cookies
