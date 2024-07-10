@@ -67,7 +67,7 @@ const handleAuth = async(e) => {
       if (err.status_code === 401 || err.status_code === 400 || err.status_code === 404) {
         setServerMsg("Wrong email or password")
       } else {
-        setServerMsg("Could not reach Reelvault")
+        setServerMsg("Could not reach Reelvault, Try again later")
       }
     } finally {
       setServerResponseLoading(false)
