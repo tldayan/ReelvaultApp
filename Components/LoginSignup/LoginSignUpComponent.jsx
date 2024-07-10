@@ -21,8 +21,8 @@ const handleOAuth = async() => {
   try {
 
   const OAuthReq = await stytchClient.oauth.google.start({
-    login_redirect_url: 'https://reelvaultapp.vercel.app',
-    signup_redirect_url: 'https://reelvaultapp.vercel.app',
+    login_redirect_url: 'https://reelvault.vercel.app',
+    signup_redirect_url: 'https://reelvault.vercel.app',
     custom_scopes: ["profile"]
   })
 
