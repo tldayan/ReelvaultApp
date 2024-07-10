@@ -142,8 +142,8 @@ const handleAuth = async(e) => {
             <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" name="password" placeholder='Enter password' id="user_password" required />
           </div>
           <p className='server_msg'>{serverMsg}</p>
-          <button className='google-btn' onClick={(e) => {e.preventDefault(); handleOAuth();}}>Continue with Google</button>
           <button className={"loginSignup_btn"}>{authType === "login" ? "Login" : "Sign up"}</button>
+          <button className='google-btn' onClick={(e) => {e.preventDefault(); handleOAuth();}}>Continue with Google</button>
           {authType === "login" ? <a onClick={() => setAuthType("signup")} className={"no_account"} >Don&apos;t have an account? Sign up.</a> : <a onClick={() => setAuthType("login")} className={"existing_account"} >Already have an account? Log in.</a>}
         </form>}
     </>      
