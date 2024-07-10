@@ -41,6 +41,7 @@ nav {
 
 .username {
   font-size: clamp(0.3rem, 3.5vw, 1rem);
+  white-space : nowrap;
 }
 
 .userlogo {
