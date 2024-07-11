@@ -24,7 +24,6 @@ export default function ShowPlayer() {
   const [episodeList, setEpisodeList] = useState([]);
   const [showLoaded, setShowLoaded] = useState(false)
   const [showTrailerKey, setShowTrailerKey] = useState("")
-  /* const [recentlyWatched, setRecentlyWatched] = useState(false) */
   const [seasonEpisodeNames,setSeasonEpisodeNames] = useState([])
 
   const showLoadedValue = useRef(showLoaded)

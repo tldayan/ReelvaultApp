@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EpisodeLinkActions } from "../store/EpisodeLinkSlice";
 import { ShowDetailsContainer } from "./Movie-ShowDetails.styles";
@@ -10,13 +10,12 @@ import { UpdateUserShowDetails } from "../APIs/mongo/UpdateUserShowDetails";
 import { getUserShowDetails } from "../APIs/mongo/UserShowDetail";
 import EntityDetailsSkeleton from "./EntityDetailsSkeleton";
 import { deleteUserShowDetails } from "../APIs/mongo/deleteUserShowDetails";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { useStytchSession } from "@stytch/react";
 
 export default function ShowDetails({ showId,showDataLoading,seasonEpisodeNames,showData,showTrailerKey,setEpisodeList,selectedEpisode,episodeList,selectedSeason,seasonList }) {
 
   const dispatch = useDispatch()
-  /* const [username] = useOutletContext() */
   const { session } = useStytchSession();
   const userId = session?.user_id;
   const seasonsContainer = useRef(null);
