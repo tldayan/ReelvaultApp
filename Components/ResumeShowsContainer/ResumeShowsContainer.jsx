@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { StyledResumeShowsContainer } from './ResumeShowsContainer.styles';
 import { register } from 'swiper/element/bundle';
 import { Link } from 'react-router-dom';
@@ -26,17 +26,26 @@ export default function ResumeShowsContainer() {
     
   }, []);
 
-  const refreshShows = (showId) => {
-    const updatedList = userShows.filter(eachShow => eachShow.showId !== showId)
-    setUserShows(updatedList)
-  }
+  const handleRemoveShow = useCallback(
+    async (showId) => {
+      try {
+        await deleteUserShowDetails(session?.user_id, showId);
+        setUserShows((prevShows) => prevShows.filter((show) => show.showId !== showId));
+      } catch (error) {
+        console.error("Failed to delete user show details:", error);
+      }
+    },[session?.user_id]);
 
+    
+    if(userShows.length === 0){
+      return null
+    }
   
 
   return (
     <>
-    {userShows?.length > 0 && <h2 className='category_titles'>Welcome back {user?.name?.first_name}, resume where you left off ?</h2>}
-    {userShows?.length > 0 && <StyledResumeShowsContainer>
+    <h2 className='category_titles'>Welcome back {user?.name?.first_name}, resume where you left off ?</h2>
+    <StyledResumeShowsContainer>
           <swiper-container slides-per-view="auto" mousewheel="false">
             {userShows.map(eachShow => (
               <swiper-slide className="eachShowSlide" key={eachShow?.showId}>
@@ -55,11 +64,11 @@ export default function ResumeShowsContainer() {
                     <p className='show_name'>{eachShow.showName}</p>
                   </div>
                 </Link>
-                <button onClick={() => {deleteUserShowDetails(session?.user_id,eachShow?.showId); refreshShows(eachShow.showId)}} className='remove_show_btn'>Remove {eachShow.showName}</button>
+                <button onClick={() => handleRemoveShow(eachShow.showId)} className='remove_show_btn'>Remove {eachShow.showName}</button>
               </swiper-slide>
             ))}
           </swiper-container>
-      </StyledResumeShowsContainer>}
-      </>
+      </StyledResumeShowsContainer>
+    </>
   );
 }
