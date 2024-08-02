@@ -74,13 +74,13 @@ export default function ShowDetails({ showId,showDataLoading,seasonEpisodeNames,
             return
           } else {
   
-            const showExists = fetchUserShowDetailsReq.some((eachObj) => eachObj.showId === showId)
+            const showExists = fetchUserShowDetailsReq.some((eachObj) => eachObj?.showId === showId)
 
             if(showExists) {
-              const currentShow = fetchUserShowDetailsReq.find((eachObj) => eachObj.showId === showId)
+              const currentShow = fetchUserShowDetailsReq.find((eachObj) => eachObj?.showId === showId)
   
               navigate(`../tvshows/${showId}/${currentShow.showSeason}/${currentShow.showEpisode}`)
-              handleEpisodeSelect(currentShow.showSeason,currentShow.showEpisode)
+              handleEpisodeSelect(currentShow?.showSeason,currentShow?.showEpisode)
             }
           }
         }
@@ -98,7 +98,6 @@ export default function ShowDetails({ showId,showDataLoading,seasonEpisodeNames,
       )
     );
     navigate(`../tvshows/${showId}/${seasonNumber}/${episodeNumber}`)
-    /* seasonsContainer.current.classList.add("hide") */
   };
 
 
@@ -144,7 +143,7 @@ export default function ShowDetails({ showId,showDataLoading,seasonEpisodeNames,
 
   function handleWatchlist() {
     
-    if(watchlist.some(eachEntity => eachEntity.showId == showId)) {
+    if(watchlist.some(eachEntity => eachEntity?.showId == showId)) {
       dispatch(showsWatchlistActions.removeFromWatchlist(showId))
     } else {
       dispatch(showsWatchlistActions.addToWatchlist(showData))
@@ -188,7 +187,7 @@ export default function ShowDetails({ showId,showDataLoading,seasonEpisodeNames,
               {showData?.production_companies?.length > 0 && (
                 <p className="entity_production">
                   Production:{" "}
-                  <span className="entity_info">{showData.production_companies[0].name}</span>
+                  <span className="entity_info">{showData?.production_companies[0]?.name}</span>
                 </p>
               )}
               
@@ -196,8 +195,8 @@ export default function ShowDetails({ showId,showDataLoading,seasonEpisodeNames,
             <div className="second_stats_container">
             <p className="entity_language">
                 Language:{" "}
-                <span className="entity_info">{showData.original_language &&
-                  showData.original_language.toUpperCase()}</span>
+                <span className="entity_info">{showData?.original_language &&
+                  showData?.original_language.toUpperCase()}</span>
               </p>
               {showData?.first_air_date && (
                 <p className="entity_released">Released: <span className="entity_info">{showData?.first_air_date}</span></p>

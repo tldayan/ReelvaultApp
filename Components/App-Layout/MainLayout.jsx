@@ -11,6 +11,7 @@ import { sessionExpiryCheck } from "../../helperFuncs/sessionExpiryCheck";
 import { createUser } from "../APIs/mongo/createUser";
 import { checkExistingUser } from "../APIs/mongo/checkExistingUser";
 import { incrementStytchUser } from "../APIs/mongo/incrementStytchUser";
+import LoggedOutAlert from "../LoggedOutAlert/LoggedOutAlert";
 
 
 const validSearchBarPaths = ["/popular","/","/rated","/upcoming","/filter","/filter/romance","/filter/action","/filter/adventure","/filter/horror","/filter/comedy"]
@@ -42,7 +43,6 @@ export default function MainLayout() {
     }
  
   },[]) */
-
   
 useEffect(() => {
 
@@ -57,16 +57,13 @@ useEffect(() => {
 
         const oAuthReq = await stytchClient.oauth.authenticate(token, {session_duration_minutes : 86400})
 
-
         if(oAuthReq.status_code === 200) {
-          
           setOauthCompleted(true)
         }
 
       } catch (err) {
         console.log(err.status_code)
     }
-
   }
 
   authenicateOauth()
@@ -162,6 +159,7 @@ useEffect(() => {
 
         if(logoutResponse.status_code === 200 || logoutResponse.status_code === 204) {
           localStorage.removeItem("OAuthUserCreated")
+          localStorage.removeItem("isUserLogged")
             navigate("/")
           }
 
@@ -177,6 +175,7 @@ useEffect(() => {
         <header>
             <nav>
                 <Link to="/" className="logo">ReelVault</Link>
+                <LoggedOutAlert />
                 {authType && <div className="dark_overlay"></div>}
                 {authType && <LoginSignupComponent authType={authType} setAuthType={setAuthType} />}
                 <ul ref={mobileMenu} className="nav_container">
@@ -189,7 +188,6 @@ useEffect(() => {
                   <ThemeToggle toggleDarkMode={toggleDarkMode}/>
 
                 <div className="user_profile_container">
-                  {/* <img className="userlogo" src="https://lh3.googleusercontent.com/a/ACg8ocKGd_sDOh7dz-pOmEot9prgRuTC3pQreFZ3QxIxosEshO6eCQ=s96-c" alt="" /> */}
                   {session && <img className={`userlogo ${isDarkMode ? "light" : ""} ${user?.providers[0]?.profile_picture_url ? "oAuth" : ""}`} src={user?.providers[0]?.profile_picture_url || userLogo} alt="user" />}
                   {session && <p className="username">{user?.name?.first_name ? user.name.first_name : "..."}</p>}
                 </div>

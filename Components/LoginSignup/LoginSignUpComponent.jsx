@@ -58,6 +58,7 @@ const handleAuth = async(e) => {
 
     try {
       let loginResponse = await stytchClient.passwords.authenticate({email,password,session_duration_minutes: 86400})
+      localStorage.setItem("isUserLogged", true)
       setServerMsg(null)
       setAuthType(undefined)
       window.location.reload()
@@ -131,7 +132,7 @@ const handleAuth = async(e) => {
         {serverResponseLoading ? <div className='load_animation_black'></div> : <form className={"login_signup_container"} onSubmit={handleAuth}>
           {authType === "signup" && <div className={"inputField_container"}>
             <label htmlFor="user_name">Username</label>
-            <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" name="username"  placeholder='Enter username' id="user_name" required />
+            <input value={username} onChange={(e) => setUsername(e.target.value)} maxLength={15} type="text" name="username"  placeholder='Enter username' id="user_name" required />
           </div>}
           <div className={"inputField_container"}>
             <label htmlFor="user_email">Email</label>

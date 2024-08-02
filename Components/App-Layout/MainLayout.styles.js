@@ -28,7 +28,7 @@ nav {
 .auth_buttons,.logout_btn {
   border: 1px solid var(--primary);
   border-radius: 3px;
-  padding: 5px 10px;
+  padding: 5px 8px;
   background-color : transparent;
   outline: none;
   color : var(--primary);
@@ -40,12 +40,16 @@ nav {
 }
 
 .username {
+ /*  background-color: red; */
   font-size: clamp(0.3rem, 3.5vw, 1rem);
   white-space : nowrap;
+  overflow : hidden;
+  text-overflow: ellipsis;
+  width : 70%
 }
 
 .userlogo {
-  width: clamp(10px, 6vw, 28px);
+  width: clamp(5px, 5vw, 25px);
   border-radius : 50%;
 }
 
@@ -267,7 +271,7 @@ a {
 
 
   .user_profile_container {
-    /* border: 1px solid red; */
+/*     border: 1px solid red; */
     color : var(--primary);
     display: flex;
     gap: 7px;

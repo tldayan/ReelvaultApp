@@ -15,9 +15,6 @@ export const StyledLoginSignUpContainer = styled.div`
     width: min(90%, 400px);
     padding: 5px 10px 20px 10px;
     border-radius: 5px;
-/*     min-height: 320px; */
- /*    opacity: 0; */
-   /*  pointer-events: none; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,17 +23,7 @@ export const StyledLoginSignUpContainer = styled.div`
     font-family: "Quicksand", sans-serif;
     z-index: 99999999999;
     transition: all ease 0.3s;
-  
-  .close_modal_button {
-    background-color: transparent;
-    border: none;
-    font-size: 1.1rem;
-    outline: none;
-    opacity: 0.6;
-    margin-left: auto;
-    cursor: pointer;
-    text-align: right !important;
-  }
+
 
   .auth_type {
     color: rgb(0, 0, 0);

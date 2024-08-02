@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import defaultPoster from "../../assets/no_image.jpg";
 import { StyledMovieLink } from './MovieCard.style';
 import { MovieNameActions } from '../store/MovieNameSlice'

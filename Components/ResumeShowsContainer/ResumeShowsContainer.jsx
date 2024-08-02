@@ -34,7 +34,7 @@ export default function ResumeShowsContainer() {
       } catch (error) {
         console.error("Failed to delete user show details:", error);
       }
-    },[session?.user_id]);
+    },[]);
 
     
     if(userShows.length === 0){
@@ -47,24 +47,24 @@ export default function ResumeShowsContainer() {
     <h2 className='category_titles'>Welcome back {user?.name?.first_name}, resume where you left off ?</h2>
     <StyledResumeShowsContainer>
           <swiper-container slides-per-view="auto" mousewheel="false">
-            {userShows.map(eachShow => (
+            {userShows.map(eachShow => (?
               <swiper-slide className="eachShowSlide" key={eachShow?.showId}>
-                <Link className='show_link' to={`/tvshows/${eachShow.showId}/${eachShow.showSeason}/${eachShow.showEpisode}`}>
-                  {eachShow.poster_url ? (
+                <Link className='show_link' to={`/tvshows/${eachShow?.showId}/${eachShow?.showSeason}/${eachShow?.showEpisode}`}>
+                  {eachShow?.poster_url ? (
                     <img className='show_poster' src={eachShow?.poster_url === null ? defaultPoster : `https://image.tmdb.org/t/p/w500${eachShow?.poster_url}`} alt="showPoster" />
                   ) : (
                     <div className="movie_poster_skeleton" style={{ width: '154px', height: '231px' }} />
                   )}
-                  {eachShow.poster_url && <span className='show_season'>s{eachShow.showSeason}</span>}
-                  {eachShow.poster_url && <span className='show_episode'>e{eachShow.showEpisode}</span>}
+                  {eachShow?.poster_url && <span className='show_season'>s{eachShow?.showSeason}</span>}
+                  {eachShow?.poster_url && <span className='show_episode'>e{eachShow?.showEpisode}</span>}
                   <div className='resumeShow_cover'>
                     <div className='watch_show_btn'>
                       <img className='play_button' src={playButton} alt="resume_icon" />
                     </div>
-                    <p className='show_name'>{eachShow.showName}</p>
+                    <p className='show_name'>{eachShow?.showName}</p>
                   </div>
                 </Link>
-                <button onClick={() => handleRemoveShow(eachShow.showId)} className='remove_show_btn'>Remove {eachShow.showName}</button>
+                <button onClick={() => handleRemoveShow(eachShow?.showId)} className='remove_show_btn'>Remove {eachShow?.showName}</button>
               </swiper-slide>
             ))}
           </swiper-container>
