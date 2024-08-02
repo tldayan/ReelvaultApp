@@ -6,6 +6,11 @@ import searchIcon from "../../assets/search_icon.svg"
 import SearchResultCard from '../SearchResultCard/SearchResultCard'
 import { StyledSearchBar } from './SearchBar.styles'
 
+function removeSpecialCharacters(input) {
+  return input.replace(/[:\-]/g, "").toLowerCase();
+}
+
+
 export default function SearchBar() {
 
   const searchInput = useRef(null)
@@ -14,52 +19,48 @@ export default function SearchBar() {
   const [searchDataLoading, setSearchDataLoading] = useState(false)
   const searchField = useRef(null)
 
-  function removeSpecialCharacters(input) {
-    return input.replace(/[:\-]/g, "").toLowerCase();
+
+  const fetchSearchData = async(entitySearch) => {
+
+    try {
+  
+      const [movieResponse, showResponse] = await Promise.all([getMovieSearchData(entitySearch), getShowSearchData(entitySearch)]);
+  
+      const searchData = [...movieResponse, ...showResponse];
+  
+      let filteredSearchData = searchData.filter((eachResult) => {
+        const title = removeSpecialCharacters(eachResult.original_name || eachResult.original_title);
+        const searchQuery = removeSpecialCharacters(entitySearch);
+        return title.includes(searchQuery);
+      }).sort((a,b) => b.popularity - a.popularity);
+  
+        setSearchResults(filteredSearchData)
+        setSearchDataLoading(false)
+  
+    } catch (error) {
+      alert(error.message)
+    }
   }
+
 
   useEffect(() => {
 
-    setSearchDataLoading(true)
+    if(search === "" ) { 
+      setSearchDataLoading(false)
+      return
+    }
 
     const searchTimer = setTimeout(() => {
-      let entitySearch = undefined
+      setSearchDataLoading(true)
+    let entitySearch = undefined
   
-    if(search.endsWith(" ")) {
-      entitySearch = search.slice(0,-1)
+    if(search[search.length - 1] === " ") {
+      entitySearch = search.trim()
     } else {
       entitySearch = search
     }
 
-    const fetchSearchData = async() => {
-
-      try {
-
-        const [movieResponse, showResponse] = await Promise.all([getMovieSearchData(entitySearch), getShowSearchData(entitySearch)]);
-
-        const searchData = [...movieResponse, ...showResponse];
-  
-        let filteredSearchData = searchData.filter((eachResult) => {
-          const title = removeSpecialCharacters(eachResult.original_name || eachResult.original_title);
-          const searchQuery = removeSpecialCharacters(entitySearch);
-          return title.includes(searchQuery);
-        }).sort((a,b) => b.popularity - a.popularity);
-
-          setSearchResults(filteredSearchData)
-          setSearchDataLoading(false)
-
-      } catch (error) {
-        alert(error.message)
-      }
-
-    }
-
-    if(search === "" ) { 
-      setSearchDataLoading(false)
-        return
-      } else {
-        fetchSearchData()
-      }
+      fetchSearchData(entitySearch)
     },500)
 
     return () => clearTimeout(searchTimer)
