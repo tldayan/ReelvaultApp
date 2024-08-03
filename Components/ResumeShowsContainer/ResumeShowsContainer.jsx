@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import { StyledResumeShowsContainer } from './ResumeShowsContainer.styles';
 import { register } from 'swiper/element/bundle';
 import { Link } from 'react-router-dom';
@@ -26,15 +26,14 @@ export default function ResumeShowsContainer() {
     
   }, []);
 
-  const handleRemoveShow = useCallback(
-    async (showId) => {
+  const handleRemoveShow = async(showId) => {
       try {
         await deleteUserShowDetails(session?.user_id, showId);
         setUserShows((prevShows) => prevShows.filter((show) => show.showId !== showId));
       } catch (error) {
         console.error("Failed to delete user show details:", error);
       }
-    },[]);
+  };
 
     
     if(userShows.length === 0){
