@@ -49,7 +49,7 @@ useEffect(() => {
       const reviewsByLatest = entityReviews
         .map(eachReview => ({
           ...eachReview,
-          created_at: eachReview.created_at ? eachReview.created_at.slice(0, 10) : null // Handle null created_at
+          created_at: eachReview?.created_at ? eachReview?.created_at.slice(0, 10) : null // Handle null created_at
         }))
         .sort((a, b) => {
           if (!a.created_at && !b.created_at) return 0; 

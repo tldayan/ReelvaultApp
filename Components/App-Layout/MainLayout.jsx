@@ -7,7 +7,6 @@ import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import SearchBar from "../SearchBar/SearchBar";
 import MoviesSlider from "../MovieSlider/MoviesSlider";
 import { useStytch, useStytchSession, useStytchUser } from "@stytch/react";
-import { sessionExpiryCheck } from "../../helperFuncs/sessionExpiryCheck";
 import { createUser } from "../APIs/mongo/createUser";
 import { checkExistingUser } from "../APIs/mongo/checkExistingUser";
 import { incrementStytchUser } from "../APIs/mongo/incrementStytchUser";
@@ -30,19 +29,6 @@ export default function MainLayout() {
     const {session} = useStytchSession()
     const navigate = useNavigate()
   
-/*   useEffect(() => {
-   
-    if(session) {
-      const isStytchTokenClosetoExpire = sessionExpiryCheck(stytchClient,stytchClient.session.session_id,session.expires_at)
-  
-      if(isStytchTokenClosetoExpire === 401 || isStytchTokenClosetoExpire === 400 || isStytchTokenClosetoExpire === 500) {
-        handleLogout()
-      }
-    } else {
-      localStorage.setItem("OAuthUserCreated", false)
-    }
- 
-  },[]) */
   
 useEffect(() => {
 

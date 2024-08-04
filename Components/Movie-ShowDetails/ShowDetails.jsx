@@ -24,15 +24,16 @@ export default function ShowDetails({ showId,showDataLoading,seasonEpisodeNames,
   const navigate = useNavigate()
 
   useEffect(() => {
-    const newEpisodeList = [];
-    for (
-      let i = 0;
-      i < seasonList[selectedSeason - 1]?.episode_count || 0;
-      i++
-    ) {
-      newEpisodeList.push(i);
+    if(seasonList && seasonList.length > 0) {
+      const newEpisodeList = [];
+      for (
+        let i = 0; i < seasonList[selectedSeason - 1]?.episode_count || 0 ;i++) {
+          newEpisodeList.push(i);
+        }
+      setEpisodeList(newEpisodeList);
     }
-    setEpisodeList(newEpisodeList);
+    
+
   }, [seasonList, selectedSeason]);
 
 
@@ -223,7 +224,7 @@ export default function ShowDetails({ showId,showDataLoading,seasonEpisodeNames,
             <ul ref={seasonsContainer} className="season_list_container hide">
               {seasonList?.map((eachSeason, index) => {
                 return (
-                  <li key={eachSeason.id}>
+                  <li key={eachSeason?.id}>
                     <button
                       onClick={() => handleSeasonSelect(index + 1)}
                       className={`season_button ${selectedSeason === index + 1 && `active`}`}
@@ -249,7 +250,7 @@ export default function ShowDetails({ showId,showDataLoading,seasonEpisodeNames,
                         selectedEpisode === index + 1 ? "active" : null
                       }`}
                     >
-                      Episode {index + 1} - {seasonEpisodeNames?.episodes[index]?.name}
+                      Episode {index + 1} - {seasonEpisodeNames?.episodes && seasonEpisodeNames.episodes[index]?.name}
                     </button>
                   </li>
                 );
