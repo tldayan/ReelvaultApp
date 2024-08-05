@@ -95,7 +95,7 @@ export default function ShowDetails({ showId,showDataLoading,seasonEpisodeNames,
   const handleEpisodeSelect = (seasonNumber, episodeNumber) => {
     dispatch(
       EpisodeLinkActions.setEpisodeLink(
-        `https://vidsrc.to/embed/tv/${showId}/${seasonNumber}/${episodeNumber}`
+        `https://vidsrc.in/embed/tv/${showId}/${seasonNumber}/${episodeNumber}`
       )
     );
     navigate(`../tvshows/${showId}/${seasonNumber}/${episodeNumber}`)
@@ -108,7 +108,7 @@ export default function ShowDetails({ showId,showDataLoading,seasonEpisodeNames,
   useEffect(() => {
     dispatch(
       EpisodeLinkActions.setEpisodeLink(
-        `https://vidsrc.to/embed/tv/${showId}/${selectedSeason}/${selectedEpisode}`
+        `https://vidsrc.in/embed/tv/${showId}/${selectedSeason}/${selectedEpisode}`
       )
     );
   },[selectedSeason])

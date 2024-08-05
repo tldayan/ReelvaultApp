@@ -20,7 +20,7 @@ export default function MoviePlayer() {
   const [movieDataLoading,setMovieDataLoading] = useState(false)
   const [trailerKey, setTrailerKey] = useState("")
   const [movieLoaded, setMovieLoaded] = useState(false)
-  const [movieIframe, setMovieIframe] = useState(`https://vidsrc.xyz/embed/movie/${movieId}`)
+  const [movieIframe, setMovieIframe] = useState(`https://vidsrc.in/embed/movie/${movieId}`)
   const movieLoadedRef = useRef(movieLoaded);
 
 
@@ -49,7 +49,7 @@ export default function MoviePlayer() {
   }
 
   fetchMovieDetails()
-  setMovieIframe(`https://vidsrc.xyz/embed/movie/${movieId}`)
+  setMovieIframe(`https://vidsrc.in/embed/movie/${movieId}`)
     
   }, [movieId]);
 
