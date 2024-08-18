@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,memo } from 'react'
 import {Link} from "react-router-dom"
 import { register } from 'swiper/element/bundle';
 import defaultPoster from "../../assets/no_image.jpg"
@@ -11,7 +11,7 @@ register();
 
 const API_KEY = import.meta.env.VITE_REACT_APP_API_KEY;
 
-export default function Recommended({movieId,showId}) {
+function Recommended({movieId,showId}) {
 
     const [recommendedMovieData, setRecommendedMovieData] = useState([])
     const [recommendedShowData, setRecommendedShowData] = useState([])
@@ -89,3 +89,5 @@ export default function Recommended({movieId,showId}) {
     
   )
 }
+
+export default memo(Recommended)

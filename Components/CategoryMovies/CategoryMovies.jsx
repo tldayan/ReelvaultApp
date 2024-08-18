@@ -109,7 +109,7 @@ export default function CategoryMovies() {
 
   const pageNumbers = Math.ceil(CategoryMovies.length / moviesPerPage);
 
-  for (let x = 1; x <= pageNumbers; ++x) {
+  for (let x = 1; x <= pageNumbers; x++) {
     pages.push(x);
   }
 

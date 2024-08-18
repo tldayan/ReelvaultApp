@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, memo } from 'react'
 import { StyledReviewContainer } from './Reviews.style'
 import Comment from '../Comment/Comment'
 import { getMovieReviews,getShowReviews } from '../APIs/Api'
 
-export default function Reviews({movieId,showId}) {
+function Reviews({movieId,showId}) {
 
     const latestButton = useRef(null)
     const bestButton = useRef(null)
@@ -97,3 +97,5 @@ useEffect(() => {
     </StyledReviewContainer> : null)
   )
 }
+
+export default memo(Reviews)
