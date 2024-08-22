@@ -196,7 +196,7 @@ useEffect(() => {
             </nav>
         </header>
         {validSearchBarPaths.includes(location.pathname) && <MoviesSlider />}
-        {validSearchBarPaths.includes(location.pathname) && <SearchBar />}
+        <SearchBar />
         <main>
             <Outlet />
         </main>
