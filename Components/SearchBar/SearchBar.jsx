@@ -18,6 +18,7 @@ export default function SearchBar() {
   const [searchResults, setSearchResults] = useState([])
   const [searchDataLoading, setSearchDataLoading] = useState(false)
   const searchField = useRef(null)
+  const searchList = useRef(null)
 
 
   const fetchSearchData = async(entitySearch) => {
@@ -76,7 +77,25 @@ export default function SearchBar() {
         const elementTop = element.getBoundingClientRect().top;
         window.scrollBy({ top: elementTop - offset});
     }
+
+    if(search !== "") {
+      searchList?.current.classList.add("active")
+    }
+
   }
+
+  useEffect(() => {
+
+    function handleClickOutsideSearchList(event) {
+      if(searchInput.current && !searchInput.current.contains(event.target)) {
+        searchList.current.classList.remove("active")
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutsideSearchList)
+    return () => document.removeEventListener("mousedown", handleClickOutsideSearchList)
+
+  },[])
 
 
   return (
@@ -95,7 +114,7 @@ export default function SearchBar() {
             onFocus={scrollToField}
             spellCheck="false"
         />
-        <div className={`search_list ${search !== "" ? "active" : null}`}>
+        <div ref={searchList} className={`search_list ${search !== "" ? "active" : null}`}>
             {searchDataLoading ? <div className="race-by"></div> : searchResults.length ? searchResults.map(eachResult => {
             return  <SearchResultCard setSearch={setSearch} key={eachResult.id} eachResult={eachResult} />
             }) : <div className='no_search_results_container'><img src={sadFace} alt="" /><p className='no_search_result'>No results for "{search}"</p></div>}
