@@ -250,7 +250,7 @@ export default function ShowDetails({ showId,showDataLoading,seasonEpisodeNames,
                         selectedEpisode === index + 1 ? "active" : null
                       }`}
                     >
-                      Episode {index + 1} - {seasonEpisodeNames?.episodes && seasonEpisodeNames.episodes[index]?.name}
+                      Episode {index + 1} - {seasonEpisodeNames.length && seasonEpisodeNames[index]?.name}
                     </button>
                   </li>
                 );

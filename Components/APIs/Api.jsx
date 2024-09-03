@@ -32,15 +32,20 @@ export const getMovies = async(page,category) => {
     category = "top_rated"
   }
   
-  const API_URL = `https://api.themoviedb.org/3/movie/${category}?language=en-US&page=${page}`
 
 
   try {
-    const response = await fetch(`${API_URL}`, {
-    headers : {
-      accept : "application/json",
-      Authorization : `Bearer ${API_KEY}`
-    }
+
+    const query = `
+      query { categoryMovies(page: ${page}, category: "${category}") { page results { original_language backdrop_path id title release_date vote_average poster_path } } }
+    `
+
+    const response = await fetch(`https://reelvault-server.vercel.app/graphql`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', 
+      },
+      body : JSON.stringify({query})
   })
 
   if(!response.ok) {
@@ -48,7 +53,7 @@ export const getMovies = async(page,category) => {
   }
 
   const DATA = await response.json()
-  return DATA.results
+  return DATA.data.categoryMovies.results
   
   } catch (error) {
 
@@ -60,12 +65,29 @@ export const getMovies = async(page,category) => {
 export const getShows = async(page) => {
 
   try {
-    const response = await fetch(`https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=${page}`, {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization: `Bearer ${API_KEY}`
-  }
+    const query = `
+      query {
+        popularShows(page: ${page}) {
+          page
+          results {
+            original_language
+            id
+            name
+            first_air_date
+            vote_average
+            poster_path
+          }
+        }
+      }
+    `
+
+
+    const response = await fetch(`https://reelvault-server.vercel.app/graphql`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json', 
+    },
+    body : JSON.stringify({query})
 });
 
     if(!response.ok) {
@@ -73,7 +95,8 @@ export const getShows = async(page) => {
     }
 
     const DATA = await response.json()
-    return DATA.results
+
+    return DATA.data.popularShows.results
 
   } catch (error) {
     return {error : true, message : error.message}
@@ -161,6 +184,8 @@ export const getShowSearchData = async(entityName) => {
     console.log(error)
   }
 }
+
+
 
 export const getMovieReviews = async(movieId) => {
 
@@ -283,21 +308,36 @@ export const fetchMovieData = async(movieId) => {
 
 }
 
-export const fetchEpisodeNames = async(showId,seasonNumber) => {
-
-      try {
-        const response = await fetch(`https://api.themoviedb.org/3/tv/${showId}/season/${seasonNumber}`, {
-          headers: {
-            accept: "application/json",
-            Authorization : `Bearer ${API_KEY}`
-          },
-        });
-        const DATA = await response.json()
-
-        return DATA
-
-      } catch (err) {
-        console.log(err.message)
+export const fetchEpisodeNames = async (showId, seasonNumber) => {
+  try {
+    const query = `
+      query {
+        seasonInfo(showId: ${showId}, seasonId: ${seasonNumber}) {
+          episodes {
+            name
+          }
+        }
       }
+    `;
 
-}
+    const response = await fetch(`https://reelvault-server.vercel.app/graphql`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', 
+      },
+      body: JSON.stringify({ query })
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    return data;
+
+  } catch (err) {
+    console.log(`Error: ${err.message}`);
+    throw err; 
+  }
+};
