@@ -66,7 +66,8 @@ useEffect(() => {
 
   const getEpisodeNames = async () => {
     const seasonEpisodeName = await fetchEpisodeNames(id,seasonNumber)
-    setSeasonEpisodeNames(seasonEpisodeName/* .data.seasonInfo.episodes */)
+
+  setSeasonEpisodeNames(seasonEpisodeName)
   }
   
   getEpisodeNames()
