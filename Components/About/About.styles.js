@@ -10,8 +10,7 @@ padding: 15px;
   width: 95%;
   color: white;
   font-family: 'Philosopher', sans-serif;
-  margin: 0 auto;
-
+  margin: 30px auto 0 auto;
   .about_title,.faq_title {
   font-size: 2rem;
   margin-bottom: 10px;  
