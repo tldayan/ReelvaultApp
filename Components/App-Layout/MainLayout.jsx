@@ -45,6 +45,7 @@ useEffect(() => {
 
         if(oAuthReq.status_code === 200) {
           setOauthCompleted(true)
+          window.location.reload()
         }
 
       } catch (err) {
