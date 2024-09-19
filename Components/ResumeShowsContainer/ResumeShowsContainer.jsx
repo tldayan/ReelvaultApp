@@ -15,6 +15,8 @@ export default function ResumeShowsContainer() {
   
   useEffect(() => {
 
+    if(!session?.user_id) return
+
     const fetchUserShowDetails = async () => {
       const userShowDetails = await getUserShowDetails(session?.user_id);
       setUserShows(userShowDetails);
@@ -24,7 +26,7 @@ export default function ResumeShowsContainer() {
       fetchUserShowDetails();
     }
     
-  }, []);
+  }, [session?.user_id]);
 
   const handleRemoveShow = async(showId) => {
       try {
