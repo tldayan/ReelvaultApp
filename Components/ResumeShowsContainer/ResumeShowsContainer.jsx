@@ -15,8 +15,6 @@ export default function ResumeShowsContainer() {
   
   useEffect(() => {
 
-    alert(session.user_id)
-
     if(!session?.user_id) return 
 
     const fetchUserShowDetails = async () => {
