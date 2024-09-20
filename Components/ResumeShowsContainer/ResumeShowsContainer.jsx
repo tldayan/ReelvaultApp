@@ -26,7 +26,7 @@ export default function ResumeShowsContainer() {
       fetchUserShowDetails();
     }
     
-  }, [session?.user_id]);
+  }, [session]);
 
   const handleRemoveShow = async(showId) => {
       try {
