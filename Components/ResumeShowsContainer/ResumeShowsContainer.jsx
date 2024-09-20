@@ -15,7 +15,7 @@ export default function ResumeShowsContainer() {
   
   useEffect(() => {
 
-    alert("logged in")
+    alert(session.user_id)
 
     if(!session?.user_id) return 
 
