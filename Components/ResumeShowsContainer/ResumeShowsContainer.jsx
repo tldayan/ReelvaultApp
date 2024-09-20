@@ -12,6 +12,7 @@ export default function ResumeShowsContainer() {
   const [userShows, setUserShows] = useState([]);
   const {session} = useStytchSession() 
   const {user} = useStytchUser()
+/*   const [userShowsLoading,setUserShowsLoading] = useState(true) */
   
   useEffect(() => {
 
@@ -37,7 +38,7 @@ export default function ResumeShowsContainer() {
   };
 
     
-    if(!session){
+    if(!session || userShows.length === 0){
       return null
     }
   
