@@ -12,10 +12,10 @@ export default function ResumeShowsContainer() {
   const [userShows, setUserShows] = useState([]);
   const {session} = useStytchSession() 
   const {user} = useStytchUser()
-/*   const [userShowsLoading,setUserShowsLoading] = useState(true) */
   
   useEffect(() => {
 
+    if(!session?.user_id) return 
 
     const fetchUserShowDetails = async () => {
       const userShowDetails = await getUserShowDetails(session?.user_id);
