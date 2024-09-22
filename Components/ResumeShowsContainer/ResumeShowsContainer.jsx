@@ -12,14 +12,23 @@ export default function ResumeShowsContainer() {
   const [userShows, setUserShows] = useState([]);
   const {session} = useStytchSession() 
   const {user} = useStytchUser()
+  const [loading,setLoading] = useState(false)
   
   useEffect(() => {
 
     if(!session?.user_id) return 
 
     const fetchUserShowDetails = async () => {
-      const userShowDetails = await getUserShowDetails(session?.user_id);
-      setUserShows(userShowDetails);
+      setLoading(true)
+      try {
+        const userShowDetails = await getUserShowDetails(session?.user_id);
+        setUserShows(userShowDetails);
+      } catch (err) {
+        console.log(err.message)
+      } finally {
+        setLoading(false)
+      }
+      
     };
 
     if (session?.user_id) {
@@ -38,21 +47,21 @@ export default function ResumeShowsContainer() {
   };
 
     
-    if(!session || userShows.length === 0){
+    if(!session || userShows?.length === 0){
       return null
     }
   
 
   return (
     <>
-    <h2 className='category_titles'>Welcome back {user?.name?.first_name}, resume where you left off ?</h2>
-    <StyledResumeShowsContainer>
-          <swiper-container slides-per-view="auto" mousewheel="false">
+      {userShows?.length > 0 && <h2 className='category_titles'>Welcome back {user?.name?.first_name}, resume where you left off ?</h2>}
+      <StyledResumeShowsContainer>
+          {loading ? <div className='load_animation'></div> : <swiper-container slides-per-view="auto" mousewheel="false">
             {userShows.map(eachShow => (
               <swiper-slide className="eachShowSlide" key={eachShow?.showId}>
                 <Link className='show_link' to={`/tvshows/${eachShow?.showId}/${eachShow?.showSeason}/${eachShow?.showEpisode}`}>
                   {eachShow?.poster_url ? (
-                    <img className='show_poster' src={eachShow?.poster_url === null ? defaultPoster : `https://image.tmdb.org/t/p/w500${eachShow?.poster_url}`} alt="showPoster" />
+                    <img className='show_poster' src={eachShow?.poster_url ? `https://image.tmdb.org/t/p/w500${eachShow?.poster_url}` : defaultPoster} alt="showPoster" />
                   ) : (
                     <div className="movie_poster_skeleton" style={{ width: '154px', height: '231px' }} />
                   )}
@@ -68,7 +77,7 @@ export default function ResumeShowsContainer() {
                 <button onClick={() => handleRemoveShow(eachShow.showId)} className='remove_show_btn'>Remove {eachShow.showName}</button>
               </swiper-slide>
             ))}
-          </swiper-container>
+          </swiper-container>}
       </StyledResumeShowsContainer>
     </>
   );
