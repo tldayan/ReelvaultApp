@@ -47,7 +47,7 @@ export default function ResumeShowsContainer() {
   };
 
     
-    if(!session || userShows?.length === 0){
+    if(!session){
       return null
     }
   
