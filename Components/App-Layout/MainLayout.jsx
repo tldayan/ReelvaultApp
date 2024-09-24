@@ -59,41 +59,37 @@ useEffect(() => {
 
 
 useEffect(() => {
-   
   const isOAuthUserCreated = localStorage.getItem("OAuthUserCreated") === 'true';
   
   const handleCreateUser = async() => {
+      if (isOAuthUserCreated) return; 
 
-      const isUserExisting = await checkExistingUser(session?.user_id)
-   
+      const isUserExisting = await checkExistingUser(session?.user_id);
       if(isUserExisting) {
-        localStorage.setItem("OAuthUserCreated", true)
-        navigate("/")
-        return
+        localStorage.setItem("OAuthUserCreated", true); 
+        navigate("/"); 
+        return;
       }
 
-      const limitStatus = await incrementStytchUser()
-
+      const limitStatus = await incrementStytchUser();
       if(limitStatus === 403) {
-        setOauthCompleted(false)
-        navigate("/")
-        return
+        setOauthCompleted(false); 
+        navigate("/"); 
+        return;
       }
 
-      const createUserReq = await createUser(user?.name?.first_name, session?.user_id)
-
+      const createUserReq = await createUser(user?.name?.first_name, session?.user_id);
       if(createUserReq === 201) {
-        localStorage.setItem("OAuthUserCreated", true)
-        navigate("/")
+        localStorage.setItem("OAuthUserCreated", true);
+        navigate("/");
       }
   }
- 
 
   if(OauthCompleted && !isOAuthUserCreated) {
-    handleCreateUser()
+    handleCreateUser();
   }
-  
-},[OauthCompleted])
+}, [OauthCompleted, session?.user_id]);
+
 
 
     const toggleDarkMode = () => {
