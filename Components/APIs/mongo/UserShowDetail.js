@@ -7,6 +7,7 @@ export const getUserShowDetails = async(userId) => {
         headers : {
             "Content-Type" : "application/json"
         },
+        mode : "no-cors",
         credentials : "include"
     })
     
