@@ -20,6 +20,9 @@ export default function ResumeShowsContainer() {
 
     const fetchUserShowDetails = async () => {
       setLoading(true)
+      
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
       try {
         const userShowDetails = await getUserShowDetails(session?.user_id);
         setUserShows(userShowDetails);
