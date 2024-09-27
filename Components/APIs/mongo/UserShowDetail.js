@@ -4,9 +4,6 @@ export const getUserShowDetails = async(userId) => {
 
     const userShowDetailsResponse = await fetch(`https://reelvault-server.vercel.app/getUserShowDetails?userId=${userId}`, {
         method : "GET",
-        headers : {
-            "Content-Type" : "application/json"
-        },
         credentials : "include"
     })
     
