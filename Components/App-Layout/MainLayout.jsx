@@ -50,7 +50,9 @@ useEffect(() => {
 
       } catch (err) {
         console.log(err.status_code)
-    }
+      } finally {
+        navigate("/"); 
+      }
   }
 
   authenicateOauth()
