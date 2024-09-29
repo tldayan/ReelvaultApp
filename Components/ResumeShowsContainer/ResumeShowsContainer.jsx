@@ -13,7 +13,6 @@ export default function ResumeShowsContainer() {
   const {session} = useStytchSession() 
   const {user} = useStytchUser()
   const [loading,setLoading] = useState(false)
-  const [requestEmpty, setRequestEmpty] = useState(false)
   
   useEffect(() => {
 
@@ -24,9 +23,6 @@ export default function ResumeShowsContainer() {
       try {
         const userShowDetails = await getUserShowDetails(session?.user_id);
         setUserShows(userShowDetails);
-        if(userShowDetails.length === 0) {
-          setRequestEmpty(true)
-        }
       } catch (err) {
         console.log(err.message)
       } finally {
@@ -51,7 +47,7 @@ export default function ResumeShowsContainer() {
   };
 
     
-    if(!session || requestEmpty){
+    if(!session){
       return null
     }
   
