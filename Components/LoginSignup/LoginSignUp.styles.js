@@ -1,4 +1,4 @@
-import {styled} from "styled-components"
+import {styled,css} from "styled-components"
 
 
 export const StyledLoginSignUpContainer = styled.div`
@@ -23,7 +23,6 @@ export const StyledLoginSignUpContainer = styled.div`
     font-family: "Quicksand", sans-serif;
     z-index: 99999999999;
     transition: all ease 0.3s;
-    box-sizing: border-box;
 
 
   .auth_type {
