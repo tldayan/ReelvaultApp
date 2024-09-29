@@ -174,7 +174,7 @@ useEffect(() => {
 
                 <div className="user_profile_container">
                   {session && <img className={`userlogo ${isDarkMode ? "light" : ""} ${user?.providers[0]?.profile_picture_url ? "oAuth" : ""}`} src={user?.providers[0]?.profile_picture_url || userLogo} alt="user" />}
-                  {session && <p className="username">{user?.name?.first_name ? user.name.first_name : "..."}</p>}
+                  {session && <p className="username">{user?.name?.first_name ? user.name.first_name.split(" ")[0] : "..."}</p>}
                 </div>
                 {session ? <button className="logout_btn" onClick={handleLogout}>Logout</button> : 
                     <>
