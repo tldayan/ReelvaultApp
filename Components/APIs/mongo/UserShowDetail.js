@@ -18,6 +18,7 @@ export const getUserShowDetails = async(userId) => {
         return userShowDetailsResponse.status
 
     } else {
+        alert(userShowDetailsResponse.status)
         console.log('Database error')
     }
 
