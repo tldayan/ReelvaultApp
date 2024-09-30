@@ -11,7 +11,7 @@ export default function AllMovies() {
 
   return (
     <>
-    <ResumeShowsContainer />
+    {session && <ResumeShowsContainer />}
     <CategoryButtonsContainer>
       <NavLink className='category_buttons' to="/">Popular Shows</NavLink>
       <NavLink className='category_buttons' to="/popular">Popular Movies</NavLink>
