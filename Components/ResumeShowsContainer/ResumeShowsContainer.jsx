@@ -55,8 +55,8 @@ export default function ResumeShowsContainer() {
   return (
     <>
       {userShows?.length > 0 && <h2 className='category_titles'>Welcome back {user?.name?.first_name}, resume where you left off ?</h2>}
-      {loading ? <div className='load_animation'></div> : <StyledResumeShowsContainer>
-          {<swiper-container slides-per-view="auto" mousewheel="false">
+      <StyledResumeShowsContainer>
+          {loading ? <div className='load_animation'></div> : <swiper-container slides-per-view="auto" mousewheel="false">
             {userShows.map(eachShow => (
               <swiper-slide className="eachShowSlide" key={eachShow?.showId}>
                 <Link className='show_link' to={`/tvshows/${eachShow?.showId}/${eachShow?.showSeason}/${eachShow?.showEpisode}`}>
@@ -78,7 +78,7 @@ export default function ResumeShowsContainer() {
               </swiper-slide>
             ))}
           </swiper-container>}
-      </StyledResumeShowsContainer>}
+      </StyledResumeShowsContainer>
     </>
   );
 }
