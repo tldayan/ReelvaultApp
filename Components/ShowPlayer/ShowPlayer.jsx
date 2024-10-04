@@ -1,4 +1,4 @@
-import React, { useEffect,useState,useRef } from "react";
+import React, { useEffect,useState,useRef, useReducer } from "react";
 import { useParams } from "react-router-dom";
 import { ScrollRestoration, Link } from "react-router-dom";
 import ShowDetails from "../Movie-ShowDetails/ShowDetails";
@@ -8,6 +8,46 @@ import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 import { EpisodeLinkActions } from "../store/EpisodeLinkSlice";
 import ServersContainer from "../ServersContainer/ServersContainer";
 
+
+const initialShowState = {
+  showData: {},
+  showDataLoading: false,
+  seasonList: [],
+  episodeList: [],
+  showLoaded: false,
+  showTrailerKey: "",
+  seasonEpisodeNames: [],
+};
+
+export const ACTION = {
+  SET_SHOW_DATA : "SET_SHOW_DATA",
+  SET_SHOW_DATA_LOADING: "SET_SHOW_DATA_LOADING",
+  SET_SEASON_LIST: "SET_SEASON_LIST",
+  SET_EPISODE_LIST: "SET_EPISODE_LIST",
+  SET_SHOW_LOADED: "SET_SHOW_LOADED", 
+  SET_SHOW_TRAILER_KEY: "SET_SHOW_TRAILER_KEY",
+  SET_SEASON_EPISODE_NAMES : "SET_SEASON_EPISODE_NAMES"
+}
+
+
+const reducer = (state, action) => {
+  if(action.type === ACTION.SET_SHOW_DATA) {
+    return {...state, showData : action.payload}
+  } else if (action.type === ACTION.SET_SHOW_DATA_LOADING) {
+    return {...state, showDataLoading: action.payload}
+  } else if(action.type === ACTION.SET_SEASON_LIST) {
+    return {...state, seasonList : action.payload}
+  } else if(action.type === ACTION.SET_SHOW_TRAILER_KEY) {
+    return {...state, showTrailerKey : action.payload}
+  } else if(action.type === ACTION.SET_SEASON_EPISODE_NAMES) {
+    return {...state, seasonEpisodeNames : action.payload}
+  } else if(action.type === ACTION.SET_SHOW_LOADED) {
+    return {...state, showLoaded : action.payload}
+  } else if(action.type === ACTION.SET_EPISODE_LIST) {
+    return {...state, episodeList : action.payload}
+  }
+}
+
 export default function ShowPlayer() {
   let {id, seasonNumber, episodeNumber} = useParams()
   seasonNumber = Number(seasonNumber);
@@ -16,37 +56,28 @@ export default function ShowPlayer() {
 
   const EpisodeLink = useSelector((state) => state.EpisodeLink.episodeLink);
 
+  const [showState, showDispatch] = useReducer(reducer, initialShowState)
+  const { showDataLoading, showTrailerKey, seasonEpisodeNames, showData, episodeList, seasonList } = showState;
+
   const showLoadContainer = useRef(null);
   const IframeShowElement = useRef(null);
-  const [showData, setShowData] = useState({});
-  const [showDataLoading,setShowDataLoading] = useState(false)
-  const [seasonList, setSeasonList] = useState([]);
-  const [episodeList, setEpisodeList] = useState([]);
-  const [showLoaded, setShowLoaded] = useState(false)
-  const [showTrailerKey, setShowTrailerKey] = useState("")
-  const [seasonEpisodeNames,setSeasonEpisodeNames] = useState([])
+  const showLoadedValue = useRef(showState.showLoaded)
 
-  const showLoadedValue = useRef(showLoaded)
 
 
   useEffect(() => {
      
     
     const fetchShowData = async () => {
-      setShowDataLoading(true)
+      showDispatch({type : ACTION.SET_SHOW_DATA_LOADING, payload : true})
       const ShowData = await getShowDetails(id);
       const ShowTrailerId = await getShowTrailer(id)
     
-
-      if (showData.message) {
-        console.log(showData.message);
-      }
-
-      setShowData(ShowData);
-      setShowDataLoading(false)
+      showDispatch({type : ACTION.SET_SHOW_DATA, payload : ShowData})
+      showDispatch({type : ACTION.SET_SHOW_DATA_LOADING, payload : false})
       let filteredSeasons = ShowData.seasons.filter(eachSeason => eachSeason.name !== "Specials" && eachSeason.air_date !== null)
-      setSeasonList([...filteredSeasons]);
-      setShowTrailerKey(ShowTrailerId)
+      showDispatch({type : ACTION.SET_SEASON_LIST, payload : filteredSeasons})
+      showDispatch({type : ACTION.SET_SHOW_TRAILER_KEY, payload: ShowTrailerId})
       
     };
 
@@ -65,9 +96,9 @@ export default function ShowPlayer() {
 useEffect(() => {
 
   const getEpisodeNames = async () => {
-    const seasonEpisodeName = await fetchEpisodeNames(id,seasonNumber)
+    const seasonEpisodeNames = await fetchEpisodeNames(id,seasonNumber)
 
-  setSeasonEpisodeNames(seasonEpisodeName)
+    showDispatch({type : ACTION.SET_SEASON_EPISODE_NAMES, payload : seasonEpisodeNames})
   }
   
   getEpisodeNames()
@@ -78,15 +109,15 @@ useEffect(() => {
 
   function handleIframeLoad() {
 
-    setShowLoaded(true)
+    showDispatch({type : ACTION.SET_SHOW_LOADED, payload : true})
 
     showLoadContainer.current.style.display = "none"
     IframeShowElement.current.style.height = "100%"
   }
 
   useEffect(() => {
-    showLoadedValue.current = showLoaded
-  },[showLoaded])
+    showLoadedValue.current = showState.showLoaded
+  },[showState.showLoaded])
 
 
   return (
@@ -100,7 +131,7 @@ useEffect(() => {
       
       
       <div className="movie_player_container">
-        <p className="watching_show_notice">Watching: {showData.original_name ? showData.original_name : "..."}</p>
+        <p className="watching_show_notice">Watching: {showState.showData?.original_name ? showState.showData.original_name : "..."}</p>
             
         <div ref={showLoadContainer} className="movie_player_skeleton">
         <LoadingAnimation />
@@ -118,7 +149,7 @@ useEffect(() => {
 
       {<ServersContainer selectedEpisode={episodeNumber} selectedSeason={seasonNumber} showId={id}/>}
 
-      {<ShowDetails showId={id} showDataLoading={showDataLoading} showTrailerKey={showTrailerKey} seasonEpisodeNames={seasonEpisodeNames} showData={showData} setEpisodeList={setEpisodeList} episodeList={episodeList} selectedSeason={seasonNumber} selectedEpisode={episodeNumber} seasonList={seasonList} /> }
+      {<ShowDetails showId={id} showDataLoading={showDataLoading} showTrailerKey={showTrailerKey} seasonEpisodeNames={seasonEpisodeNames} showData={showData} episodeList={episodeList} selectedSeason={seasonNumber} selectedEpisode={episodeNumber} seasonList={seasonList} showDispatch={showDispatch} /> }
       <ScrollRestoration top={true} />
     </>
   );

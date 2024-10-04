@@ -12,8 +12,9 @@ import EntityDetailsSkeleton from "./EntityDetailsSkeleton";
 import { deleteUserShowDetails } from "../APIs/mongo/deleteUserShowDetails";
 import { useNavigate} from "react-router-dom";
 import { useStytchSession } from "@stytch/react";
+import { ACTION } from "../ShowPlayer/ShowPlayer";
 
-export default function ShowDetails({ showId,showDataLoading,seasonEpisodeNames,showData,showTrailerKey,setEpisodeList,selectedEpisode,episodeList,selectedSeason,seasonList }) {
+export default function ShowDetails({showDispatch, showId,showDataLoading,seasonEpisodeNames,showData,showTrailerKey,selectedEpisode,episodeList,selectedSeason,seasonList }) {
 
   const dispatch = useDispatch()
   const { session } = useStytchSession();
@@ -30,7 +31,8 @@ export default function ShowDetails({ showId,showDataLoading,seasonEpisodeNames,
         let i = 0; i < seasonList[selectedSeason - 1]?.episode_count || 0 ;i++) {
           newEpisodeList.push(i);
         }
-      setEpisodeList(newEpisodeList);
+
+      showDispatch({type: ACTION.SET_EPISODE_LIST, payload: newEpisodeList})
     }
     
 
