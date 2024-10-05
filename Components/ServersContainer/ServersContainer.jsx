@@ -2,8 +2,9 @@ import React from 'react'
 import { StyledServersContainer } from './ServerContainer.styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { EpisodeLinkActions } from '../store/EpisodeLinkSlice'
+import { ACTION } from '../../helperFuncs/show_movie_reducer'
 
-export default function ServersContainer({selectedEpisode,selectedSeason,showId,movieId,movieIframe,setMovieIframe}) {
+export default function ServersContainer({dispatch,selectedEpisode,selectedSeason,showId,movieId,movieIframe}) {
 
   let iframeLink = undefined
   const dispatch = useDispatch()
@@ -25,7 +26,7 @@ export default function ServersContainer({selectedEpisode,selectedSeason,showId,
     if(showId) {
       dispatch(EpisodeLinkActions.setEpisodeLink(iframeLink))
     } else {
-      setMovieIframe(iframeLink)
+      dispatch({type : ACTION.SET_MOVIE_IFRAME, payload : iframeLink})
     }
   }
 

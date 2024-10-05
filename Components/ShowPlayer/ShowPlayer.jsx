@@ -1,4 +1,4 @@
-import React, { useEffect,useState,useRef, useReducer } from "react";
+import React, { useEffect,useRef, useReducer } from "react";
 import { useParams } from "react-router-dom";
 import { ScrollRestoration, Link } from "react-router-dom";
 import ShowDetails from "../Movie-ShowDetails/ShowDetails";
@@ -7,46 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 import { EpisodeLinkActions } from "../store/EpisodeLinkSlice";
 import ServersContainer from "../ServersContainer/ServersContainer";
+import { ACTION, initialShowState, reducer } from "../../helperFuncs/show_movie_reducer";
 
 
-const initialShowState = {
-  showData: {},
-  showDataLoading: false,
-  seasonList: [],
-  episodeList: [],
-  showLoaded: false,
-  showTrailerKey: "",
-  seasonEpisodeNames: [],
-};
-
-export const ACTION = {
-  SET_SHOW_DATA : "SET_SHOW_DATA",
-  SET_SHOW_DATA_LOADING: "SET_SHOW_DATA_LOADING",
-  SET_SEASON_LIST: "SET_SEASON_LIST",
-  SET_EPISODE_LIST: "SET_EPISODE_LIST",
-  SET_SHOW_LOADED: "SET_SHOW_LOADED", 
-  SET_SHOW_TRAILER_KEY: "SET_SHOW_TRAILER_KEY",
-  SET_SEASON_EPISODE_NAMES : "SET_SEASON_EPISODE_NAMES"
-}
-
-
-const reducer = (state, action) => {
-  if(action.type === ACTION.SET_SHOW_DATA) {
-    return {...state, showData : action.payload}
-  } else if (action.type === ACTION.SET_SHOW_DATA_LOADING) {
-    return {...state, showDataLoading: action.payload}
-  } else if(action.type === ACTION.SET_SEASON_LIST) {
-    return {...state, seasonList : action.payload}
-  } else if(action.type === ACTION.SET_SHOW_TRAILER_KEY) {
-    return {...state, showTrailerKey : action.payload}
-  } else if(action.type === ACTION.SET_SEASON_EPISODE_NAMES) {
-    return {...state, seasonEpisodeNames : action.payload}
-  } else if(action.type === ACTION.SET_SHOW_LOADED) {
-    return {...state, showLoaded : action.payload}
-  } else if(action.type === ACTION.SET_EPISODE_LIST) {
-    return {...state, episodeList : action.payload}
-  }
-}
 
 export default function ShowPlayer() {
   let {id, seasonNumber, episodeNumber} = useParams()
@@ -131,7 +94,7 @@ useEffect(() => {
       
       
       <div className="movie_player_container">
-        <p className="watching_show_notice">Watching: {showState.showData?.original_name ? showState.showData.original_name : "..."}</p>
+        <p className="watching_show_notice">Watching: {showData?.original_name ? showData.original_name : "..."}</p>
             
         <div ref={showLoadContainer} className="movie_player_skeleton">
         <LoadingAnimation />

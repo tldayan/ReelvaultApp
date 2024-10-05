@@ -1,4 +1,4 @@
-import {React, useEffect, useState,useRef } from "react";
+import {React, useEffect, useRef, useReducer } from "react";
 import {useNavigate, useParams } from "react-router-dom";
 import MovieDetails from "../Movie-ShowDetails/MovieDetails";
 import { ScrollRestoration, Link } from "react-router-dom";
@@ -6,6 +6,8 @@ import { MoviePlayerContainer } from "./MoviePlayer.styles";
 import { fetchMovieData, getTrailer } from "../APIs/Api";
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 import ServersContainer from "../ServersContainer/ServersContainer";
+import { ACTION, initialMovieState, reducer } from "../../helperFuncs/show_movie_reducer";
+
 
 
 export default function MoviePlayer() {
@@ -13,29 +15,29 @@ export default function MoviePlayer() {
   const params = useParams();
   const movieId = params.id;
 
+  const [movieState, dispatch] = useReducer(reducer, initialMovieState)
+
+  const {movieData,movieDataLoading,trailerKey, movieLoaded, movieIframe} = movieState
+  
   const movieLoadContainer = useRef(null);
   const IframeElement = useRef(null);
-  
-  const [movieData, setMovieData] = useState({});
-  const [movieDataLoading,setMovieDataLoading] = useState(false)
-  const [trailerKey, setTrailerKey] = useState("")
-  const [movieLoaded, setMovieLoaded] = useState(false)
-  const [movieIframe, setMovieIframe] = useState(`https://vidsrc.in/embed/movie/${movieId}`)
-  const movieLoadedRef = useRef(movieLoaded);
+  const movieLoadedRef = useRef(movieState.movieLoaded);
 
 
   useEffect(() => {
 
     const fetchMovieDetails = async() => {
-      setMovieDataLoading(true)
+      dispatch({type : ACTION.SET_MOVIE_DATA_LOADING, payload: true})
+
       try {
 
         const movieData = await fetchMovieData(movieId);
         const movieTrailerKey = await getTrailer(movieId);
 
-        setTrailerKey(`${movieTrailerKey}`)
-        setMovieData(movieData);
-        setMovieDataLoading(false)
+        dispatch({type : ACTION.SET_MOVIE_TRAILER_KEY, payload: `${movieTrailerKey}`})
+        dispatch({type : ACTION.SET_MOVIE_DATA, payload: movieData})
+        dispatch({type : ACTION.SET_MOVIE_IFRAME, payload : `https://vidsrc.in/embed/movie/${movieId}`})
+        dispatch({type : ACTION.SET_MOVIE_DATA_LOADING, payload: false})
 
     } catch (err) {
       console.log(err.message)
@@ -49,7 +51,7 @@ export default function MoviePlayer() {
   }
 
   fetchMovieDetails()
-  setMovieIframe(`https://vidsrc.in/embed/movie/${movieId}`)
+  dispatch({type: ACTION.SET_MOVIE_IFRAME, payload: `https://vidsrc.in/embed/movie/${movieId}`})
     
   }, [movieId]);
 
@@ -60,7 +62,7 @@ export default function MoviePlayer() {
 
   
   function handleIframeLoad() {
-    setMovieLoaded(true)
+    dispatch({type : ACTION.SET_MOVIE_LOADED, payload : true})
 
     movieLoadContainer.current.style.display = "none"
     IframeElement.current.style.height = "100%"
@@ -89,7 +91,7 @@ export default function MoviePlayer() {
     onLoad={handleIframeLoad}
   ></iframe>
 
-  <ServersContainer movieId={movieId} movieIframe={movieIframe} setMovieIframe={setMovieIframe}/>
+  <ServersContainer movieId={movieId} movieIframe={movieIframe} dispatch={dispatch}/>
 
       </MoviePlayerContainer>
       {/^\d+$/.test(params.id) && <MovieDetails trailerKey={trailerKey} movieData={movieData} movieDataLoading={movieDataLoading} movieId={movieId} />}
