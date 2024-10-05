@@ -12,7 +12,8 @@ import EntityDetailsSkeleton from "./EntityDetailsSkeleton";
 import { deleteUserShowDetails } from "../APIs/mongo/deleteUserShowDetails";
 import { useNavigate} from "react-router-dom";
 import { useStytchSession } from "@stytch/react";
-import { ACTION } from "../ShowPlayer/ShowPlayer";
+import { ACTION } from "../../helperFuncs/show_movie_reducer";
+
 
 export default function ShowDetails({showDispatch, showId,showDataLoading,seasonEpisodeNames,showData,showTrailerKey,selectedEpisode,episodeList,selectedSeason,seasonList }) {
 
