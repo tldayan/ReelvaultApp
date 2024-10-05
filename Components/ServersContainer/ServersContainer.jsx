@@ -7,7 +7,7 @@ import { ACTION } from '../../helperFuncs/show_movie_reducer'
 export default function ServersContainer({dispatch,selectedEpisode,selectedSeason,showId,movieId,movieIframe}) {
 
   let iframeLink = undefined
-  const dispatch = useDispatch()
+  const reduxDispatch = useDispatch()
   let server = undefined
 
   const checkServer = (iframe) => {
@@ -24,7 +24,7 @@ export default function ServersContainer({dispatch,selectedEpisode,selectedSeaso
 
   const setSource = (iframeLink) => {
     if(showId) {
-      dispatch(EpisodeLinkActions.setEpisodeLink(iframeLink))
+      reduxDispatch(EpisodeLinkActions.setEpisodeLink(iframeLink))
     } else {
       dispatch({type : ACTION.SET_MOVIE_IFRAME, payload : iframeLink})
     }
