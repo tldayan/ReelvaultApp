@@ -17,7 +17,7 @@ export default function CategoryMovies() {
   const [CategoryMovies, setCategoryMovies] = useState([]);
   const [isLoading,setIsLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1);
-  const [moviesPerPage] = useState(40);
+  const moviesPerPage = 40;
   const categoryMovieTypeContainerRef = useRef()
 
   useEffect(() => {
@@ -28,11 +28,15 @@ export default function CategoryMovies() {
 
 
   useEffect(() => {
-    if (sessionStorage.getItem(category)) {
-      setCategoryMovies(JSON.parse(sessionStorage.getItem(category)));
+
+    const cachedMovies = sessionStorage.getItem(category)
+    if(cachedMovies) {
+      setCategoryMovies(JSON.parse(cachedMovies))
       setIsLoading(false)
+      return
     } else {
-      let allMovies = undefined
+
+      let allMovies = []
       const fetchCategorisedMovies = async () => {
         const [data1, data2, data3,data4,data5] = await Promise.all([
           getMovies(1, category),
@@ -51,7 +55,10 @@ export default function CategoryMovies() {
 
           setCategoryMovies(allMovies);
         }
-        sessionStorage.setItem(category,JSON.stringify(allMovies));
+        if(allMovies.length) {
+           sessionStorage.setItem(category,JSON.stringify(allMovies));
+        }
+       
         
         setIsLoading(false)
       };
