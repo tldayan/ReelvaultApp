@@ -1,6 +1,6 @@
 import React, { useEffect,useRef, useReducer } from "react";
 import { useParams } from "react-router-dom";
-import { ScrollRestoration, Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import ShowDetails from "../Movie-ShowDetails/ShowDetails";
 import { fetchEpisodeNames, getShowDetails, getShowTrailer } from "../APIs/Api";
 import { useDispatch, useSelector } from "react-redux";
@@ -113,7 +113,6 @@ useEffect(() => {
       {<ServersContainer selectedEpisode={episodeNumber} selectedSeason={seasonNumber} showId={id}/>}
 
       {<ShowDetails showId={id} showDataLoading={showDataLoading} showTrailerKey={showTrailerKey} seasonEpisodeNames={seasonEpisodeNames} showData={showData} episodeList={episodeList} selectedSeason={seasonNumber} selectedEpisode={episodeNumber} seasonList={seasonList} showDispatch={showDispatch} /> }
-      <ScrollRestoration top={true} />
     </>
   );
 }

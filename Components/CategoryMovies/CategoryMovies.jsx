@@ -28,7 +28,7 @@ export default function CategoryMovies() {
 
 
   useEffect(() => {
-
+    setIsLoading(true)
     const cachedMovies = sessionStorage.getItem(category)
     if(cachedMovies) {
       setCategoryMovies(JSON.parse(cachedMovies))
@@ -92,16 +92,18 @@ export default function CategoryMovies() {
     
     removeSelectedSortOptions()
 
+    let originalMovies = [...CategoryMovies]
+
     if (sortOption === "rating_high" || sortOption === "rating_low") {
   
       (sortOption === "rating_high" ? ratingHighButton : ratingLowButton).current.classList.add("selectedSort");
   
-      setCategoryMovies(sortMoviesRating(CategoryMovies,sortOption));
+      setCategoryMovies(sortMoviesRating(originalMovies,sortOption));
 
     } else {
       (sortOption === "new" ? newMovieButton : oldMovieButton).current.classList.add("selectedSort");
   
-      setCategoryMovies(sortMoviesAge(CategoryMovies, sortOption));
+      setCategoryMovies(sortMoviesAge(originalMovies, sortOption));
     } 
 
     sortList.current.classList.remove("active")
@@ -144,13 +146,13 @@ export default function CategoryMovies() {
         </div>
       </h2>
       <div className="movielist_container">
-      {currentMovies.map((eachMovie) => (
+      {isLoading ? <div className="load_animation"></div> : currentMovies.map((eachMovie) => (
         <MovieCard key={eachMovie.id} eachMovie={eachMovie} />
       ))}
       </div>
 
-      {!isLoading && <ul className="pagination">
-        {pages.map((eachPage) => {
+      {<ul className="pagination">
+        {pages.length > 0 && pages.map((eachPage) => {
           return (
             <li key={eachPage}>
               <button

@@ -47,6 +47,7 @@ function Recommended({movieId,showId}) {
     const dispatch = useDispatch()
 
     function handleNameChange(entityName) {
+      window.scrollTo(0,0)
         if(recommendedMovieData.length > 0) {
           dispatch(MovieNameActions.setMovieName(entityName))  
         } else {

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef} from "react";
+import React, { useEffect, useLayoutEffect, useRef} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EpisodeLinkActions } from "../store/EpisodeLinkSlice";
 import { ShowDetailsContainer } from "./Movie-ShowDetails.styles";
@@ -124,23 +124,28 @@ export default function ShowDetails({showDispatch, showId,showDataLoading,season
 
   useEffect(() => {
 
-    window.scrollTo(0, 0);
-  
-    if (episodeListContainer.current) {
+    if (episodeListContainer.current && episodeList?.length > 0) {
+      const activeEpisodeButton = episodeListContainer.current.querySelector(
+        ".episode_buttons.active"
+      );
 
-      const activeEpisodeButton = episodeListContainer.current.querySelector(".episode_buttons.active");
-  
+
       if (activeEpisodeButton) {
-        setTimeout(() => {
-          episodeListContainer.current.scroll({
-            top: activeEpisodeButton.offsetTop - episodeListContainer.current.offsetTop,
-            behavior: "smooth"
-          });
-        }, 500); 
+
+        requestAnimationFrame(() => {
+
+          setTimeout(() => {
+            const offsetTop = activeEpisodeButton.offsetTop - episodeListContainer.current.offsetTop;
+  
+            episodeListContainer.current.scrollTo({
+              top: offsetTop,
+              behavior: "smooth",
+            })}, 500)
+        });
       }
     }
-  }, [selectedEpisode, selectedSeason, showData]);
-  
+    
+  }, [episodeList, selectedEpisode, selectedSeason]);
   
 
   const watchlist = useSelector((state) => state.showsWatchlist)
