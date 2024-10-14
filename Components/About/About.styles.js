@@ -59,10 +59,8 @@ export const FaqMainContainer = styled.div`
   border-radius: 5px;
   padding: 15px;
   width: 95%;
-  color: white;
   font-family: 'Philosopher', sans-serif;
   margin: 10px auto;
-
 
 .faq_container {
   display: flex;
@@ -75,16 +73,20 @@ export const FaqMainContainer = styled.div`
   border: 1px solid #333;
   border-radius: 5px;
   cursor: pointer;
-
 }
 
-#faq_questions {
+.faq_question {
   padding: 15px 10px;
 }
 
-#faq_answers {
+.faq_answer {
   margin: 0px auto;
   padding: 0px 0px 10px 10px;
   display: none;
 }
+
+.faq_answer.show {
+  display: block;
+}
+
 `

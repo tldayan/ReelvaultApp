@@ -5,19 +5,22 @@ import {styled} from "styled-components"
 
 export const ContactUsContainer = styled.div`
 
-  padding: 20px 20px 0px 20px;
-    box-shadow: 0px 0px 1px 0px white;
-    width: min(85%, 900px);
-     margin: 75px auto;
-     animation: form_appear 0.5s ease-in-out forwards;
-     font-family: 'Philosopher', sans-serif;
+  border: 2px solid var(--searchContianerBgColor);
+  background-color: var(--searchContianerBgColor);
+  padding: 20px 20px 20px 20px;
+/*   box-shadow: 0px 0px 1px 0px white; */
+  width: min(85%, 900px);
+  margin: 75px auto;
+  animation: form_appear 0.5s ease-in-out forwards;
+  font-family: 'Philosopher', sans-serif;
+  border-radius: 15px;
 
 .contact_us_title {
-  color: white;
+  color: var(--primary);
   font-size: 1.5rem;
   text-align: center;
   display: block;
-  margin: 0 auto;
+  margin: 10 auto;
   padding-bottom: 3px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.232);
 }
@@ -28,8 +31,8 @@ export const ContactUsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 25px;
-  padding: 20px 0px;
-
+  padding: 20px;
+  border-radius: 15px;
 }
 
 
