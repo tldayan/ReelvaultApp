@@ -665,15 +665,9 @@ svg text {
 }
 
 .close_modal_button {
-/*   border: 2px solid red; */
-  background-color: transparent;
-  border: none;
-  font-size: 1.1rem;
-  outline: none;
-  opacity: 0.6;
   margin-left: auto;
+  margin-top: 5px;
   cursor: pointer;
-  text-align: right !important;
 }
 
 footer {

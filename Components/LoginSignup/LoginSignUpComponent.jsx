@@ -4,6 +4,7 @@ import { StyledLoginSignUpContainer } from "./LoginSignUp.styles"
 import { useStytch } from '@stytch/react'
 import { createUser } from '../APIs/mongo/createUser'
 import { incrementStytchUser } from '../APIs/mongo/incrementStytchUser'
+import closeIcon from "../../assets/close_icon.svg"
 
 export default function LoginSignupComponent({authType,setAuthType}) {
 
@@ -128,7 +129,7 @@ const handleAuth = async(e) => {
     <>
     <StyledLoginSignUpContainer ref={loginSignupContainer}>
       <>
-        <button onClick={() => setAuthType(undefined)} href="/" className={"close_modal_button"}>&#x2716;</button>
+      <svg onClick={() => setAuthType(undefined)} href="/" className='close_modal_button' xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24px" width="24px" viewBox="0 0 24 24"><path d="M18 6L6 18M18 18L6 6" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path></svg>
           <h3 className={"auth_type"}>{serverResponseLoading ? (authType === "login" ? "Logging..." : "Signing Up") : (authType === "login" ? "Log In" : "Sign Up")}</h3>
         {serverResponseLoading ? <div className='load_animation_black'></div> : <form className={"login_signup_container"} onSubmit={handleAuth}>
           {authType === "signup" && <div className={"inputField_container"}>
