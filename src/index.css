@@ -270,7 +270,7 @@ svg text {
   text-transform: uppercase;
   letter-spacing: 8px;
   fill: transparent;
-  stroke: rgb(255, 255, 255);
+  stroke: var(--primary);
   stroke-width: 2px;
   animation: animated-stroke 3s forwards;
   font-family: "Raleway", sans-serif;
@@ -291,7 +291,7 @@ svg text {
   100% {
     stroke-dasharray: 10% 0%;
     stroke-dashoffset: 25%;
-    fill: rgb(255, 255, 255);
+    fill: var(--primary);
   }
   
 }

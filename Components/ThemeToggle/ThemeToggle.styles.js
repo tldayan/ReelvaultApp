@@ -48,7 +48,7 @@ export const ToggleContainer = styled.div`
 
 
 .tgl-ios + .tgl-btn {
-  background: black;
+  background: transparent;
   border-radius: 2em;
   padding: 2px;
   transition: all 0.4s ease;

@@ -22,7 +22,7 @@ export default function MainLayout() {
     const hamburger = useRef()
     const [authType, setAuthType] = useState(undefined)
     const {user} = useStytchUser();
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(() => JSON.parse(localStorage.getItem("isDarkMode")) || false);
     const [OauthCompleted,setOauthCompleted] = useState(user?.providers[0]?.provider_type ? true : false)
     const location = useLocation()
     const stytchClient = useStytch()
@@ -39,65 +39,82 @@ useEffect(() => {
 
   const authenicateOauth = async() => {
 
+    let isMounted = true
+
     try {
 
         const oAuthReq = await stytchClient.oauth.authenticate(token, {session_duration_minutes : 86400})
 
-        if(oAuthReq.status_code === 200) {
+        if(isMounted && oAuthReq.status_code === 200) {
           setOauthCompleted(true)
-       /*    window.location.reload() */
         }
 
       } catch (err) {
         console.log(err.status_code)
       } finally {
-        navigate("/"); 
+        if (isMounted) navigate("/"); 
       }
   }
 
   authenicateOauth()
 
+  return () => {
+    isMounted = false
+  }
+
 },[location.search])
 
 
 useEffect(() => {
-  const isOAuthUserCreated = localStorage.getItem("OAuthUserCreated") === 'true';
-  
-  const handleCreateUser = async() => {
-      if (isOAuthUserCreated) return; 
 
-      const isUserExisting = await checkExistingUser(session?.user_id);
-      if(isUserExisting) {
-        localStorage.setItem("OAuthUserCreated", true); 
-        navigate("/"); 
-        return;
-      }
-
-      const limitStatus = await incrementStytchUser();
-      if(limitStatus === 403) {
-        setOauthCompleted(false); 
-        navigate("/"); 
-        return;
-      }
-
-      const createUserReq = await createUser(user?.name?.first_name, session?.user_id);
-      if(createUserReq === 201) {
-        localStorage.setItem("OAuthUserCreated", true);
-        navigate("/");
-      }
+  if (localStorage.getItem("OAuthUserCreated") === 'true') {
+    return;
   }
 
-  if(OauthCompleted && !isOAuthUserCreated) {
+  const handleCreateUser = async () => {
+    const isUserExisting = await checkExistingUser(session?.user_id);
+    if (isUserExisting) {
+      localStorage.setItem("OAuthUserCreated", true);
+      navigate("/"); 
+      return;
+    }
+
+    const limitStatus = await incrementStytchUser();
+    if (limitStatus === 403) {
+      setOauthCompleted(false);
+      navigate("/");
+      return;
+    }
+
+    const createUserReq = await createUser(user?.name?.first_name, session?.user_id);
+    if (createUserReq === 201) {
+      localStorage.setItem("OAuthUserCreated", true);
+      navigate("/");
+    }
+  };
+
+  if (OauthCompleted) {
     handleCreateUser();
   }
 }, [OauthCompleted, session?.user_id]);
 
 
 
-    const toggleDarkMode = () => {
-      setIsDarkMode(!isDarkMode);
-      document.documentElement.classList.toggle('light', !isDarkMode);
-    };
+useEffect(() => {
+  if (isDarkMode) {
+    document.documentElement.classList.remove('light');
+  } else {
+    document.documentElement.classList.add('light');
+  }
+
+  localStorage.setItem("isDarkMode", JSON.stringify(isDarkMode)); 
+}, [isDarkMode]);
+
+
+
+const toggleDarkMode = () => {
+  setIsDarkMode((prevMode) => !prevMode); 
+};
 
 
     function openHamburger() {
@@ -170,11 +187,11 @@ useEffect(() => {
                     <NavLink to="about" className="nav_links" onClick={returnHome}>About</NavLink>
                 </ul>
 
-                  <ThemeToggle toggleDarkMode={toggleDarkMode}/>
+                  <ThemeToggle isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode}/>
 
                 <div className="user_profile_container">
-                  {session && <img className={`userlogo ${isDarkMode ? "light" : ""} ${user?.providers[0]?.profile_picture_url ? "oAuth" : ""}`} src={user?.providers[0]?.profile_picture_url || userLogo} alt="user" />}
-                  {session && <p className="username">{user?.name?.first_name ? user.name.first_name.split(" ")[0] : "..."}</p>}
+                  {session?.user_id && <img className={`userlogo ${isDarkMode ? "light" : ""} ${user?.providers[0]?.profile_picture_url ? "oAuth" : ""}`} src={user?.providers[0]?.profile_picture_url || userLogo} alt="user" />}
+                  {session?.user_id && <p className="username">{user?.name?.first_name ? user.name.first_name.split(" ")[0] : "..."}</p>}
                 </div>
                 {session ? <button className="logout_btn" onClick={handleLogout}>Logout</button> : 
                     <>
@@ -202,7 +219,7 @@ useEffect(() => {
         <div onClick={() => window.scrollTo(0,0)} className='chevron_up' style={{ opacity: showChevron ? '1' : '0',cursor: showChevron ? "pointer" : "auto" }}></div>
         <footer>
             <Link to="/" className="logo">ReelVault</Link>
-            <p className="copyright">&copy; 2023 ReelVault. All rights reserved.</p>
+            <p className="copyright">&copy; 2024 ReelVault. All rights reserved.</p>
         </footer>
     </StyledMainApp>
   )
