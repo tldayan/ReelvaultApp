@@ -30,39 +30,35 @@ export default function MainLayout() {
     const navigate = useNavigate()
   
   
-useEffect(() => {
-
-  const searchParams = new URLSearchParams(location.search)
-  const token = searchParams.get("token")
-
-  if(!token) return
-
-  const authenicateOauth = async() => {
-
-    let isMounted = true
-
-    try {
-
-        const oAuthReq = await stytchClient.oauth.authenticate(token, {session_duration_minutes : 86400})
-
-        if(isMounted && oAuthReq.status_code === 200) {
-          setOauthCompleted(true)
+    useEffect(() => {
+      let isMounted = true; 
+    
+      const searchParams = new URLSearchParams(location.search);
+      const token = searchParams.get("token");
+    
+      if (!token) return;
+    
+      const authenticateOauth = async () => {
+        try {
+          const oAuthReq = await stytchClient.oauth.authenticate(token, { session_duration_minutes: 86400 });
+    
+          if (isMounted && oAuthReq.status_code === 200) {
+            setOauthCompleted(true);
+          }
+        } catch (err) {
+          console.log(err.status_code);
+        } finally {
+          if (isMounted) navigate("/");
         }
-
-      } catch (err) {
-        console.log(err.status_code)
-      } finally {
-        if (isMounted) navigate("/"); 
-      }
-  }
-
-  authenicateOauth()
-
-  return () => {
-    isMounted = false
-  }
-
-},[location.search])
+      };
+    
+      authenticateOauth();
+    
+      return () => {
+        isMounted = false;
+      };
+    }, [location.search]);
+    
 
 
 useEffect(() => {

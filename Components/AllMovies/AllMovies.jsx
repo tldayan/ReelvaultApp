@@ -5,17 +5,22 @@ import { CategoryButtonsContainer } from './AllMovies.styles'
 import ResumeShowsContainer from '../ResumeShowsContainer/ResumeShowsContainer'
 
 
+const navLinks = [{name: "Popular Shows", path: "/"},
+  {name: "Popular Movies", path: "/popular"},
+  {name: "Rated Movies", path: "/rated"},
+  {name: "Upcoming Movies", path: "/upcoming"},
+  {name: "Filter", path: "filter"}]
+
 export default function AllMovies() {
+
 
   return (
     <>
     <ResumeShowsContainer />
     <CategoryButtonsContainer>
-      <NavLink className='category_buttons' to="/">Popular Shows</NavLink>
-      <NavLink className='category_buttons' to="/popular">Popular Movies</NavLink>
-      <NavLink className='category_buttons' to="/rated">Rated Movies</NavLink>
-      <NavLink className='category_buttons' to="/upcoming">Upcoming Movies</NavLink>
-      <NavLink className='category_buttons' to="filter">Filter</NavLink>
+      {navLinks.map(({name, path}) => {
+        return <NavLink key={name} className="category_buttons" to={path}>{name}</NavLink>
+      })}
     </CategoryButtonsContainer>
 
     {<div className='categories_container'>
