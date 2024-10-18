@@ -51,10 +51,11 @@ nav {
 .userlogo {
   width: clamp(5px, 5vw, 25px);
   border-radius : 50%;
+  filter : invert(1)
 }
 
 .userlogo.light {
-  filter : invert(1)
+  filter : invert(0)
 }
 
 .userlogo.light.oAuth {

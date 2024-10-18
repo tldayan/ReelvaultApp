@@ -301,7 +301,7 @@ svg text {
   margin:  20px auto;
 	width: 30px;
 	height: 30px;
-	border:solid 3px #ffffff;
+	border:solid 3px var(--primary);
 	border-radius: 50%;
 	border-right-color: transparent;
 	border-bottom-color: transparent;
