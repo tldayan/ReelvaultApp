@@ -91,16 +91,13 @@ const handleAuth = async(e) => {
         setServerMsg("Sorry, Maximum User Accounts reached")
         return
       }
-
+    
         const userData = await stytchClient.passwords.create({email,password,session_duration_minutes: 86400})
-        await stytchClient.user.update({user_id : userData.user_id, name : {first_name : username}})        
+        localStorage.setItem("isUserLogged", true)
+        await stytchClient.user.update({user_id : userData.user_id, name : {first_name : username}})
+           
         const createUserReq = await createUser(username, userData.user_id)
-        
-        if(createUserReq === 400) {
-          setServerMsg("The email address is already taken!")
-        } else if(createUserReq === 401) {
-          setServerMsg("Unauthorized Credentials")
-        }
+
         setAuthType(undefined)
       } else {
         setServerMsg("Create a strong password with numbers and special characters")
@@ -109,8 +106,6 @@ const handleAuth = async(e) => {
     } catch (err) {
       if(err.status_code === 400) {
         setServerMsg("The email address is already taken!")
-      } else {
-        setServerMsg("Create a strong password with numbers and special characters")
       }
         
     } finally {
