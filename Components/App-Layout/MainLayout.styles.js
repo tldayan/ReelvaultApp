@@ -51,6 +51,9 @@ nav {
 .userlogo {
   width: clamp(5px, 5vw, 25px);
   border-radius : 50%;
+}
+
+.userlogo.default {
   filter : invert(1)
 }
 
@@ -58,7 +61,9 @@ nav {
   filter : invert(0)
 }
 
-
+.userlogo.light.oAuth {
+  filter : invert(0)
+}
 
 .auth_buttons:hover,.logout_btn:hover {
   border: 1px solid var(--primary);
