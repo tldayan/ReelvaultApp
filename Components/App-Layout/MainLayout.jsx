@@ -186,7 +186,7 @@ const toggleDarkMode = () => {
                   <ThemeToggle isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode}/>
 
                 <div className="user_profile_container">
-                  {session?.user_id && <img className={`userlogo ${isDarkMode && user?.providers[0]?.profile_picture_url ? "light" : "oAuth"}`} src={user?.providers[0]?.profile_picture_url || userLogo} alt="user" />}
+                  {session?.user_id && <img className={`userlogo ${isDarkMode && user?.providers[0]?.profile_picture_url ? "" : isDarkMode && !user?.providers[0]?.profile_picture_url ? "light" : ""}`} src={user?.providers[0]?.profile_picture_url || userLogo} alt="user" />}
                   {session?.user_id && <p className="username">{user?.name?.first_name ? user.name.first_name.split(" ")[0] : "..."}</p>}
                 </div>
                 {session ? <button className="logout_btn" onClick={handleLogout}>Logout</button> : 
