@@ -58,6 +58,10 @@ nav {
   filter : invert(0)
 }
 
+.userlogo.oAuth {
+  filter : invert(1)
+}
+
 .auth_buttons:hover,.logout_btn:hover {
   border: 1px solid var(--primary);
   color : var(--background);
