@@ -58,10 +58,6 @@ nav {
   filter : invert(0)
 }
 
-.userlogo.light.oAuth {
-  filter : invert(0)
-}
-
 .auth_buttons:hover,.logout_btn:hover {
   border: 1px solid var(--primary);
   color : var(--background);
