@@ -33,7 +33,7 @@ export const StyledSearchBar = styled.div`
 
 
 .search_list.active {
-  max-height: 80vh;
+  max-height: 60vh;
   padding: 0;
   box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.458);
 }

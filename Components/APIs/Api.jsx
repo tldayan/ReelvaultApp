@@ -127,9 +127,10 @@ export const getShowDetails = async(showId) => {
 
 export const getMovieSearchData = async(entityName) => {
 
+  let encodedEntityName = encodeURIComponent(entityName)
 
   try {
-    const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${entityName}&include_adult=false&language=en-US&page=1`,{
+    const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${encodedEntityName}&include_adult=false&language=en-US&page=1`,{
       headers : {
       accept: 'application/json',
       Authorization: `Bearer ${API_KEY}`
@@ -137,17 +138,12 @@ export const getMovieSearchData = async(entityName) => {
   })
 
 
-  
   const DATA = await response.json()
   const movieData = DATA.results
-
-  let filteredData = []
-
-  movieData.map(eachMovie => {
-    if(eachMovie.poster_path && eachMovie.vote_count > 50 && eachMovie.release_date?.slice(0,4) > 1970) {
-      filteredData.push(eachMovie)
-    }
-  })
+  
+  let filteredData = movieData.filter(eachMovie => 
+    eachMovie.poster_path && eachMovie.vote_count > 50 && eachMovie.release_date?.slice(0,4) > 1970
+  );
 
   return filteredData
 

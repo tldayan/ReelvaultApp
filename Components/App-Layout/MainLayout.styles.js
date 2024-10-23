@@ -16,6 +16,7 @@ export const StyledMainApp = styled.div`
   color: var(--primary);
   font-family: 'Cinzel', serif;
   font-size: clamp(0.4rem, 4vw, 1.5rem);
+  z-index: 997
 }
 
 nav {
