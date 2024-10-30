@@ -1,4 +1,4 @@
-import React, { useEffect,useRef, useReducer } from "react";
+import React, { useEffect,useRef, useReducer, useState } from "react";
 import { useParams } from "react-router-dom";
 import {Link} from "react-router-dom";
 import ShowDetails from "../Movie-ShowDetails/ShowDetails";
@@ -25,9 +25,10 @@ export default function ShowPlayer() {
   const showLoadContainer = useRef(null);
   const IframeShowElement = useRef(null);
   const showLoadedValue = useRef(showState.showLoaded)
+  const [iframeLoaded,setIframeLoaded] = useState(false)
 
 
-
+  console.log(showData)
   useEffect(() => {
      
     
@@ -50,6 +51,7 @@ export default function ShowPlayer() {
   }, [id]);
 
   useEffect(() => {
+    setIframeLoaded(false);
     showLoadContainer.current.style.display = "flex"
     IframeShowElement.current.style.height = "0%"
     dispatch(EpisodeLinkActions.setEpisodeLink(`https://vidsrc.in/embed/tv/${id}/${seasonNumber}/${episodeNumber}`))
@@ -72,6 +74,7 @@ useEffect(() => {
 
   function handleIframeLoad() {
 
+    setIframeLoaded(true)
     showDispatch({type : ACTION.SET_SHOW_LOADED, payload : true})
 
     showLoadContainer.current.style.display = "none"
@@ -90,14 +93,15 @@ useEffect(() => {
       <Link to="/" className="back_button">
         &#10094; Home
       </Link>
+
+      <p className="watching_show_notice">Watching: {showData?.original_name ? showData.original_name : "..."}</p>
     </div>
-      
-      
+    
       <div className="movie_player_container">
-        <p className="watching_show_notice">Watching: {showData?.original_name ? showData.original_name : "..."}</p>
-            
+      
         <div ref={showLoadContainer} className="movie_player_skeleton">
-        <LoadingAnimation />
+          {!iframeLoaded && <img className="backdrop_image" src={`https://image.tmdb.org/t/p/original/${showData.backdrop_path}`} alt="" />}
+          <LoadingAnimation />
         </div>  
 
           <iframe
