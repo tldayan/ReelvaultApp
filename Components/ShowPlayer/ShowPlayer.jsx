@@ -100,7 +100,7 @@ useEffect(() => {
       <div className="movie_player_container">
       
         <div ref={showLoadContainer} className="movie_player_skeleton">
-          {!iframeLoaded && <img className="backdrop_image" src={`https://image.tmdb.org/t/p/original/${showData.backdrop_path}`} alt="" />}
+          {!iframeLoaded && <img className="backdrop_image" src={`https://image.tmdb.org/t/p/original/${showData.backdrop_path}`} alt="show_backdrop" />}
           <LoadingAnimation />
         </div>  
 
