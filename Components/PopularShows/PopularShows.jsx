@@ -18,8 +18,14 @@ export default function PopularShows() {
 
 
   useEffect(() => {
-    if (sessionStorage.getItem("popularShows")) {
-      setPopularShowsData(JSON.parse(sessionStorage.getItem("popularShows")));
+
+    let cachedShows = localStorage.getItem("popularShows")
+    let showsExpiryTime = localStorage.getItem("popularShowsExpiryTime")
+    let nowDate = new Date().getTime()
+
+
+    if (cachedShows && showsExpiryTime && nowDate < showsExpiryTime) {
+      setPopularShowsData(JSON.parse(cachedShows));
       setIsLoading(false)
     } else {
       const fetchPopularShows = async () => {
@@ -38,12 +44,13 @@ export default function PopularShows() {
         if (data1.message) {
           console.log(data1.message);
         } else {
-          setPopularShowsData([...data1, ...data2, ...data3, ...data4,...data5,...data6,...data7,...data8,...data9]);
+          const allPopularShows = [...data1, ...data2, ...data3, ...data4,...data5,...data6,...data7,...data8,...data9]
+          setPopularShowsData(allPopularShows);
 
-          sessionStorage.setItem(
-            "popularShows",
-            JSON.stringify([...data1, ...data2, ...data3, ...data4,...data5,...data6,...data7,...data8,...data9])
-          );
+          localStorage.setItem("popularShows",JSON.stringify(allPopularShows));
+
+          localStorage.setItem("popularShowsExpiryTime", nowDate + 24 * 60 * 60 * 1000)
+
         }
 
         setIsLoading(false)
