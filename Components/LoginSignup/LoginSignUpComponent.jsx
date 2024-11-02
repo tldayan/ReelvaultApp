@@ -159,7 +159,7 @@ const handleForgotPassword = async() => {
   setServerMsg("")
 
 
-  let resetPasswordReq = await stytchClient.passwords.resetByEmailStart({email: email, reset_password_redirect_url: 'http://localhost:5173/reset'})
+  let resetPasswordReq = await stytchClient.passwords.resetByEmailStart({email: email, reset_password_redirect_url: 'https://reelvault.vercel.app/reset'})
   console.log(resetPasswordReq)
   if(resetPasswordReq.status_code === 200) {
     setServerMsg(`An email with instructions to reset your password has been sent to ${email}.`)
