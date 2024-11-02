@@ -28,9 +28,14 @@ export default function MainLayout() {
     const stytchClient = useStytch()
     const {session} = useStytchSession()
     const navigate = useNavigate()
+
+    const resetRoute = location.pathname.includes("reset")
   
   
     useEffect(() => {
+
+      if(resetRoute) return
+      
       let isMounted = true; 
     
       const searchParams = new URLSearchParams(location.search);
@@ -174,8 +179,8 @@ const toggleDarkMode = () => {
             <nav>
                 <Link to="/" className="logo">ReelVault</Link>
                 <LoggedOutAlert />
-                {authType && <div className="dark_overlay"></div>}
-                {authType && <LoginSignupComponent authType={authType} setAuthType={setAuthType} />}
+                {(authType || resetRoute) && <div className="dark_overlay"></div>}
+                {(authType || resetRoute) && <LoginSignupComponent resetRoute={resetRoute} authType={authType} setAuthType={setAuthType} />}
                 <ul ref={mobileMenu} className="nav_container">
                     <NavLink to="/" className="nav_links" onClick={returnHome}>Home</NavLink>
                     <NavLink to="watchlist" className="nav_links" onClick={returnHome}>Watchlist</NavLink>

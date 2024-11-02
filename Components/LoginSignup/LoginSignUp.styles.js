@@ -38,7 +38,8 @@ export const StyledLoginSignUpContainer = styled.div`
   }
   
   .server_msg {
-    color: red;
+    width: 90%;
+    color: #050505c1;
     margin: 0 auto;
     text-shadow: 1px 1px 1px #05050510;
     text-align : center;
@@ -49,10 +50,13 @@ export const StyledLoginSignUpContainer = styled.div`
     float: right;
     cursor: pointer;
     transition: all ease 0.3s;
+    font-size: clamp(0.5rem, 3vw, 0.75rem);
+    margin-left: auto;
   }
   
   .forgot_password:hover {
     color: var(--accent);
+    text-decoration: underline;
   }
   
   .inputField_container {
