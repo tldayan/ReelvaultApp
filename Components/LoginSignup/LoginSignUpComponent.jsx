@@ -9,26 +9,32 @@ import { useNavigate } from 'react-router-dom'
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function LoginSignupComponent({authType,setAuthType,resetRoute}) {
+  
 
-    const loginSignupContainer = useRef(null)
-    const [email,setEmail] = useState("")
-    const [username,setUsername] = useState("")
-    const [password,setPassword] = useState("")
-    const [serverResponseLoading,setServerResponseLoading] = useState(false)
-    const [serverMsg,setServerMsg] = useState(null)
-    const stytchClient = useStytch()
-    const navigate = useNavigate()
+  const loginSignupContainer = useRef(null)
 
-const handleOAuth = async() => {
+  const [formData,setFormData] = useState({
+    username: "",
+    email: "",
+    password: ""
+  })
+  const [serverResponseLoading,setServerResponseLoading] = useState(false)
+  const [serverMsg,setServerMsg] = useState(null)
+  const stytchClient = useStytch()
+  const navigate = useNavigate()
+    
+  const {email,password,username} = formData
+
+  const handleOAuth = async() => {
   
   try {
 
-  const OAuthReq = await stytchClient.oauth.google.start({
-    login_redirect_url: 'https://reelvault.vercel.app',
-    signup_redirect_url: 'https://reelvault.vercel.app',
-    custom_scopes: ["profile"],
-    prompt: 'select_account'
-  })
+    const OAuthReq = await stytchClient.oauth.google.start({
+      login_redirect_url: 'https://reelvault.vercel.app',
+      signup_redirect_url: 'https://reelvault.vercel.app',
+      custom_scopes: ["profile"],
+      prompt: 'select_account'
+    })
 
   } catch(err) {
     console.log(err.message)
@@ -36,6 +42,12 @@ const handleOAuth = async() => {
 
 }
 
+const handleFormData = (e) => {
+
+  const {name, value} = e.target
+  setFormData(prevFormData => ({...prevFormData, [name] : value}))
+
+}
 
 const handleAuth = async(e) => {
   e.preventDefault()
@@ -166,9 +178,6 @@ const handleForgotPassword = async() => {
   } else if(resetPasswordReq.status_code === 404) {
     setServerMsg(`This email doesn't appear to be in our system.`)
   }
-
-  
-
 }
 
 
@@ -182,7 +191,6 @@ const handleForgotPassword = async() => {
   const closeModal = () => {
     setAuthType(undefined)
     navigate("/")
-    
   }
 
 
@@ -194,15 +202,15 @@ const handleForgotPassword = async() => {
           {serverResponseLoading ? <div className='load_animation_black'></div> : <form className={"login_signup_container"} onSubmit={handleAuth}>
             {authType === "signup" && <div className={"inputField_container"}>
               <label htmlFor="user_name">Username</label>
-              <input value={username} onChange={(e) => setUsername(e.target.value)} maxLength={15} type="text" name="username"  placeholder='Enter username' id="user_name" required />
+              <input value={username} onChange={handleFormData} maxLength={15} type="text" name="username"  placeholder='Enter username' id="user_name" required />
             </div>}
             {!resetRoute && <div className={"inputField_container"}>
               <label htmlFor="user_email">Email</label>
-              <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" name="email"  placeholder='Enter email' id="user_email" required />
+              <input value={email} onChange={handleFormData} type="text" name="email"  placeholder='Enter email' id="user_email" required />
             </div>}
             <div className={"inputField_container"}>
               <label htmlFor="user_password">{!resetRoute ? "Password" : "New Password"} {(!resetRoute && authType === "login") && <span onClick={handleForgotPassword} className={"forgot_password"}>Forgot password? Reset now</span>}</label>
-              <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" name="password" placeholder={!resetRoute ? "Enter password" : "Enter new password"} id="user_password" required />
+              <input value={password} onChange={handleFormData} type="password" name="password" placeholder={!resetRoute ? "Enter password" : "Enter new password"} id="user_password" required />
             </div>
             <p className='server_msg'>{serverMsg}</p>
             <button className={"loginSignup_btn"}>{resetRoute ? "Reset" : authType === "login" ? "Login" : "Sign up"}</button>
