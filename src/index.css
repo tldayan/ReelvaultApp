@@ -794,7 +794,7 @@ footer {
   display: none;
 }
 
-.watching_show_notice,watching_movie_notice {
+.watching_show_notice,.watching_movie_notice {
   color: var(--primary);
   font-size: clamp(0.5rem, 4vw, 1.4rem);
   align-self: flex-start;
