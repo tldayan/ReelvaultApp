@@ -99,7 +99,7 @@ nav {
 .search_icon {
   width: 18px;
   margin-right: 10px;
-  filter: var(--watchlistIconFilter);
+  filter: var(--IconFilter);
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -227,7 +227,8 @@ a {
 .copyright {
   font-size: clamp(0.5rem, 1vw, 1rem);
   font-family: 'Quicksand', sans-serif;
-  color : var(--primary)
+  color : var(--primary);
+  opacity: 0.6;
 }
 
 #hamburger {

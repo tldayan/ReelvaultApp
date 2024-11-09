@@ -15,26 +15,23 @@ export const GenreMovieTypeContainer = styled.div`
 
 
 .movielist_container {
-/*   border: 1px solid rgb(0, 255, 166); */
   display: grid;
   overflow: hidden;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 20px 10px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px 20px;
   width: 100%;
   margin: 0 auto;
 }
     
 .category_titles {
-/*   border: 1px solid #333; */
-  text-align: center;
-  padding: 10px 0px;
+  padding: 10px 10px;
   font-size: 1.5rem;
   border-radius: 5px;
-    background-color: #101010;
   margin-top: 5px;
   margin-bottom: 20px;
-  font-family: 'Philosopher', sans-serif;
-  color: rgb(228, 228, 228);
+  font-weight: normal;
+    font-family: 'Quicksand', sans-serif;
+    color: var(--primary);
 }
 
 

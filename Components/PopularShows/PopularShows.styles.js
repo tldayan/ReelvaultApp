@@ -16,8 +16,9 @@ export const PopularShowsTypeContainer = styled.div`
 .movielist_container {
   display: grid;
   overflow: hidden;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 20px 10px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  align-items: center;
+  gap: 25px 20px;
   width: 100%;
   margin: 0 auto;
 }
