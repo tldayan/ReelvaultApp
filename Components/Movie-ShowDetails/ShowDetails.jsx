@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState} from "react";
 import { useDispatch} from "react-redux";
 import { EpisodeLinkActions } from "../store/EpisodeLinkSlice";
 import { ShowDetailsContainer } from "./Movie-ShowDetails.styles";
@@ -28,6 +28,7 @@ export default function ShowDetails({showDispatch, showId,showDataLoading,season
     return JSON.parse(localStorage.getItem('userWatchlist')) || []
   })
 
+  
   useEffect(() => {
     if(seasonList && seasonList.length > 0) {
       const newEpisodeList = [];
@@ -151,8 +152,8 @@ export default function ShowDetails({showDispatch, showId,showDataLoading,season
   }, [episodeList, selectedEpisode, selectedSeason]);
   
 
-  const isInWatchlist = userWatchlist?.some(eachEntity => eachEntity.entityId == showId);
-
+  const isInWatchlist = (userWatchlist || []).some(eachEntity => eachEntity.entityId === showId);
+  
 
   useEffect(() => {
     const storedWatchlist = JSON.parse(localStorage.getItem('userWatchlist')) || [];

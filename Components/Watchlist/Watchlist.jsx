@@ -4,6 +4,7 @@ import WatchlistCard from './WatchlistCard'
 import { Link } from 'react-router-dom'
 import sadFace from "../../assets/sad_face.png"
 import { fetchWatchlist } from '../../helperFuncs/fetchWatchlist'
+import { useStytchSession } from '@stytch/react'
 
 export default function Watchlist() {
 

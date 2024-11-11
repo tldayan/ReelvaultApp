@@ -1,0 +1,563 @@
+[33mcommit 1c1a7f307fb0f00d15d28517778003de32b3679d[m[33m ([m[1;36mHEAD -> [m[1;32mwatchlist_update_branch[m[33m)[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sat Nov 9 11:00:58 2024 +0400
+
+    Added Stylings & Optimizations
+
+[33mcommit 5a4c7b3f9680d9822622994987f090dba1762d12[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Thu Nov 7 00:03:58 2024 +0400
+
+    Style Bug Fix
+
+[33mcommit e22dfdac1e1f32375188f4a510fd2819c8e60aae[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Mon Nov 4 17:31:23 2024 +0400
+
+    Fixed 404 response
+
+[33mcommit 71f5c3ee66e7eaac6649ef51619a5f23277c8bde[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sun Nov 3 14:16:34 2024 +0400
+
+    Optimized FormData
+
+[33mcommit 94515df3bf33c00f6c838660ad98e666f92b4d93[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sun Nov 3 00:03:20 2024 +0400
+
+    Added Password Reset Journey
+
+[33mcommit b3cd9c1e4cf7111b55e9af334359075c40992923[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sat Nov 2 23:43:08 2024 +0400
+
+    Added Password Reset Journey
+
+[33mcommit 51a6f11337269506fc84fee48b4a8673b708d394[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Fri Nov 1 21:15:07 2024 +0400
+
+    Optimized Popular Shows
+
+[33mcommit e6a68967c3135ee1d3b46c0871265eb919f431c8[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Wed Oct 30 16:51:25 2024 +0400
+
+    Updated Show Player
+
+[33mcommit eac741f31ef4e8574b830d84e626d4be0cc192aa[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Wed Oct 30 16:50:25 2024 +0400
+
+    Updated Show Player
+
+[33mcommit 8f3d226087e3ff457f04785f2d955165a714a112[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Wed Oct 23 10:37:45 2024 +0400
+
+    Fixed Search Bar filtering bug
+
+[33mcommit ca265d446439540e58b2c6e4c7911e4395e39534[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sat Oct 19 17:07:51 2024 +0400
+
+    Style Fix
+
+[33mcommit 99da642ecbecb49e767087145797bd602bd1d335[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sat Oct 19 16:51:15 2024 +0400
+
+    Style Fix
+
+[33mcommit 85e774cc146d30ac12176fcd2b63dd0591abbe9c[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sat Oct 19 12:36:19 2024 +0400
+
+    Style Fix
+
+[33mcommit 5edefd32479452ddbb0a7e1b570441774b318e69[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sat Oct 19 12:29:42 2024 +0400
+
+    Style Fix
+
+[33mcommit 52261a4000e311b43d746712abee7a02bd90391e[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Fri Oct 18 12:17:44 2024 +0400
+
+    Fixed UserLogo Styles
+
+[33mcommit 13a12035796fbbb313bc48e2e04dd63832456c21[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Fri Oct 18 11:39:30 2024 +0400
+
+    Fixed Authentication Bug
+
+[33mcommit 691cefe71e8b4fdfe83ece9cae9e6592ac5a65df[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Fri Oct 18 09:39:44 2024 +0400
+
+    Fixed Component Bug
+
+[33mcommit 80903208600b389adb9ba4b0159946bb8561f9f8[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Wed Oct 16 17:33:05 2024 +0400
+
+    Optimized Components
+
+[33mcommit b2ec2b42f33c5e88e367770104b46774296ec150[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Tue Oct 15 22:43:25 2024 +0400
+
+    Fixed Modal Styles
+
+[33mcommit 8a9ea88c2db0dd1b31fdca034d2b2576d5bd0fc4[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Mon Oct 14 22:43:32 2024 +0400
+
+    Fixed Bugs
+
+[33mcommit 7c5e3412bae9f73020cd40e6b37480114e8a3e83[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Mon Oct 14 19:04:59 2024 +0400
+
+    implemented useMemo for Optimization
+
+[33mcommit 2d21ab9c32989f25c9eccd03c0911149aec28fda[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Fri Oct 11 12:01:46 2024 +0400
+
+    Optimized Components
+
+[33mcommit 7a04ac894e20ed351afd298667b759b076382ce5[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Thu Oct 10 23:54:29 2024 +0400
+
+    optimizations made
+
+[33mcommit 388598a7a3ce2bba2878189544ccceeebe6123a1[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sat Oct 5 14:36:25 2024 +0400
+
+    dispatch conflict fix 2
+
+[33mcommit c0de329546c463d1c9af334344521382633e6015[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sat Oct 5 14:33:02 2024 +0400
+
+    dispatch conflict fix
+
+[33mcommit 17c04bc6b179bf2b7004a5fdbcbc64751814d516[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sat Oct 5 14:27:16 2024 +0400
+
+    useReducer hook used commit 2
+
+[33mcommit 1622150c713826389806e785a3b99bed5e1d6749[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Fri Oct 4 23:23:01 2024 +0400
+
+    useReducer Hook used
+
+[33mcommit 9b0c610de636b9adced1993b5aafecc674ffb38b[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Wed Oct 2 23:16:15 2024 +0400
+
+    Style Fix
+
+[33mcommit 1bd47946050f94d2fde155c9972b0b68e1de2ced[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Mon Sep 30 19:38:25 2024 +0400
+
+    Fix
+
+[33mcommit 93019ca64c73a9bd62e5848b17a2c089bc8227c0[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Mon Sep 30 19:19:07 2024 +0400
+
+    Fix
+
+[33mcommit 2dc426625dfcbb486073e502cf70c13aa5f409fd[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Mon Sep 30 19:16:12 2024 +0400
+
+    Fix
+
+[33mcommit 812c75c92438cd6887b6ce0ee8c20a1c6c66404e[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Mon Sep 30 19:11:54 2024 +0400
+
+    Fix
+
+[33mcommit 9be5618976a5968b22a59d143ddc6ae70f37c549[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Mon Sep 30 19:07:39 2024 +0400
+
+    Fix
+
+[33mcommit d237e4d73b9988886e705371f69ce6494cb79e47[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Mon Sep 30 18:55:28 2024 +0400
+
+    Fix
+
+[33mcommit 3fa6d75f0ff67d17fe07d0f8dfd4eb7d3b1f93af[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Mon Sep 30 18:26:39 2024 +0400
+
+    Fix
+
+[33mcommit 8c6f430391dfa4b1c64509ed247c332a9898d2dd[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Mon Sep 30 17:56:36 2024 +0400
+
+    Fix
+
+[33mcommit 4227aba4d49c9ab8a1e27b5bc55a62109b027f50[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Mon Sep 30 17:51:11 2024 +0400
+
+    Fix
+
+[33mcommit 81d8b90566f93951c023e62e37b7e9504c7a25b8[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Mon Sep 30 17:26:24 2024 +0400
+
+    Fix
+
+[33mcommit 8b85f0b2cca9d18532bc310f65703f70390e5e43[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sun Sep 29 22:17:55 2024 +0400
+
+    Fix
+
+[33mcommit 37ee4731c992ea811b5945f973b53b2a14a8aa24[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sun Sep 29 15:21:19 2024 +0400
+
+    Text fix
+
+[33mcommit 2d49339b42a142b11855c33c7fc901f158ea9d50[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sun Sep 29 15:18:15 2024 +0400
+
+    Text fix
+
+[33mcommit 9863dffbced8989cece8c4ed6e433e5f2f413241[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sun Sep 29 11:49:27 2024 +0400
+
+    Text fix
+
+[33mcommit b343c79b5cb0a71397f0c6d2754cbde859256b0a[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sun Sep 29 11:30:58 2024 +0400
+
+    Text fix
+
+[33mcommit 3adec085745c7ae9c0c460ebc0564b034a981910[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sun Sep 29 11:02:56 2024 +0400
+
+    Text fix
+
+[33mcommit 7790909f6e41efb12ba44898957276dd8a2110b7[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sun Sep 29 10:56:05 2024 +0400
+
+    Text fix
+
+[33mcommit 6855febb0c9ce0a04a6bfecac5b7d107fae964ac[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sun Sep 29 10:50:20 2024 +0400
+
+    Text fix
+
+[33mcommit 285187a0e6d8a3a58a7dd380791c4d895d76899f[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sun Sep 29 10:30:37 2024 +0400
+
+    Text fix
+
+[33mcommit 9093ac2bcfa55bff118bbb2e5427e211887637b0[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sat Sep 28 01:13:19 2024 +0400
+
+    Bug Fix
+
+[33mcommit 59e411c074b69d5e06301e63c17dc72470c17015[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sat Sep 28 01:05:49 2024 +0400
+
+    Bug Fix
+
+[33mcommit feb3cb84f03a6ff3a32f318bc03b784bed9dbd01[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sat Sep 28 00:27:27 2024 +0400
+
+    Bug Fix
+
+[33mcommit 7e49c35506c8498b4745fae90aac182ebc86956a[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sat Sep 28 00:24:14 2024 +0400
+
+    Bug Fix
+
+[33mcommit 242e4c999e6afc5b0cdcd08a3a5d92c2ceb73a00[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sat Sep 28 00:18:24 2024 +0400
+
+    Bug Fix
+
+[33mcommit 59798fd24139b24e6c24c863e24a87238a578e00[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Fri Sep 27 22:42:45 2024 +0400
+
+    Bug Fix
+
+[33mcommit 078b37d460fef6d87286c8c14b8655aa4e6cece2[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Tue Sep 24 11:13:24 2024 +0400
+
+    bug fix
+
+[33mcommit a1795a68f4554b7df0853f3edac4489820a4446d[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Tue Sep 24 10:15:50 2024 +0400
+
+    bug fix
+
+[33mcommit e89978afd4fea75016e3e1c2705b10848e44d1e5[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sun Sep 22 21:41:10 2024 +0400
+
+    bug fix
+
+[33mcommit f7dd5876a56d64ec8b44b8f956967de41684b2c8[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sun Sep 22 21:36:05 2024 +0400
+
+    bug fix
+
+[33mcommit 0d2c1907d9033f4973338c9c6e1c2c974c3b56c6[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sun Sep 22 10:33:15 2024 +0400
+
+    Bug fix
+
+[33mcommit b277ae174324be3b68d29368b9f6bc96046e402f[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sun Sep 22 10:15:55 2024 +0400
+
+    Bug fix
+
+[33mcommit 2470d407169f46b950ea33a4fa96315d74cc0a66[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sun Sep 22 09:14:39 2024 +0400
+
+    Bug fix
+
+[33mcommit 7c722b7a1d15b1d9159aa524ad5f58e604dacb62[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Fri Sep 20 11:55:22 2024 +0400
+
+    bug fix test
+
+[33mcommit 316561b546fdb9e33b5f390cfe9d6b6e1d58f27d[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Fri Sep 20 11:52:43 2024 +0400
+
+    bug fix test
+
+[33mcommit 1961b641891cb6de05c161ad6fdd9558ddbd5809[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Fri Sep 20 11:45:35 2024 +0400
+
+    bug fix test
+
+[33mcommit 0cd7869f4ce63c9a6a0fda22be0cbe348149fdd8[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Fri Sep 20 11:39:26 2024 +0400
+
+    bug fix test
+
+[33mcommit d065db86a943917eafb87180027907c2f5ae4910[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Fri Sep 20 11:28:45 2024 +0400
+
+    bug fix test
+
+[33mcommit bf0ff5a31186575cbea2e902de7572d4477f6f99[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Fri Sep 20 08:50:29 2024 +0400
+
+    bug fix test
+
+[33mcommit 561008b13aaf7489674e1075429b185a41d94336[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Fri Sep 20 08:43:20 2024 +0400
+
+    bug fix test
+
+[33mcommit 5b83dd5dad3ab004391b0eabfc32639ae82bb5d0[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Fri Sep 20 08:31:25 2024 +0400
+
+    bug fix test
+
+[33mcommit e55fd871b53b58eb4c0ef809cf116f6fc6c85a1d[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Fri Sep 20 08:27:55 2024 +0400
+
+    bug fix test
+
+[33mcommit 269bf95997560b4a6a0861a12dfa11ba42a86a88[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Fri Sep 20 08:20:24 2024 +0400
+
+    bug fix test
+
+[33mcommit c09d8a97df39b444fd56ba66ea263df479f69a6b[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Thu Sep 19 22:10:50 2024 +0400
+
+    Fixed Bug
+
+[33mcommit 54d69ee2b5042166d77b82e8d81de5a0192c1195[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Thu Sep 19 20:37:14 2024 +0400
+
+    Fixed Bug
+
+[33mcommit c248b3eb978edcfdaf3a237c7c831c832004f852[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Thu Sep 19 20:12:38 2024 +0400
+
+    Fixed Bug
+
+[33mcommit 4eda4d6a6bb9dd2d076bc313980fe4e518d6d549[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Thu Sep 19 18:58:58 2024 +0400
+
+    Fixed Bug
+
+[33mcommit 5eb957163028a793b6a5cd12d59376cc277ff55e[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sun Sep 8 19:29:07 2024 +0400
+
+    Fixed Type
+
+[33mcommit 019e0d082ce24c622f364fd259d45224a31a340d[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sun Sep 8 10:20:56 2024 +0400
+
+    Added Styles
+
+[33mcommit 420d31eaecca142eecd81206bb5e2716f5ea3ba0[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Tue Sep 3 23:19:15 2024 +0400
+
+    Test
+
+[33mcommit 1c13bfa2955892780ad9580a63034d5320d72ce5[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Tue Sep 3 23:14:07 2024 +0400
+
+    Test
+
+[33mcommit c07a875a9208d1bc766e9a78216ae92122754cc2[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Tue Sep 3 22:18:00 2024 +0400
+
+    Fixed Episode Name Bug
+
+[33mcommit 96dbe53d82535f6c0efb09672eb46347f91ba7e2[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Tue Sep 3 21:36:26 2024 +0400
+
+    Integrated GraphQL
+
+[33mcommit 40a977eb54895145a199c51758db8ca620703be2[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Mon Sep 2 14:34:34 2024 +0400
+
+    Fixed Search Bar Bug
+
+[33mcommit d22bce9a218af740d1a9c360a7bda865e588ce97[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sat Aug 31 11:24:36 2024 +0400
+
+    Fixed MongoDB Bug
+
+[33mcommit a238988a80f4871cf0d8c9a9e5e85cca347c642c[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Thu Aug 22 14:50:56 2024 +0400
+
+    Search bar added
+
+[33mcommit b84fec919f6e6fbfe2fc1459a130dfab358f2b2b[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sun Aug 18 10:57:04 2024 +0400
+
+    Optimized Components
+
+[33mcommit 8aa4627a90040c7b80ed4fa455dd3593d71f91ff[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Mon Aug 5 20:55:16 2024 +0400
+
+    Fixed Servers
+
+[33mcommit 14d142eb648be930709623808c683b83f8f98157[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sun Aug 4 15:18:56 2024 +0400
+
+    Fixed Bug
+
+[33mcommit 5515c36836308f919fe38dd73e09c1f251e92001[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Sat Aug 3 19:22:20 2024 +0400
+
+    Optimized Function
+
+[33mcommit e1879d06d422688523f49683d15a638bcf0074ec[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Fri Aug 2 23:00:33 2024 +0400
+
+    Optmized Search Bar
+
+[33mcommit d794e5503fbe8216c08b442dbd59d591c1b25ec2[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Fri Aug 2 21:37:11 2024 +0400
+
+    Added Session Expiry Modal
+
+[33mcommit 07d6c570b984616cf511ef7650df52e645f8d437[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Fri Aug 2 21:36:34 2024 +0400
+
+    Added Session Expiry Modal
+
+[33mcommit 908756a8c41e48c565bac3af2c17629b6f3a2a1a[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Thu Jul 11 11:33:50 2024 +0400
+
+    Optimized
+
+[33mcommit b55cd05ba91071b7a819db5a284a60a055232338[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Thu Jul 11 10:54:19 2024 +0400
+
+    Optimized
+
+[33mcommit d8d271699d823feeb7725155ca62b1a8f1f491ea[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Wed Jul 10 23:13:38 2024 +0400
+
+    Updated
+
+[33mcommit f4d0d0bd837ac61b86e198074b18b38ffb78215d[m
+Author: tldayan <110288123+tldayan@users.noreply.github.com>
+Date:   Wed Jul 10 20:24:04 2024 +0400
+
+    Updated

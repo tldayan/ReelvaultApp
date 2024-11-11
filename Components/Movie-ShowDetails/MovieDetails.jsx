@@ -4,6 +4,7 @@ import { MovieDetailsContainer } from "./Movie-ShowDetails.styles";
 import EntityDetailsSkeleton from "./EntityDetailsSkeleton";
 import { useStytchSession } from "@stytch/react";
 import { handleWatchlist } from "../../helperFuncs/handleWatchlist";
+import { useState } from "react";
 
 export default function MovieDetails({movieData,movieDataLoading,movieId,trailerKey}) {
 
@@ -27,7 +28,7 @@ export default function MovieDetails({movieData,movieDataLoading,movieId,trailer
      }
   }
 
-  const isInWatchlist = userWatchlist.some(eachEntity => eachEntity.entityId == showId);
+  const isInWatchlist = (userWatchlist || []).some(eachEntity => eachEntity.entityId === showId);
 
   useEffect(() => {
     const storedWatchlist = JSON.parse(localStorage.getItem('userWatchlist')) || [];
