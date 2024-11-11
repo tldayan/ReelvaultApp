@@ -11,6 +11,7 @@ import { createUser } from "../APIs/mongo/createUser";
 import { checkExistingUser } from "../APIs/mongo/checkExistingUser";
 import { incrementStytchUser } from "../APIs/mongo/incrementStytchUser";
 import LoggedOutAlert from "../LoggedOutAlert/LoggedOutAlert";
+import { fetchWatchlist } from "../../helperFuncs/fetchWatchlist";
 
 
 const validSearchBarPaths = ["/popular","/","/rated","/upcoming","/filter","/filter/romance","/filter/action","/filter/adventure","/filter/horror","/filter/comedy"]
@@ -99,6 +100,13 @@ useEffect(() => {
   }
 }, [OauthCompleted, session?.user_id]);
 
+useEffect(() => {
+
+  if(session?.user_id) {
+    fetchWatchlist(session?.user_id)
+  }
+
+}, [session?.user_id])
 
 
 useEffect(() => {

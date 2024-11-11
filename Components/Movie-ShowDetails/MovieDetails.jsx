@@ -1,24 +1,17 @@
-import { useDispatch, useSelector } from "react-redux";
 import Recommended from "../Recommended/Recommended";
 import Reviews from "../Reviews/Reviews";
 import { MovieDetailsContainer } from "./Movie-ShowDetails.styles";
-import { moviesWatchlistAction } from "../store/moviesWatchlistSlice";
 import EntityDetailsSkeleton from "./EntityDetailsSkeleton";
+import { useStytchSession } from "@stytch/react";
+import { handleWatchlist } from "../../helperFuncs/handleWatchlist";
 
 export default function MovieDetails({movieData,movieDataLoading,movieId,trailerKey}) {
-  
-  const dispatch = useDispatch()
-  const watchlist = useSelector((state) => state.moviesWatchlist)
 
-  function handleWatchlist() {
-
-    if(watchlist.some(eachEntity => eachEntity.movieId == movieId)) { 
-      dispatch(moviesWatchlistAction.removeFromWatchlist(movieId))
-    } else {
-      dispatch(moviesWatchlistAction.addToWatchlist(movieData))
-    }
-  }
-
+  const { session } = useStytchSession()
+  const userId = session?.user_id;
+  const [userWatchlist,setUserWatchlist] = useState(() => {
+    return JSON.parse(localStorage.getItem('userWatchlist')) || []
+  })
 
   const shareEntity = () => {
     const shareData = {
@@ -34,7 +27,23 @@ export default function MovieDetails({movieData,movieDataLoading,movieId,trailer
      }
   }
 
+  const isInWatchlist = userWatchlist.some(eachEntity => eachEntity.entityId == showId);
 
+  useEffect(() => {
+    const storedWatchlist = JSON.parse(localStorage.getItem('userWatchlist')) || [];
+    setUserWatchlist(storedWatchlist);
+  }, []);
+
+
+  const handleWatchlistClick = async() => {
+
+    const updatedWatchList = await handleWatchlist(movieId,userId,movieData,isInWatchlist)
+
+    setUserWatchlist(updatedWatchList)
+
+    localStorage.setItem("userWatchlist", JSON.stringify(updatedWatchList));
+
+  }
 
   return (
     <>
@@ -78,7 +87,7 @@ export default function MovieDetails({movieData,movieDataLoading,movieId,trailer
           </div>
           <div className="buttons_container">
             <button className="share_btn" onClick={shareEntity}>Share</button>
-            <button className={`watchlist_btn ${watchlist.some(eachEntity => eachEntity.movieId == movieId) ? "active" : ""}`} onClick={handleWatchlist}>{watchlist.some(eachEntity => eachEntity.movieId == movieId) ? "In Watchlist" : "+ Watchlist"}</button>
+            <button className={`watchlist_btn ${isInWatchlist ? "active" : ""}`} onClick={handleWatchlistClick}>{isInWatchlist ? "In Watchlist" : "+ Watchlist"}</button>
           </div>
         </div>
         { Object.keys(movieData)?.length !== 0  && trailerKey !== "null" && <iframe className="trailer" src={`https://www.youtube.com/embed/${trailerKey}`} title="YouTube player" frameBorder="0" allow="encrypted-media; fullscreen"></iframe>}
