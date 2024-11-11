@@ -4,7 +4,7 @@ export const createUser = async(username,userId) => {
 
   try {
 
-      const userCreateReq = await fetch("https://reelvault-server.vercel.app/createUser", {
+      const userCreateReq = await fetch("http://localhost:3200/createUser", {
               method : "POST",
               body : JSON.stringify({username : username, userId : userId}),
               headers : {

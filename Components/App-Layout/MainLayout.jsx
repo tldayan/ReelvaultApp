@@ -14,6 +14,7 @@ import LoggedOutAlert from "../LoggedOutAlert/LoggedOutAlert";
 import { fetchWatchlist } from "../../helperFuncs/fetchWatchlist";
 
 
+
 const validSearchBarPaths = ["/popular","/","/rated","/upcoming","/filter","/filter/romance","/filter/action","/filter/adventure","/filter/horror","/filter/comedy"]
 
 export default function MainLayout() {
@@ -68,6 +69,7 @@ export default function MainLayout() {
 
 
 useEffect(() => {
+
 
   if (localStorage.getItem("OAuthUserCreated") === 'true') {
     return;

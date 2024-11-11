@@ -36,7 +36,7 @@ function Recommended({movieId,showId}) {
                 }  
 
             } catch (error) {
-                alert(error.message)
+                console.log(error.message)
             }
         }
 

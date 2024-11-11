@@ -5,16 +5,14 @@ import defaultPoster from "../../assets/no_image.jpg"
 
 export default function WatchlistCard({eachEntity}) {  
   
- let entityType = entityEntity.title ? "movie" : "show"
-  
   return (
-    <Link to={`${entityType === "show" ? `../tvshows/${eachEntity.entityId}/1/1` : `../${eachEntity.entityId}`}`} key={eachEntity.entityId} className='watchlistCard'>
-      <img className='watchlist_poster' src={eachEntity.poster_path !== null ? `https://image.tmdb.org/t/p/original${eachEntity.poster_path}` : defaultPoster} alt="" />
+    <Link to={`${eachEntity.entityType === "Show" ? `../tvshows/${eachEntity.entityId}/1/1` : `../movies/${eachEntity.entityId}`}`} key={eachEntity.entityId} className='watchlistCard'>
+      <img className='watchlist_poster' src={eachEntity.entityPosterUrl !== null ? `https://image.tmdb.org/t/p/w500${eachEntity.entityPosterUrl}` : defaultPoster} alt="poster" />
       <div className='watchlist_metrics'>
-        <p className='watchlist_entity_title'>{entityType === "movie" ? eachEntity.title : eachEntity.name}</p>
-        <p className='entity_date'>{entityType === "movie" ? eachEntity.release_date : eachEntity.first_air_date}</p>
-        <p className='entity_type'>{entityType === "show" ? "Show" : "Movie"}</p>
-        <p className='entity_overview'>{eachEntity.overview}</p>
+        <p className='watchlist_entity_title'>{eachEntity.entityName}</p>
+        <p className='movie_date'>{eachEntity.entityReleaseDate}</p>
+        <p className='movie_date'>{eachEntity.entityType}</p>
+        <p className='entity_overview'>{eachEntity.entityDescription}</p>
       </div>
     </Link>
   )

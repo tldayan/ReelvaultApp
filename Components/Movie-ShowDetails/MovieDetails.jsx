@@ -4,14 +4,20 @@ import { MovieDetailsContainer } from "./Movie-ShowDetails.styles";
 import EntityDetailsSkeleton from "./EntityDetailsSkeleton";
 import { useStytchSession } from "@stytch/react";
 import { handleWatchlist } from "../../helperFuncs/handleWatchlist";
+import { useRef, useState } from "react";
+import { handleWatchlistButtonHover, handleWatchlistButtonLeave } from "../../helperFuncs/handleWatchlistButtonAlert";
 
 export default function MovieDetails({movieData,movieDataLoading,movieId,trailerKey}) {
 
   const { session } = useStytchSession()
   const userId = session?.user_id;
-  const [userWatchlist,setUserWatchlist] = useState(() => {
-    return JSON.parse(localStorage.getItem('userWatchlist')) || []
-  })
+  const watchlistButton = useRef(null)
+  const [userWatchlist, setUserWatchlist] = useState(() => {
+    const storedWatchlist = localStorage.getItem("userWatchlist");
+    return storedWatchlist ? JSON.parse(storedWatchlist) : [];
+  });
+  
+
 
   const shareEntity = () => {
     const shareData = {
@@ -27,15 +33,15 @@ export default function MovieDetails({movieData,movieDataLoading,movieId,trailer
      }
   }
 
-  const isInWatchlist = userWatchlist.some(eachEntity => eachEntity.entityId == showId);
+  const isInWatchlist = userWatchlist?.some((eachEntity) => eachEntity.entityId === movieId);
 
-  useEffect(() => {
-    const storedWatchlist = JSON.parse(localStorage.getItem('userWatchlist')) || [];
-    setUserWatchlist(storedWatchlist);
-  }, []);
 
 
   const handleWatchlistClick = async() => {
+
+    if(!userId) {
+      return
+    }
 
     const updatedWatchList = await handleWatchlist(movieId,userId,movieData,isInWatchlist)
 
@@ -87,7 +93,7 @@ export default function MovieDetails({movieData,movieDataLoading,movieId,trailer
           </div>
           <div className="buttons_container">
             <button className="share_btn" onClick={shareEntity}>Share</button>
-            <button className={`watchlist_btn ${isInWatchlist ? "active" : ""}`} onClick={handleWatchlistClick}>{isInWatchlist ? "In Watchlist" : "+ Watchlist"}</button>
+            <button onMouseEnter={() => handleWatchlistButtonHover(watchlistButton)} onMouseLeave={() => handleWatchlistButtonLeave(watchlistButton)} ref={watchlistButton}  className={`watchlist_btn ${isInWatchlist ? "active" : ""}`} onClick={handleWatchlistClick}>{isInWatchlist ? "In Watchlist" : "+ Watchlist"}</button>
           </div>
         </div>
         { Object.keys(movieData)?.length !== 0  && trailerKey !== "null" && <iframe className="trailer" src={`https://www.youtube.com/embed/${trailerKey}`} title="YouTube player" frameBorder="0" allow="encrypted-media; fullscreen"></iframe>}

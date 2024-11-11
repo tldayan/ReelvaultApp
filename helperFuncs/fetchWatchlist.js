@@ -5,7 +5,7 @@ export const fetchWatchlist = async(userId) => {
 
   try {
 
-    let userWatchlistFetch = await fetch(`https://reelvault-server.vercel.app/getUserWatchlist?userId=${userId}`,{
+    let userWatchlistFetch = await fetch(`http://localhost:3200/getUserWatchlist?userId=${userId}`,{
       method : "GET"
     })
 

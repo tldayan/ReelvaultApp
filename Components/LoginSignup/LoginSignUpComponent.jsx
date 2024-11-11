@@ -28,10 +28,10 @@ export default function LoginSignupComponent({authType,setAuthType,resetRoute}) 
   const handleOAuth = async() => {
   
   try {
-
+    /* https://reelvault.vercel.app */
     const OAuthReq = await stytchClient.oauth.google.start({
-      login_redirect_url: 'https://reelvault.vercel.app',
-      signup_redirect_url: 'https://reelvault.vercel.app',
+      login_redirect_url: 'http://localhost:5173',
+      signup_redirect_url: 'http://localhost:5173',
       custom_scopes: ["profile"],
       prompt: 'select_account'
     })
@@ -171,7 +171,7 @@ const handleForgotPassword = async() => {
   setServerMsg("")
 
   try {
-    let resetPasswordReq = await stytchClient.passwords.resetByEmailStart({email: email, reset_password_redirect_url: 'https://reelvault.vercel.app/reset'})
+    let resetPasswordReq = await stytchClient.passwords.resetByEmailStart({email: email, reset_password_redirect_url: 'http://localhost:5173/reset'})
 
     if(resetPasswordReq.status_code === 200) {
         setServerMsg(`An email with instructions to reset your password has been sent to ${email}.`)

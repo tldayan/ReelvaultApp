@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyledWatchlistContainer } from './Watchlist.style'
 import WatchlistCard from './WatchlistCard'
 import { Link } from 'react-router-dom'
 import sadFace from "../../assets/sad_face.png"
 import { fetchWatchlist } from '../../helperFuncs/fetchWatchlist'
+import { useStytchSession } from '@stytch/react'
 
 export default function Watchlist() {
 
@@ -11,15 +12,19 @@ export default function Watchlist() {
   const userId = session?.user_id;
 
   const [watchlistEntities,setWatchlistEntities] = useState(() => {
-    return JSON.parse(localStorage.getItem("userWatchlist")) || []
-  })
+    const storedWatchlist = localStorage.getItem("userWatchlist");
+    return storedWatchlist ? JSON.parse(storedWatchlist) : [];
+  });
 
 
   useEffect(() => {
 
+    if(!userId) return 
+    
     let isMounted = true
 
     const fetchWatchlistFunc = async() => {
+
       const userWatchlist = await fetchWatchlist(userId)
       
       if(isMounted) {
@@ -40,7 +45,7 @@ export default function Watchlist() {
     <StyledWatchlistContainer>
         <h3>Watchlist</h3>
         <div className='watchlist'>
-        {watchlistEntities.length ? watchlistEntities.map(eachEntity => {
+        {watchlistEntities?.length ? watchlistEntities.map(eachEntity => {
           const key = eachEntity.entityId;
           return <WatchlistCard key={key} eachEntity={eachEntity} />;
         }) : <div className="empty_watchlist">

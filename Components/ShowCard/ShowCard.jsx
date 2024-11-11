@@ -21,7 +21,7 @@ const ShowCard = ({ eachShow, imageLoaded, posterLoaded, handlePosterLoaded}) =>
         <div className="hd">HD</div>
           <img
             className="movie_poster"
-            src={eachShow.poster_path === null ? defaultPoster : `https://image.tmdb.org/t/p/w500${eachShow.poster_path}`}
+            src={eachShow.poster_path === null ? defaultPoster : `https://image.tmdb.org/t/p/original${eachShow.poster_path}`}
             alt="imagePoster"
             loading='lazy'
             onLoad={handlePosterLoaded}

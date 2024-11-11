@@ -65,7 +65,7 @@ export const getMovies = async(page,category) => {
 export const getShows = async(page) => {
 
   try {
-    const query = `
+    /* const query = `
       query {
         popularShows(page: ${page}) {
           page
@@ -79,16 +79,15 @@ export const getShows = async(page) => {
           }
         }
       }
-    `
+    ` */
 
 
-    const response = await fetch(`https://reelvault-server.vercel.app/graphql`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json', 
-    },
-    body : JSON.stringify({query})
-});
+    const response = await fetch(`https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=${page}`, {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${API_KEY}`
+  }})
 
     if(!response.ok) {
       throw new Error (`Failed to fetch Shows : ${response.status}`)
@@ -96,7 +95,7 @@ export const getShows = async(page) => {
 
     const DATA = await response.json()
 
-    return DATA.data.popularShows.results
+    return DATA.results
 
   } catch (error) {
     return {error : true, message : error.message}
