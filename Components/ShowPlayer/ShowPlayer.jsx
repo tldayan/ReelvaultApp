@@ -28,7 +28,6 @@ export default function ShowPlayer() {
   const [iframeLoaded,setIframeLoaded] = useState(false)
 
 
-  console.log(showData)
   useEffect(() => {
      
     

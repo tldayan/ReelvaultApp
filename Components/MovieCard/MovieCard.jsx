@@ -19,7 +19,7 @@ const MovieCard = ({ eachMovie, imageLoaded, posterLoaded, handlePosterLoaded}) 
           <div className="hd">HD</div>
           <img
             className="movie_poster"
-            src={eachMovie.poster_path === null ? defaultPoster : `https://image.tmdb.org/t/p/w500${eachMovie.poster_path}`}
+            src={eachMovie.poster_path === null ? defaultPoster : `https://image.tmdb.org/t/p/original${eachMovie.poster_path}`}
             alt="imagePoster"
             loading='lazy'
             onLoad={handlePosterLoaded}

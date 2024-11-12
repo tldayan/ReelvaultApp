@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState} from "react";
 import { useDispatch} from "react-redux";
 import { EpisodeLinkActions } from "../store/EpisodeLinkSlice";
 import { ShowDetailsContainer } from "./Movie-ShowDetails.styles";
@@ -12,6 +12,8 @@ import { deleteUserShowDetails } from "../APIs/mongo/deleteUserShowDetails";
 import { useNavigate} from "react-router-dom";
 import { useStytchSession } from "@stytch/react";
 import { ACTION } from "../../helperFuncs/show_movie_reducer";
+import { handleWatchlist } from "../../helperFuncs/handleWatchlist";
+import { handleWatchlistButtonHover, handleWatchlistButtonLeave } from "../../helperFuncs/handleWatchlistButtonAlert";
 
 
 export default function ShowDetails({showDispatch, showId,showDataLoading,seasonEpisodeNames,showData,showTrailerKey,selectedEpisode,episodeList,selectedSeason,seasonList }) {
@@ -23,9 +25,12 @@ export default function ShowDetails({showDispatch, showId,showDataLoading,season
   let episodeButton = useRef(null)
   let episodeListContainer = useRef(null) 
   const navigate = useNavigate()
-  const [userWatchlist,setUserWatchlist] = useState(() => {
-    return JSON.parse(localStorage.getItem('getUserWatchlist')) || []
-  })
+  const watchlistButton = useRef(null)
+  const [userWatchlist, setUserWatchlist] = useState(() => {
+    const storedWatchlist = localStorage.getItem("userWatchlist");
+    return storedWatchlist ? JSON.parse(storedWatchlist) : [];
+  });
+  
 
   useEffect(() => {
     if(seasonList && seasonList.length > 0) {
@@ -150,68 +155,13 @@ export default function ShowDetails({showDispatch, showId,showDataLoading,season
   }, [episodeList, selectedEpisode, selectedSeason]);
   
 
-  const isInWatchlist = userWatchlist.some(eachEntity => eachEntity.entityId == showId);
-
-  async function handleWatchlist() {
-      
-    if(isInWatchlist) {
-
-      try {
-
-        const deleteShowRequest = await fetch(`https://reelvault-server.vercel.app/deleteUserWatchlist?entityId=${showId}&userId=${userId}`, {
-          method : "DELETE"
-        })
-
-        const deleteShowRequestResponse = await deleteShowRequest.json()
-
-        if(deleteShowRequestResponse.ok) {
-          let updatedWatchList = userWatchlist.filter(eachEntity => eachEntity.entityId !== showId)
-          setUserWatchlist(updatedWatchList)
-          localStorage.setItem("userWatchlist", JSON.stringify(updatedWatchList));
-        }
-        
-      } catch (err) {
-        console.log(err.message)
-      }
-
-    } else {
-
-      let entityObject = {
-        entityId: showId,
-        entityName: showData.name,
-        entityReleaseDate: showData.first_air_date,
-        entityPosterUrl: showData.poster_path,
-        entityType: "Show",
-        entityDescription: showData.overview
-      }
-
-      try {
-
-        const addShowRequest = await fetch(`https://reelvault-server.vercel.app/addUserWatchlist`, {
-          method: "POST",
-          body: JSON.stringify({entityObject : entityObject, userId: userId})
-        })
-
-        const addShowRequestResponse = await addShowRequest.json()
-
-        if(addShowRequestResponse.ok) {
-
-          let updatedUserWatchlist = [...userWatchlist, {entityObject}]
-
-          setUserWatchlist(updatedUserWatchlist)
-          localStorage.setItem("userWatchlist", JSON.stringify(updatedUserWatchlist));
-        }
-        
-      } catch(err) {
-        console.log(err.message)
-      } 
-    }
-  }
+  const isInWatchlist = userWatchlist?.some((eachEntity) => eachEntity.entityId === showId);
 
   useEffect(() => {
     const storedWatchlist = JSON.parse(localStorage.getItem('userWatchlist')) || [];
     setUserWatchlist(storedWatchlist);
   }, []);
+  
   
   
   const shareEntity = () => {
@@ -227,6 +177,22 @@ export default function ShowDetails({showDispatch, showId,showDataLoading,season
       return
      }
   }
+
+  const handleWatchlistClick = async() => {
+
+    if(!userId) {
+      return
+    }
+
+    const updatedWatchList = await handleWatchlist(showId,userId,showData,isInWatchlist) 
+
+    setUserWatchlist(updatedWatchList)
+
+    localStorage.setItem("userWatchlist", JSON.stringify(updatedWatchList));
+
+  }
+
+
 
 
   return (
@@ -273,7 +239,7 @@ export default function ShowDetails({showDispatch, showId,showDataLoading,season
           <div className="buttons_container">
             {showTrailerKey && <button onClick={() => window.open(`https://www.youtube.com/watch?v=${showTrailerKey}`)} className={`trailer_btn`}><img className="eye_icon" src={eye} loading="lazy"></img>Trailer</button>}
             <button className="share_btn" onClick={shareEntity}>Share</button>
-            <button className={`watchlist_btn ${isInWatchlist ? "active" : ""}`} onClick={handleWatchlist}>{isInWatchlist ? "In Watchlist" : "+ Watchlist"}</button>
+            <button onMouseEnter={() => {if(!userId) handleWatchlistButtonHover(watchlistButton)}} onMouseLeave={() => {if(!userId) handleWatchlistButtonLeave(watchlistButton)}} ref={watchlistButton} className={`watchlist_btn ${isInWatchlist ? "active" : ""}`} onClick={handleWatchlistClick}>{isInWatchlist ? "In Watchlist" : "+ Watchlist"}</button>
           </div>
         </div>
         <div className="shows_list_container">

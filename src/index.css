@@ -367,6 +367,8 @@ svg text {
 /* MOVIE POSTER STATS */
 
 .movie_name {
+  width: 97%;
+  margin: 3px auto 0 auto;
   color: var(--entityTitleColor);
   border-radius: 2px;
   padding: 5px 1px 10px 1px;
@@ -411,9 +413,10 @@ svg text {
 
 
 .entity_info_container {
-  /*     border: 1px solid red; */
       display: flex;
-      justify-content: space-between
+      justify-content: space-between;
+      width: 97%;
+      margin: 0px auto 4px auto;
     }
   
     .vote_container {
@@ -542,6 +545,14 @@ border-radius: 3px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.522) ;
 }
 
+.watchlist_btn.alert {
+  border: 1px solid black;
+  background-color: #ff2f00;
+  color: rgb(255, 255, 255);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.522) ;
+  transition: none;
+}
+
 .trailer_btn {
   padding: 4px;
   width: 90px;
@@ -602,7 +613,8 @@ border-radius: 3px;
 
 .watchlist_entity_title {
   color: var(--primary);
-  font-weight: bold;
+  font-size: 1rem;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .entity_type {
@@ -637,6 +649,7 @@ border-radius: 3px;
 .watchlist_metrics {
   display: flex;
   flex-direction: column;
+  align-items: start;
   gap: 5px;
 }
 
@@ -744,7 +757,6 @@ footer {
   color: var(--primary);
   font-weight: bold;
   font-size: clamp(0.8rem, 2vw, 0.9rem);
-  padding-right: 5px;
   z-index: 1;
 }
 

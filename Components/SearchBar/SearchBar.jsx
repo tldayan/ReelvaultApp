@@ -29,7 +29,7 @@ export default function SearchBar() {
       setSearchResults(searchData);
       setSearchDataLoading(false);
     } catch (error) {
-      alert(error.message);
+      console.log(error.message);
     }
   };
 

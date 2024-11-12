@@ -2,7 +2,7 @@
 
 export const getUserShowDetails = async(userId) => {
 
-    const userShowDetailsResponse = await fetch(`https://reelvault-server.vercel.app/getUserShowDetails?userId=${userId}`, {
+    const userShowDetailsResponse = await fetch(`https://reelvault.vercel.app/getUserShowDetails?userId=${userId}`, {
         method : "GET",
         credentials : "include"
     })
@@ -18,8 +18,7 @@ export const getUserShowDetails = async(userId) => {
         return userShowDetailsResponse.status
 
     } else {
-        alert(userShowDetailsResponse.status)
-        console.log('Database error')
+        console.log(userShowDetailsResponse.status)
     }
 
 }
