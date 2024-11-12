@@ -736,6 +736,10 @@ footer {
     color: var(--primary);
   }
 
+.category_titles.user {
+  width: 90%;
+}
+
 .hd {
   position: absolute;
   top: 3%;
