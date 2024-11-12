@@ -171,6 +171,7 @@ const toggleDarkMode = () => {
           const logoutResponse = await stytchClient.session.revoke()
 
         if(logoutResponse.status_code === 200 || logoutResponse.status_code === 204) {
+          localStorage.removeItem("userWatchlist")
           localStorage.removeItem("OAuthUserCreated")
           localStorage.removeItem("isUserLogged")
             navigate("/")
