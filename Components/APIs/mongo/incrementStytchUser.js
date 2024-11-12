@@ -5,7 +5,7 @@ export const incrementStytchUser = async() => {
 
   try {
 
-    const incrementReq = await fetch("https://reelvault.vercel.app/incrementStytchUser", {
+    const incrementReq = await fetch("https://reelvault-server.vercel.app/incrementStytchUser", {
         method : "POST",
         credentials : "include"
       })
