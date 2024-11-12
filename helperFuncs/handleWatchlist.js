@@ -41,7 +41,7 @@ export async function handleWatchlist(entityId,userId,entityData,isInWatchlist) 
 
     try {
 
-      const addEntityRequest = await fetch(`http://localhost:3200/addUserWatchlist`, {
+      const addEntityRequest = await fetch(`https://reelvault-server.vercel.app/addUserWatchlist`, {
         method: "POST",
         headers : {
           "Content-Type" : "application/json"

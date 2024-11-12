@@ -2,7 +2,7 @@
 
 export const getUserShowDetails = async(userId) => {
 
-    const userShowDetailsResponse = await fetch(`http://localhost:3200/getUserShowDetails?userId=${userId}`, {
+    const userShowDetailsResponse = await fetch(`https://reelvault.vercel.app/getUserShowDetails?userId=${userId}`, {
         method : "GET",
         credentials : "include"
     })

@@ -234,7 +234,7 @@ export default function ShowDetails({showDispatch, showId,showDataLoading,season
           <div className="buttons_container">
             {showTrailerKey && <button onClick={() => window.open(`https://www.youtube.com/watch?v=${showTrailerKey}`)} className={`trailer_btn`}><img className="eye_icon" src={eye} loading="lazy"></img>Trailer</button>}
             <button className="share_btn" onClick={shareEntity}>Share</button>
-            <button onMouseEnter={() => handleWatchlistButtonHover(watchlistButton)} onMouseLeave={() => handleWatchlistButtonLeave(watchlistButton)} ref={watchlistButton} className={`watchlist_btn ${isInWatchlist ? "active" : ""}`} onClick={handleWatchlistClick}>{isInWatchlist ? "In Watchlist" : "+ Watchlist"}</button>
+            <button onMouseEnter={() => {if(!userId) handleWatchlistButtonHover(watchlistButton)}} onMouseLeave={() => {if(!userId) handleWatchlistButtonLeave(watchlistButton)}} ref={watchlistButton} className={`watchlist_btn ${isInWatchlist ? "active" : ""}`} onClick={handleWatchlistClick}>{isInWatchlist ? "In Watchlist" : "+ Watchlist"}</button>
           </div>
         </div>
         <div className="shows_list_container">

@@ -3,7 +3,7 @@ export const checkExistingUser = async(userId) => {
 
   try {
 
-    const isUserExistingReq = await fetch(`http://localhost:3200/getIsUserExisting?userId=${userId}`, {
+    const isUserExistingReq = await fetch(`https://reelvault.vercel.app/getIsUserExisting?userId=${userId}`, {
       method : "GET",
       headers : {
         "Content-Type" : "application/json"

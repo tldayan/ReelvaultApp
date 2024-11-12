@@ -19,7 +19,11 @@ export default function Watchlist() {
 
   useEffect(() => {
 
-    if(!userId) return 
+    if(!userId) {
+      setWatchlistEntities([])
+      localStorage.removeItem("userWatchlist")
+      return
+    } 
     
     let isMounted = true
 

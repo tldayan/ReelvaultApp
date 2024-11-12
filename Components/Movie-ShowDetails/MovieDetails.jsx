@@ -93,14 +93,13 @@ export default function MovieDetails({movieData,movieDataLoading,movieId,trailer
           </div>
           <div className="buttons_container">
             <button className="share_btn" onClick={shareEntity}>Share</button>
-            <button onMouseEnter={() => handleWatchlistButtonHover(watchlistButton)} onMouseLeave={() => handleWatchlistButtonLeave(watchlistButton)} ref={watchlistButton}  className={`watchlist_btn ${isInWatchlist ? "active" : ""}`} onClick={handleWatchlistClick}>{isInWatchlist ? "In Watchlist" : "+ Watchlist"}</button>
+            <button onMouseEnter={() => {if(!userId) handleWatchlistButtonHover(watchlistButton)}} onMouseLeave={() => {if(!userId) handleWatchlistButtonLeave(watchlistButton)}} ref={watchlistButton}  className={`watchlist_btn ${isInWatchlist ? "active" : ""}`} onClick={handleWatchlistClick}>{isInWatchlist ? "In Watchlist" : "+ Watchlist"}</button>
           </div>
         </div>
         { Object.keys(movieData)?.length !== 0  && trailerKey !== "null" && <iframe className="trailer" src={`https://www.youtube.com/embed/${trailerKey}`} title="YouTube player" frameBorder="0" allow="encrypted-media; fullscreen"></iframe>}
       </MovieDetailsContainer> : <EntityDetailsSkeleton /> }
       
       <Reviews movieId={movieId}/>
-
       <Recommended movieId={movieId} />
     </>
   );
