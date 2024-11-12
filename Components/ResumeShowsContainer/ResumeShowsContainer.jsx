@@ -54,7 +54,7 @@ export default function ResumeShowsContainer() {
 
   return (
     <>
-      {userShows?.length > 0 && <h2 className='category_titles user'>Welcome back {user?.name?.first_name}, resume where you left off ?</h2>}
+      {userShows?.length > 0 && <h2 className='category_titles userview'>Welcome back {user?.name?.first_name}, resume where you left off ?</h2>}
       <StyledResumeShowsContainer>
           {loading ? <div style={{marginTop : "140px", marginBottom : "100px"}} className='load_animation'></div> : <swiper-container slides-per-view="auto" mousewheel="false">
             {userShows.map(eachShow => (
