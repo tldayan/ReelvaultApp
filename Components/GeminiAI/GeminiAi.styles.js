@@ -9,7 +9,7 @@ color: var(--primary);
 text-align: center;
 font-family: "Quicksand", sans-serif;
 margin-top: 20px;
-width: min(90%, 500px);
+width: min(80%, 500px);
 
 .gemini_container {
 /*   border: 1px solid aqua; */
@@ -23,7 +23,7 @@ width: min(90%, 500px);
 .gemini_title {
   color: #000;
   text-shadow: 0px 2px 1px#1919190e;
-  font-size: 1rem;
+  font-size: clamp(0.5rem, 3.5vw, 1rem);
   font-weight: bold;
   letter-spacing: 1px;
   text-align: center;
@@ -63,7 +63,7 @@ width: min(90%, 500px);
   position: relative;
   z-index: 1;
   font-family: "Quicksand", sans-serif;
-  font-size: 1rem;
+  font-size: 13px;
 
   /* Adding border animation */
   background: linear-gradient(
@@ -95,6 +95,7 @@ width: min(90%, 500px);
   opacity: 0.5;
   display: block;
   margin: 5px auto 0 auto;
+  font-size: clamp(0.5rem, 3vw, 1rem);
 }
 
 

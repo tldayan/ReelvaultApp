@@ -38,12 +38,17 @@ export const CategoryButtonsContainer = styled.div`
   border-radius: 5px;
   padding: 10px;
   display: flex;
+  overflow-x: scroll;
   width: 95%;
   margin: 10px auto 0px auto;
   align-items: center;
   gap: 10px;
   justify-content: space-evenly;
-
+  -ms-overflow-style: none;
+  scrollbar-width: none; 
+  ::-webkit-scrollbar {
+    display: none;
+  }
   
 .category_buttons {
 /*   border: 1px solid rgba(51, 51, 51, 0.779);
