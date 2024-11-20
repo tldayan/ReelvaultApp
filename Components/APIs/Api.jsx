@@ -304,6 +304,8 @@ export const fetchMovieData = async(movieId) => {
 
 }
 
+
+
 export const fetchEpisodeNames = async (showId, seasonNumber) => {
   try {
     const query = `
@@ -337,3 +339,49 @@ export const fetchEpisodeNames = async (showId, seasonNumber) => {
     throw err; 
   }
 };
+
+export const fetchGeminiResponse = async(userPrompt,signal) => {
+
+  try {
+
+    const geminiReq = await fetch("https://reelvault-server.vercel.app/askGemini", {
+        method: "POST",
+        signal,
+        headers: {
+          "Content-Type" : "application/json"
+        },
+        body : JSON.stringify({userPrompt})
+      })
+
+      
+
+      let geminiReqData = await geminiReq.json()
+      
+      if (!geminiReq.ok) {
+        return geminiReqData.message
+      }
+
+      if(geminiReq.ok) {  
+        let matchedMovieandShowsArr = await Promise.all(geminiReqData?.entities.flatMap((entityName) => [
+        getMovieSearchData(entityName), getShowSearchData(entityName)
+      ]))
+
+
+      let matchedMovieandShows = matchedMovieandShowsArr.flat()
+
+      let uniqueEntitiesMap = matchedMovieandShows.reduce((map, entity) => {
+        map.set(entity.id, entity);
+        return map;
+      }, new Map());
+      
+      let uniqueMoviesAndShows = Array.from(uniqueEntitiesMap.values());
+      
+      return uniqueMoviesAndShows
+    }
+      
+
+  } catch (err) {
+    console.log(err.message)
+  }
+
+}

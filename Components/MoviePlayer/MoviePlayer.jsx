@@ -36,7 +36,7 @@ export default function MoviePlayer() {
 
         dispatch({type : ACTION.SET_MOVIE_TRAILER_KEY, payload: `${movieTrailerKey}`})
         dispatch({type : ACTION.SET_MOVIE_DATA, payload: movieData})
-        dispatch({type : ACTION.SET_MOVIE_IFRAME, payload : `https://vidsrc.in/embed/movie/${movieId}`})
+        dispatch({type : ACTION.SET_MOVIE_IFRAME, payload : `https://www.2embed.cc/embed/${movieId}`})
         dispatch({type : ACTION.SET_MOVIE_DATA_LOADING, payload: false})
 
     } catch (err) {
@@ -51,7 +51,7 @@ export default function MoviePlayer() {
   }
 
   fetchMovieDetails()
-  dispatch({type: ACTION.SET_MOVIE_IFRAME, payload: `https://vidsrc.in/embed/movie/${movieId}`})
+  dispatch({type: ACTION.SET_MOVIE_IFRAME, payload: `https://www.2embed.cc/embed/${movieId}`})
     
   }, [movieId]);
 

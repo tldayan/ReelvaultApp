@@ -39,7 +39,7 @@ export const CategoryButtonsContainer = styled.div`
   padding: 10px;
   display: flex;
   width: 95%;
-  margin: 30px auto 0px auto;
+  margin: 10px auto 0px auto;
   align-items: center;
   gap: 10px;
   justify-content: space-evenly;

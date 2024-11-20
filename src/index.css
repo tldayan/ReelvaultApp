@@ -516,7 +516,7 @@ border-radius: 3px;
 }
 
 
-.watchlist_btn,.share_btn {
+.watchlist_btn,.share_btn,.find_btn {
   padding: 4px 20px;
   height: 30px;
   white-space: nowrap;
@@ -524,10 +524,26 @@ border-radius: 3px;
   border-radius: 3px;
   background-color: #000000;
   color: white;
-  border: 1px solid white;
+  border: 1px solid var(--primary);
   cursor: pointer;
   transition: 0.3s all;
 }
+
+.find_btn {
+  border: none;
+  font-weight: bold;
+  box-shadow: 0px 0px 10px#8f8f8f49;
+  background: linear-gradient(
+    90deg, 
+    #00ffff 0%, 
+    #97fba0 25%, 
+    #97b1fb 50%, 
+    #00ffff 100%
+  );
+  background-size: 200% 200%;
+}
+
+
 
 .share_btn {
   margin-right: 5px;

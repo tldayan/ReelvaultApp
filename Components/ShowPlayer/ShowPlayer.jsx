@@ -53,7 +53,7 @@ export default function ShowPlayer() {
     setIframeLoaded(false);
     showLoadContainer.current.style.display = "flex"
     IframeShowElement.current.style.height = "0%"
-    dispatch(EpisodeLinkActions.setEpisodeLink(`https://vidsrc.in/embed/tv/${id}/${seasonNumber}/${episodeNumber}`))
+    dispatch(EpisodeLinkActions.setEpisodeLink(`https://www.2embed.cc/embedtv/${id}&s=${seasonNumber}&e=${episodeNumber}`))
   },[id,seasonNumber,episodeNumber])
 
 

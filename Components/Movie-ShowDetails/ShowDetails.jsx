@@ -105,7 +105,7 @@ export default function ShowDetails({showDispatch, showId,showDataLoading,season
   const handleEpisodeSelect = (seasonNumber, episodeNumber) => {
     dispatch(
       EpisodeLinkActions.setEpisodeLink(
-        `https://vidsrc.in/embed/tv/${showId}/${seasonNumber}/${episodeNumber}`
+        `https://www.2embed.cc/embedtv/${showId}&s=${seasonNumber}&e=${episodeNumber}`
       )
     );
     navigate(`../tvshows/${showId}/${seasonNumber}/${episodeNumber}`)
@@ -118,7 +118,7 @@ export default function ShowDetails({showDispatch, showId,showDataLoading,season
   useEffect(() => {
     dispatch(
       EpisodeLinkActions.setEpisodeLink(
-        `https://vidsrc.in/embed/tv/${showId}/${selectedSeason}/${selectedEpisode}`
+        `https://www.2embed.cc/embedtv/${showId}&s=${selectedSeason}&e=${selectedEpisode}`
       )
     );
   },[selectedSeason])

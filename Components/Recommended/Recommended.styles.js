@@ -8,7 +8,7 @@ export const RecommendedContainer = styled.div`
  background-color: #0b0b0b;
   width: 95%;
   margin: 50px auto;
-  padding: 25px;
+  padding: 15px 25px;
   color: #8f8f8f;
   font-family: 'Philosopher', sans-serif;
   border-radius: 10px;
@@ -55,8 +55,8 @@ swiper-slide:last-child {
   padding: 10px 0px;
   font-size: 1.5rem;
   border-radius: 5px;
-    background-color: #000000;
-  margin-top: 5px;
+  /*   background-color: #000000; */
+  margin-top: 0px;
   margin-bottom: 20px;
   font-family: 'Philosopher', sans-serif;
   color: rgb(228, 228, 228);

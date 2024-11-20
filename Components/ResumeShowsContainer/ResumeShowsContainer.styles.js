@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 
-export const StyledResumeShowsContainer = styled.div`
+export const StyledEntitiesContainer = styled.div`
 
 
 /* border : 3px solid red; */
 width : 93%;
-margin : auto;
+margin : 0 auto;
 /* height: 260px; */
 display : flex;
 align-items: center;

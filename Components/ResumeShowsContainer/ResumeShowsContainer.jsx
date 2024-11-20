@@ -1,11 +1,12 @@
 import React, {useEffect, useState } from 'react';
-import { StyledResumeShowsContainer } from './ResumeShowsContainer.styles';
+
 import { register } from 'swiper/element/bundle';
 import { Link } from 'react-router-dom';
 import playButton from "../../assets/play-solid.svg";
 import { getUserShowDetails } from '../APIs/mongo/UserShowDetail';
 import { deleteUserShowDetails } from '../APIs/mongo/deleteUserShowDetails';
 import { useStytchSession, useStytchUser } from '@stytch/react';
+import { StyledEntitiesContainer } from './ResumeShowsContainer.styles';
 register();
 
 export default function ResumeShowsContainer() {
@@ -55,7 +56,7 @@ export default function ResumeShowsContainer() {
   return (
     <>
       {userShows?.length > 0 && <h2 className='category_titles userview'>Welcome back {user?.name?.first_name}, resume where you left off ?</h2>}
-      <StyledResumeShowsContainer>
+      <StyledEntitiesContainer>
           {loading ? <div style={{marginTop : "140px", marginBottom : "100px"}} className='load_animation'></div> : <swiper-container slides-per-view="auto" mousewheel="false">
             {userShows.map(eachShow => (
               <swiper-slide className="eachShowSlide" key={eachShow?.showId}>
@@ -78,7 +79,7 @@ export default function ResumeShowsContainer() {
               </swiper-slide>
             ))}
           </swiper-container>}
-      </StyledResumeShowsContainer>
+      </StyledEntitiesContainer>
     </>
   );
 }

@@ -4,10 +4,14 @@ import sadFace from "../../assets/sad_face.png";
 import searchIcon from "../../assets/search_icon.svg";
 import SearchResultCard from '../SearchResultCard/SearchResultCard';
 import { StyledSearchBar } from './SearchBar.styles';
+import GeminiAI from '../GeminiAI/GeminiAI';
+import { useLocation } from 'react-router-dom';
 
 function removeSpecialCharacters(input) {
   return input.replace(/[:\-]/g, "").toLowerCase();
 }
+
+let nonAIRoutes = ["movies","tvshows","watchlist","contact","about"]
 
 export default function SearchBar() {
   const searchInput = useRef(null);
@@ -16,6 +20,9 @@ export default function SearchBar() {
   const [searchDataLoading, setSearchDataLoading] = useState(false);
   const searchField = useRef(null);
   const searchList = useRef(null);
+  const location = useLocation()
+  
+  let shouldRenderGemini = !nonAIRoutes.some((eachRoute) => location.pathname.includes(eachRoute))
 
   const fetchSearchData = async (entitySearch) => {
 
@@ -125,6 +132,7 @@ export default function SearchBar() {
         </div>
         <img className="search_icon" src={searchIcon} alt="searchIcon" />
       </StyledSearchBar>
+      {shouldRenderGemini && <GeminiAI />}
     </>
   );
 }
