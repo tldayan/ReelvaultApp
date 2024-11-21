@@ -29,10 +29,8 @@ export const PopularShowsTypeContainer = styled.div`
 display: flex;
 align-items :center;
   text-align: center;
-  padding: 10px 10px;
-/*   font-size: 1.5rem; */
+  padding: 10px 0;
   border-radius: 5px;
-   /*  background-color: #101010; */
   margin-top: 5px;
   margin-bottom: 20px;
   font-weight: normal;
