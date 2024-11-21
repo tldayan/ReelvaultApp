@@ -34,7 +34,7 @@ const ShowCard = ({ eachShow, imageLoaded, handlePosterLoaded }) => {
             src={
               eachShow.poster_path === null
                 ? defaultPoster
-                : `https://image.tmdb.org/t/p/original${eachShow.poster_path}`
+                : `https://image.tmdb.org/t/p/w500${eachShow.poster_path}`
             }
             alt="imagePoster"
             loading="lazy"

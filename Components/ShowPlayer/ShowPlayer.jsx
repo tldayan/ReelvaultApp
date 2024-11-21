@@ -25,7 +25,6 @@ export default function ShowPlayer() {
   const showLoadContainer = useRef(null);
   const IframeShowElement = useRef(null);
   const showLoadedValue = useRef(showState.showLoaded)
-  const [iframeLoaded,setIframeLoaded] = useState(false)
 
 
   useEffect(() => {
@@ -46,11 +45,10 @@ export default function ShowPlayer() {
 
     
     fetchShowData();
-  
+    scrollTo(0,0)
   }, [id]);
 
   useEffect(() => {
-    setIframeLoaded(false);
     showLoadContainer.current.style.display = "flex"
     IframeShowElement.current.style.height = "0%"
     dispatch(EpisodeLinkActions.setEpisodeLink(`https://www.2embed.cc/embedtv/${id}&s=${seasonNumber}&e=${episodeNumber}`))
@@ -67,13 +65,10 @@ useEffect(() => {
   
   getEpisodeNames()
 
-
 },[seasonNumber,id])
 
 
   function handleIframeLoad() {
-
-    setIframeLoaded(true)
     showDispatch({type : ACTION.SET_SHOW_LOADED, payload : true})
 
     showLoadContainer.current.style.display = "none"
@@ -87,22 +82,18 @@ useEffect(() => {
 
   return (
     <>
+      <div className="back_button_container">
+        <Link to="/" className="back_button">
+          &#10094; Home
+        </Link>
 
-    <div className="back_button_container">
-      <Link to="/" className="back_button">
-        &#10094; Home
-      </Link>
-
-      <p className="watching_show_notice">Watching: {showData?.original_name ? showData.original_name : "..."}</p>
-    </div>
+        <p className="watching_show_notice">Watching: {showData?.original_name ? showData.original_name : "..."}</p>
+      </div>
     
       <div className="movie_player_container">
-      
         <div ref={showLoadContainer} className="movie_player_skeleton">
-          {!iframeLoaded && <img className="backdrop_image" src={`https://image.tmdb.org/t/p/original/${showData.backdrop_path}`} alt="show_backdrop" />}
           <LoadingAnimation />
         </div>  
-
           <iframe
             key={`${id}-${seasonNumber}-${episodeNumber}`}
             ref={IframeShowElement}

@@ -367,16 +367,16 @@ svg text {
 /* MOVIE POSTER STATS */
 
 .movie_name {
+/*   border: 1px solid red; */
   width: 97%;
   margin: 3px auto 0 auto;
   color: var(--entityTitleColor);
   border-radius: 2px;
-  padding: 5px 1px 10px 1px;
+  padding: 2px 1px 10px 0px;
   font-size: 0.95rem;
   font-weight: lighter;
   font-family: 'Quicksand', sans-serif;
   white-space: nowrap;
-  margin-top: 3px;
   overflow: hidden;
   text-overflow: ellipsis;
   opacity: 0.8;
@@ -398,7 +398,7 @@ svg text {
 }
 
 .movie_poster_container {
-  height: 100%;
+  
   position: relative;
   overflow: hidden;
 }
@@ -409,6 +409,7 @@ svg text {
   height: 100%;
   display: block;
   transition: transform 1s;
+  object-fit: cover;
 }
 
 

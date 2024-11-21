@@ -33,7 +33,7 @@ const MovieCard = ({ eachMovie, imageLoaded, handlePosterLoaded }) => {
             src={
               eachMovie.poster_path === null
                 ? defaultPoster
-                : `https://image.tmdb.org/t/p/original${eachMovie.poster_path}`
+                : `https://image.tmdb.org/t/p/w500${eachMovie.poster_path}`
             }
             alt="imagePoster"
             loading="lazy"
