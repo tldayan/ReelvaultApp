@@ -9,7 +9,7 @@ export async function handleWatchlist(entityId,userId,entityData,isInWatchlist) 
 
     try {
 
-      const deleteEntityRequest = await fetch(`http://localhost:3200/deleteUserWatchlist?entityId=${entityId}&userId=${userId}`,
+      const deleteEntityRequest = await fetch(`https://reelvault-server.vercel.app/deleteUserWatchlist?entityId=${entityId}&userId=${userId}`,
         { method: "DELETE" }
       );
 
