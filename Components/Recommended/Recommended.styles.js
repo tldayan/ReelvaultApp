@@ -17,7 +17,6 @@ export const RecommendedContainer = styled.div`
 
 swiper-container {
   width: 100%;
-  
 }
 
 
@@ -25,6 +24,7 @@ swiper-slide {
   margin-right: 10px;
   flex: 0;
   height: 100%;
+  width: 155px;
 }
 
 
@@ -33,8 +33,6 @@ swiper-slide:last-child {
 }
 
 .recommended_movie_poster {
-  width: 150px;
-  height: 225px;
   display: block;
   border-radius: 5px;
 }
@@ -43,10 +41,15 @@ swiper-slide:last-child {
 .recommended_movie_title {
   margin-top: 5px;
   color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .recommended_link {
-  text-decoration: none;
+/*   border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
 }
 
 .category_titles {

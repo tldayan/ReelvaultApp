@@ -78,21 +78,20 @@ export default function MoviePlayer() {
     </div>
       
       <MoviePlayerContainer>
-      <p className="watching_movie_notice">Watching: {movieData.original_title ? movieData.original_title : "..."}</p>
-      <div ref={movieLoadContainer} className="movie_player_skeleton">
-    <LoadingAnimation />
-  </div>
-  
-  <iframe
-    ref={IframeElement}
-    className="movie_player"
-    src={movieIframe} /* .to before */
-    allowFullScreen
-    onLoad={handleIframeLoad}
-  ></iframe>
+        <p className="watching_movie_notice">Watching: {movieData.original_title ? movieData.original_title : "..."}</p>
+        <div ref={movieLoadContainer} className="movie_player_skeleton">
+          <LoadingAnimation />
+        </div>
+        
+        <iframe
+          ref={IframeElement}
+          className="movie_player"
+          src={movieIframe} /* .to before */
+          allowFullScreen
+          onLoad={handleIframeLoad}
+        ></iframe>
 
-  <ServersContainer movieId={movieId} movieIframe={movieIframe} dispatch={dispatch}/>
-
+        <ServersContainer movieId={movieId} movieIframe={movieIframe} dispatch={dispatch}/>
       </MoviePlayerContainer>
       {/^\d+$/.test(params.id) && <MovieDetails trailerKey={trailerKey} movieData={movieData} movieDataLoading={movieDataLoading} movieId={movieId} />}
       <ScrollRestoration top={true} />

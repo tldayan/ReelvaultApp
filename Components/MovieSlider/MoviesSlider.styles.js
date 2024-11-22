@@ -3,9 +3,7 @@ import {styled,css} from 'styled-components';
 
 export const StyledSliderContainer= styled.div`
 
-/* border: 1px solid aqua; */
-/* height: 40vh; */
-/* margin-top : 50px; */
+
 width: 100%;
 
 

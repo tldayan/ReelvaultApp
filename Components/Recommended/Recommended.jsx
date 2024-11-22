@@ -63,8 +63,9 @@ function Recommended({movieId,showId}) {
             if(eachMovie?.poster_path && eachMovie?.vote_count > 50 && eachMovie?.release_date?.slice(0,4) > 2000) {
                 return (
                 <swiper-slide key={eachMovie?.id}>
-                    <Link className='recommended_link' onClick={() => handleNameChange(eachMovie?.original_title)} to={`../movies/${eachMovie?.id}`}><img className='recommended_movie_poster' src={eachMovie?.poster_path === null ? defaultPoster : `https://image.tmdb.org/t/p/w500${eachMovie?.poster_path}`} loading='lazy' alt="entity_poster" /><p className='recommended_movie_title'>{eachMovie?.title.length > 15  ? `${eachMovie?.title.slice(0, 15)}...` : eachMovie?.title}</p>
-                    </Link>
+                    <Link className='recommended_link' onClick={() => handleNameChange(eachMovie?.original_title)} to={`../movies/${eachMovie?.id}`}>
+                      <img className='recommended_movie_poster' src={eachMovie?.poster_path === null ? defaultPoster : `https://image.tmdb.org/t/p/w500${eachMovie?.poster_path}`} loading='lazy' alt="entity_poster" />
+                    </Link><p className='recommended_movie_title'>{eachMovie?.title}</p>
                 </swiper-slide>
               )
             }
@@ -74,7 +75,7 @@ function Recommended({movieId,showId}) {
             if(eachShow?.poster_path && eachShow?.vote_count > 50 && eachShow?.first_air_date?.slice(0,4) > 1993) {
                 return (
                 <swiper-slide key={eachShow?.id}>
-                    <Link className='recommended_link' onClick={() => handleNameChange(eachShow?.original_name)} to={`../tvshows/${eachShow?.id}/1/1`}><img className='recommended_movie_poster' src={eachShow?.poster_path === null ? defaultPoster : `https://image.tmdb.org/t/p/w500${eachShow?.poster_path}`} alt="" /><p className='recommended_movie_title'>{eachShow?.name.length > 15  ? `${eachShow?.name.slice(0, 15)}...` : eachShow?.name}</p>
+                    <Link className='recommended_link' onClick={() => handleNameChange(eachShow?.original_name)} to={`../tvshows/${eachShow?.id}/1/1`}><img className='recommended_movie_poster' src={eachShow?.poster_path === null ? defaultPoster : `https://image.tmdb.org/t/p/w500${eachShow?.poster_path}`} alt="poster_img" /><p className='recommended_movie_title'>{eachShow?.name}</p>
                     </Link>
                 </swiper-slide>
               )
