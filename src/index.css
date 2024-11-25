@@ -525,7 +525,7 @@ border-radius: 3px;
   border-radius: 3px;
   background-color: #000000;
   color: white;
-  border: 1px solid var(--background);
+  border: 1px solid white;
   cursor: pointer;
   transition: 0.3s all;
 }
