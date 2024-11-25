@@ -50,6 +50,7 @@ swiper-slide:last-child {
 /*   border: 1px solid red; */
   display: flex;
   flex-direction: column;
+  text-decoration: none;
 }
 
 .category_titles {
