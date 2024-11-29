@@ -77,15 +77,15 @@ padding-bottom : 30px;
 }
 
 @media (hover: none) and (pointer: coarse) {
-  .show_link:hover .resumeShow_cover {
-    left: -100%;
+
+  .resumeShow_cover {
+    left: -100%; 
   }
 
-  .show_link:hover .show_poster {
-  filter : none;
-  transform: none;
-}
-
+  .show_poster {
+    filter: none;
+    transform: none;
+  }
 }
 
 .show_link:hover .show_poster {
