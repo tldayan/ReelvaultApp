@@ -80,6 +80,12 @@ padding-bottom : 30px;
   .show_link:hover .resumeShow_cover {
     left: -100%;
   }
+
+  .show_link:hover .show_poster {
+  filter : none;
+  transform: none;
+}
+
 }
 
 .show_link:hover .show_poster {
