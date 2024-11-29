@@ -35,6 +35,8 @@ swiper-slide:last-child {
 .recommended_movie_poster {
   display: block;
   border-radius: 5px;
+  width: 150px;
+  height: 225px;
 }
 
 
