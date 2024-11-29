@@ -76,6 +76,12 @@ padding-bottom : 30px;
   left: 0;
 }
 
+@media (hover: none) and (pointer: coarse) {
+  .show_link:hover .resumeShow_cover {
+    left: -100%;
+  }
+}
+
 .show_link:hover .show_poster {
   filter : blur(1px);
   transform: scale(1.2);
