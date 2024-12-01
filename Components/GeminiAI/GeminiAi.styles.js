@@ -53,10 +53,9 @@ width: min(80%, 500px);
   box-shadow: 0px 0px 10px#8f8f8f49;
   outline: none;
   width: 100%;
-/*    transition: all ease 0.7s; */
   border-radius: 3px;
-  border: 1px solid transparent; /* Transparent initial border */
-  background-clip: padding-box; /* Clips the background within padding */
+  border: 1px solid transparent; 
+  background-clip: padding-box; 
   background-color: var(--background);
   text-indent: 4px;
   color: var(--primary);

@@ -78,8 +78,8 @@ padding-bottom : 30px;
 
 @media (hover: none) and (pointer: coarse) {
 
-  .resumeShow_cover {
-    left: -100%; 
+  .show_link:hover .resumeShow_cover {
+    left: -100%;
   }
 
   .show_poster {

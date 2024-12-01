@@ -17,11 +17,11 @@ img {
 }
 
 .image_container {
- /*  border: 2px solid red; */
   width: 100%;
-  height : 60vh;
-  display : flex;
+  height: clamp(30vh, 50vw, 60vh);
+  display: flex;
 }
+
 
 .black_shadow {
   position: absolute;
