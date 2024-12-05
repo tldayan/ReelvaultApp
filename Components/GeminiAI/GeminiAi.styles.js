@@ -22,7 +22,7 @@ width: min(80%, 500px);
 
 .gemini_title {
   color: #000;
-  text-shadow: 0px 2px 1px#1919190e;
+  text-shadow: 0px 1px 1px#1919190e;
   font-size: clamp(0.5rem, 3.5vw, 1rem);
   font-weight: bold;
   letter-spacing: 1px;
@@ -64,7 +64,7 @@ width: min(80%, 500px);
   font-family: "Quicksand", sans-serif;
   font-size: 13px;
 
-  /* Adding border animation */
+
   background: linear-gradient(
       var(--background), /* Background color */
       var(--background)
